@@ -1,0 +1,51 @@
+extends ../layout/layout
+
+block vars
+	//- include ../templates/project-vars
+	include ../templates/mixins/m-hero
+	include ../templates/mixins/m-image
+	include ../templates/mixins/m-text-block
+	include ../templates/mixins/m-chat-with-us
+	- array = {body_class:'disaster_relief', layout_mod:'', sub_keywords:'', title_inner:'Disaster Relief', template_name: 'disaster-relief'}
+
+block content_block
+	+hero({
+		mod: 'hero--4_mod',
+		content: [
+			'<h1>Disaster relief housing solutions</h1>',
+			"<p>Within days of a disaster or emergency, we deploy and assemble temporary housing buildings and space solutions that are efficient and cost-effective.</p>",
+		],
+	})
+	+image({
+		mod:'js-video-section image--blackout_mod',
+		img: `image-section/disaster_relief.jpg`,
+		img_mob: `image-section/disaster_relief_mob.jpg`,
+		video: 'LXb3EKWsInQ',
+		video_provider: 'youtube',
+	})
+	+image({
+		mod:'js-video-section image--blackout_mod',
+		img: `image-section/disaster_relief.jpg`,
+		img_mob: `image-section/disaster_relief_mob.jpg`,
+		video: '76979871',
+		video_provider: 'vimeo',
+	})
+	+text-block({
+		content_left: [
+			"<p>We provide front-line response teams with world-class accommodations and temporary space solutions. This means we save precious time and money when every second and every dollar is critical.</p>",
+		],
+		content_rigth: [
+			"<p>Deploying reliable space solutions enables critical services to be up and running in a matter of hours. Our versatile mobile units are an innovative and economical solution for disaster preparedness. And what’s more they are ready for assembly in less than 8 hours.</p>",
+		],
+	})
+	include ../blocks/case-section
+	+chat_with_us({
+		content: [
+			'<h2>Chat with us</h2>',
+			'<p>Getting started with a Hapi Home couldn’t be any easier. Our range in price and aesthetic, we don’t compromise on quality or design, and our clients love the fact that our homes are ready to ship in less than six weeks.</p>',
+			'<p>With concierge-level service from the blueprint to delivery, you have a dedicated Hapi Home expert with you for every part of the process.</p>',
+		],
+		btn_title: 'Book a call',
+		btn_mod: 'btn_primary',
+		icon: 'calendar',
+	})

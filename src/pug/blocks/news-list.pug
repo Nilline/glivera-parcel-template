@@ -1,0 +1,48 @@
+include ../templates/mixins/m-news-card
+
+-
+	news_list_list = [
+		{
+			img: 'news_list/1.jpg',
+			date: 'Jul 1, 2023',
+			title: 'These foldable tiny homes start at $50,000 and can be...',
+			link: 'Read News',
+		},
+		{
+			img: 'news_list/2.jpg',
+			date: 'Jun 20, 2023',
+			title: 'Homes Of The Future, With Mohamed Ahmed of Hapi...',
+			link: 'Read News',
+		},
+		{
+			img: 'news_list/3.jpg',
+			date: 'May 9, 2023',
+			title: 'Confidential memo: New York City considering shutting down...',
+			link: 'Read News',
+		},
+		{
+			img: 'news_list/4.jpg',
+			date: 'May 11, 2023',
+			title: '‘Hapi Homes’ looks to fill the US housing ‘void’ with emergency...',
+			link: 'Read News',
+		},
+		{
+			img: 'news_list/5.jpg',
+			date: 'April 25, 2023',
+			title: 'Hapi Homes Debuts Innovative Lineup of Contemporary Home...',
+			link: 'Read News',
+		},
+		{
+			img: 'news_list/6.jpg',
+			date: 'April 25, 2023',
+			title: 'Hapi Homes Debuts Innovative Lineup of Contemporary Home...',
+			link: 'Read News',
+		},
+	]
+
+section.section.news_list
+	.section_in
+		ul.news_list__list
+			each news in news_list_list
+				li.news_list__item
+					+news_card(news)

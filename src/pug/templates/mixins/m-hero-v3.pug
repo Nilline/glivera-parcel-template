@@ -1,0 +1,34 @@
+mixin hero_v3(data)
+	section.section.hero_v3(class=data.mod)
+		.section_in.hero_v3__in
+			.hero_v3__row.js-fade-item
+				.hero_v3__col
+					h1.hero_v3__title= data.title
+					ul.hero_v3__info_list
+						each item in data.info
+							li.hero_v3__info_item
+								.hero_v3__info_icon
+									+icon(item.icon, 'icon--size_mod')
+								= item.text
+				.hero_v3__col
+					.hero_v3__price_info
+						.hero_v3__price_w
+							.hero_v3__price_label Buy plans
+							.hero_v3__price=data.price
+
+						.hero_v3__btn_w
+							if data.form
+								form(action="#" method="post")
+									button.btn_v4.single_add_to_cart_button(type='submit' name="add-to-cart")
+										span Add to Cart
+										//- .btn_icon_right
+										//- 	+icon('bag', 'icon--size_mod')
+										.btn_icon.btn_icon--double_mod
+											+icon('cart', 'icon--size_mod')
+											+icon('cart_2', 'icon--size_mod icon--double_mod')
+							else
+								a.btn_v4(href="#")
+									span Add to Cart
+									.btn_icon.btn_icon--double_mod
+										+icon('cart', 'icon--size_mod')
+										+icon('cart_2', 'icon--size_mod icon--double_mod')

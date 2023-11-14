@@ -1,0 +1,12 @@
+mixin chat_with_us(data)
+	section.section.chat_with_us(class=data.mod)
+		.section_in.chat_with_us__in
+			.chat_with_us__info_w.js-fade-item
+				.chat_with_us__info
+					each item in data.content
+						!=item
+				.chat_with_us__btn_w.js-fade-item
+					a.btn_v3(href="#")
+						.btn_icon
+							+icon(data.icon, 'icon--size_mod')
+						span= data.btn_title

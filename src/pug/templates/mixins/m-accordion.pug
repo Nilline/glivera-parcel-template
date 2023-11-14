@@ -1,0 +1,27 @@
+mixin accordion(data, prefix)
+	- itemClass = prefix ||'accordion';
+	- itemMod = mod || '';
+	-	itemEl = `${itemClass}__item`;
+	- itemHead = `${itemClass}__item_head js-accordion-head`;
+	-	itemTitle = `${itemClass}__item_title`;
+	- itemIconWrap = `${itemClass}__item_icon_w`;
+	- itemBody = `${itemClass}__item_body js-accordion-body`;
+	- itemBodyIn = `${itemClass}__item_body_in`;
+
+	ul(class= `${itemClass} ${itemMod}`)
+		each item, index in data.content
+			- itemIndex = `item-${index + 1}`;
+			li.js-fade-item(class=itemEl)
+				button(class=itemHead aria-controls=itemIndex aria-expanded='false' type='button')
+					h3(class=itemTitle)!= item.title
+					span(class=itemIconWrap)
+						if data.icon
+							+icon(data.icon, `icon--size_mod ${data.icon_class}`)
+				div(class=itemBody id=itemIndex aria-hidden="true")
+					div(class=itemBodyIn)!= item.descr
+						if item.list
+							ul
+								each list_item in item.list
+									li!=list_item
+						block
+

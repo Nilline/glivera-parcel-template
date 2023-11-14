@@ -1,35 +1,45 @@
 @mixin h1 {
-	font-size: 7.2rem;
 	font-weight: 700;
+	line-height: 1.2;
+
+	@include bp($point_2, min) {
+		font-size: 8.2rem;
+	}
+	@include bp($point_3) {
+		font-size: 4.8rem;
+	}
 }
 
 @mixin h2 {
-	font-size: 5.6rem;
 	font-weight: 700;
+	line-height: 1.2;
+	@include bp($point_2, min) {
+		font-size: 4.8rem;
+	}
+	@include bp($point_3) {
+		font-size: 2.8rem;
+	}
 }
 
 @mixin h3 {
-	font-size: 4rem;
-	font-weight: 500;
+	font-weight: 700;
+	@include bp($point_2, min) {
+		font-size: 2.8rem;
+	}
+	@include bp($point_3) {
+		font-size: 2rem;
+	}
 }
 
-@mixin h4 {
-	font-size: 3.2rem;
-}
-
-@mixin h5 {
-	font-size: 2.4rem;
-}
-
-@mixin h6 {
+@mixin title {
 	font-size: 2rem;
+	font-weight: 700;
+}
+
+@mixin caption {
+	font-size: 1.8rem;
 }
 
 @mixin text {
-	font-size: 1.8rem;
-}
-// offsets
-
-@mixin title_offset {
-	margin-bottom: 2rem;
+	font-size: 2.2rem;
 }

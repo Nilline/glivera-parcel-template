@@ -5,3 +5,7 @@
 .form_input__element {
 	@include form_el_default;
 }
+
+.form_input__element_v2 {
+	@include form_el_default_v2;
+}

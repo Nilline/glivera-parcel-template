@@ -1,0 +1,74 @@
+@import 'ScssHelpers/helpers-all';
+
+.dream_home {
+	.section_in {
+		&:not(:last-child) {
+			@include bp($point_2, min) {
+				margin-bottom: 10.6rem;
+			}
+
+			@include bp($point_3) {
+				margin-bottom: 3.8rem;
+			}
+		}
+	}
+	.swiper {
+		overflow: visible;
+		margin-right: -2.4rem;
+	}
+}
+
+.dream_home__title {
+	@include h1;
+
+	max-width: 110rem;
+	color: $dark;
+
+	@include bp($point_2, min) {
+		margin-bottom: 8.6rem;
+
+		line-height: 1.25;
+	}
+
+	@include bp($point_3) {
+		margin-bottom: 4.4rem;
+	}
+}
+
+.dream_home__text {
+	font-size: 2.2rem;
+	color: $dark_2;
+
+	@include bp($point_2, min) {
+		max-width: 108rem;
+
+		column-count: 2;
+		column-gap: 7rem;
+	}
+
+	p {
+		&:not(:last-child) {
+			@include bp($point_3) {
+				margin-bottom: 3rem;
+			}
+		}
+	}
+}
+
+.dream_home__poster {
+	display: block;
+
+	@include bp($point_4, min) {
+		width: 100%;
+		height: 28.4rem;
+	}
+
+	@include bp($point_4 - 1) {
+		margin: 0 calc(var(--gl-hr-indent) * -1);
+		height: 83.4vw;
+	}
+}
+
+.dream_home__poster_img {
+	@include cover_img;
+}

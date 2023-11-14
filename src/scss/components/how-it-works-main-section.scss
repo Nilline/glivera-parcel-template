@@ -1,0 +1,303 @@
+.how_it_works {
+	@include bp($point_2, min) {
+		padding-top: 5.6rem;
+		padding-bottom: 15rem;
+	}
+
+	@include bp($point_3) {
+		// padding-top: 12.4rem;
+		padding-bottom: 2.8rem;
+	}
+}
+
+.how_it_works__in {
+	max-width: $page_width_3;
+}
+
+.how_it_works__heading {
+	max-width: $page_width;
+	margin: 0 auto;
+
+	&:not(:last-child) {
+		@include bp($point_2, min) {
+			margin-bottom: 12.4rem;
+		}
+
+		@include bp($point_3) {
+			margin-bottom: 4rem;
+		}
+	}
+}
+
+.how_it_works__title {
+	@include h1;
+
+	color: $black;
+
+	line-height: 1.26;
+
+	&:not(:last-child) {
+		@include bp($point_2, min) {
+			margin-bottom: 5.2rem;
+		}
+
+		@include bp($point_3) {
+			margin-bottom: 3.9rem;
+		}
+	}
+}
+
+.how_it_works__btn_w {
+	span {
+		&:not(:last-child) {
+			margin-right: 2.4rem;
+		}
+	}
+}
+
+.how_it_works__block,
+.how_it_works__list {
+	width: 100%;
+}
+
+.how_it_works__item {
+	@include bp($point_2, min) {
+		display: grid;
+	}
+
+	&:not(:last-child) {
+		@include bp($point_2, min) {
+			margin-bottom: 11.6rem;
+		}
+
+		@include bp($point_3) {
+			margin-bottom: 3.8rem;
+		}
+	}
+
+	&.how_it_works__item:nth-child(2n + 1) {
+		grid-template-columns: 0.84fr 1fr;
+	}
+
+	&.how_it_works__item:nth-child(2n) {
+		grid-template-columns: 1fr 0.84fr;
+	}
+}
+
+.how_it_works__item_col {
+	@include text;
+
+	position: relative;
+
+	@include bp($point_3) {
+		&:nth-child(1) {
+			margin: 0 calc(var(--gl-hr-indent) * -1) 5rem;
+		}
+		&:nth-child(2) {
+			padding-left: 14%;
+
+			.how_it_works__item:last-child & {
+				padding: 0;
+			}
+		}
+	}
+
+	.how_it_works__item:nth-child(2n + 1) & {
+		&:nth-child(1) {
+		}
+
+		&:nth-child(2) {
+			@include bp($point_2, min) {
+				padding-left: 16%;
+			}
+		}
+	}
+
+	.how_it_works__item:nth-child(2n) & {
+		&:nth-child(1) {
+			@include bp($point_2, min) {
+				order: 2;
+			}
+		}
+
+		&:nth-child(2) {
+			@include bp($point_2, min) {
+				padding-right: 16%;
+				order: 1;
+			}
+		}
+	}
+}
+
+.how_it_works__item_img_w {
+	position: relative;
+
+	display: block;
+	width: 100%;
+
+	@include bp($point_2, min) {
+		padding-top: 55%;
+	}
+
+	@include bp($point_3) {
+		padding-top: 83%;
+	}
+}
+
+.how_it_works__item_img {
+	@include cover_img;
+
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+.how_it_works__item_decors {
+	position: absolute;
+
+	@include bp($point_2, min) {
+		top: 0;
+		height: 100%;
+	}
+
+	@include bp($point_3) {
+		top: -1rem;
+		height: 103%;
+
+		margin-left: -46.5%;
+
+		display: flex;
+		flex-direction: column;
+	}
+
+	.how_it_works__item:nth-child(2n + 1) & {
+		left: 50%;
+
+		transform: translateX(-50%);
+
+		@include bp($point_2, min) {
+			margin-left: -42%;
+		}
+	}
+
+	.how_it_works__item:nth-child(2n) & {
+		@include bp($point_2, min) {
+			right: 50%;
+
+			transform: translateX(50%);
+			margin-right: -42%;
+		}
+
+		@include bp($point_3) {
+			left: 50%;
+
+			transform: translateX(-50%);
+		}
+	}
+
+	.how_it_works__item:last-child & {
+		@include bp($point_3) {
+			display: none;
+		}
+	}
+}
+
+.how_it_works__item_decor {
+	background-color: $gray_2;
+
+	&.how_it_works__item_decor--square_mod {
+		width: 2.4rem;
+		height: 2.4rem;
+	}
+
+	&.how_it_works__item_decor--line_mod {
+		width: 1px;
+
+		margin: 2.4rem auto 0;
+
+		@include bp($point_2, min) {
+			height: 110%;
+		}
+		@include bp($point_3) {
+			flex-grow: 1;
+		}
+	}
+}
+
+.how_it_works__item_content {
+	@include bp($point_2, min) {
+		width: 80%;
+	}
+
+	@include bp($point_3) {
+		.how_it_works__item:last-child & {
+			text-align: center;
+		}
+	}
+
+	.how_it_works__item:nth-child(2n) & {
+		@include bp($point_2, min) {
+			margin-left: auto;
+			text-align: right;
+		}
+	}
+
+	p {
+		&:not(:last-child) {
+			@include bp($point_2, min) {
+				margin-bottom: 3.5rem;
+			}
+
+			@include bp($point_3) {
+				margin-bottom: 3.3rem;
+			}
+		}
+	}
+
+	b {
+		font-size: 2.8rem;
+	}
+}
+
+.how_it_works__item_heading {
+	color: $black;
+
+	&:not(:last-child) {
+		@include bp($point_2, min) {
+			margin-bottom: 3.3rem;
+		}
+
+		@include bp($point_3) {
+			margin-bottom: 2.4rem;
+		}
+	}
+}
+
+.how_it_works__item_number {
+	font-size: 2.8rem;
+	font-weight: 700;
+	line-height: 1;
+
+	&:not(:last-child) {
+		@include bp($point_2, min) {
+			margin-bottom: 1.6rem;
+		}
+
+		@include bp($point_3) {
+			margin-bottom: 0.9rem;
+		}
+	}
+}
+
+.how_it_works__item_title {
+	@include h3;
+
+	@include bp($point_2, min) {
+		line-height: 1;
+	}
+
+	@include bp($point_3) {
+		font-size: 2.8rem;
+		line-height: 1.6;
+	}
+}

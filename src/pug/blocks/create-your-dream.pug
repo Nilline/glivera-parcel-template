@@ -1,0 +1,78 @@
+include ../templates/mixins/m-text-block
+include ../templates/mixins/m-image
+
+-
+	list = [
+		{
+			title: 'Residential ',
+		},
+		{
+			title: 'Hospitality',
+		},
+		{
+			title: 'Disaster relief',
+		},
+		{
+			title: 'Commercial',
+		},
+
+		{
+			mod: 'create_your_dream__image_item--last_item_mod',
+			title: 'Explore our range',
+			icon: true,
+		},
+	]
+
+section.section.create_your_dream
+	.section_in.create_your_dream_in
+		.create_your_dream__info
+			+text-block({
+				not_section: true,
+				mod: 'text_block--offset_1_mod',
+				title: 'Create your dream home today',
+				content_left: [
+					"<p>Your home is a reflection of who you are, and we want to help you bring your vision to life.</p>",
+					"<p>With our customizable options, the possibilities are endless. Choose from a variety of styles, sizes, and finishes to create a home that perfectly suits your taste and budget. Build a home you'll love with Hapi Homes.</p>",
+				],
+				content_rigth: [
+					"<p>Upgrade your living space with Hapi Homes' modern, sustainable housing solutions that are both affordable and customizable. Make the smart choice for your future.</p>",
+				],
+			})
+
+		h2.create_your_dream__images_list_title Unlimited possibilities
+		.create_your_dream__image_list
+			each item, index in list
+				.create_your_dream__image_item_w.js-fade-item
+					a.create_your_dream__image_item(class=item.mod href='#')
+						if !item.icon
+							+picture({
+								img: `create_your_dream/${index}.jpg`,
+								class: 'create_your_dream__img_w',
+								img_class: 'create_your_dream__img',
+								alt: 'some image',
+								lazy: true,
+							})
+						else
+							span.create_your_dream__image_item_icon
+								+icon('arrow_top_r', 'icon--size_mod')
+
+						.create_your_dream__image_title= item.title
+
+		.create_your_dream__info
+			h2.create_your_dream__info_title_bot 20 years of Hapi Homes
+			+text-block({
+				not_section: true,
+				mod: 'text_block--offset_1_mod',
+				content_left: [
+					"<p>As a result of the wide range of building types and locations, we have gained extensive experience in architectural design, interior design, construction, real estate development, and technology, with more than 20 designs to choose from.</p>",
+				],
+				content_rigth: [
+					"<p>For over two decades, the founders of Hapi Homeshave been offering prefabricated homes using light steel frame systems to clients globally.</p>",
+				],
+			})
+
+	+image({
+		not_section: true,
+		img: `create_your_dream/create_your_dream.jpg`,
+		img_mob: `create_your_dream/create_your_dream-mob.jpg`,
+	})

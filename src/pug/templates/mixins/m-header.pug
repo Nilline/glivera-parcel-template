@@ -1,2 +1,86 @@
+-
+	headerButtons = [
+		{
+			mobileHidden: true,
+			class: 'header_links__link',
+			text: 'Financing',
+		},
+		{
+			mobileHidden: true,
+			class: 'btn_v1',
+			icon: 'calendar',
+			text: 'Book a call',
+		},
+		{
+			class: 'btn_v2',
+			icon: 'cart',
+			double_icon: 'cart_2',
+		},
+	]
+
+-
+	headerNav = {
+		main: ['Home', 'Contact'],
+		secondary: [
+			'Residential',
+			'Hospitality',
+			'Commercial',
+			'Disaster Relief'
+		]
+	}
+
 mixin header
-	header.header
+	header.header(style='opacity: 0')
+		.header_in
+			a.header__logo(href="#")
+				img.header__logo_img(src="/src/images/logo.svg", alt="logo")
+			button.header_trigger.js-header-menu-trigger
+				.header_trigger__hamburger
+					.header_trigger__hamburger_el
+						span.header_trigger__hamburger_decor
+				.header_trigger__label
+					span.header_trigger__label_in Menu
+					span.header_trigger__label_in Close
+			nav.header_menu.js-header-menu
+				.header_menu__cols
+					.header_menu__col
+						ul.header_menu__main
+							each item in headerNav.main
+								li.header_menu__main_item
+									a.header_menu__main_link(href="#")= item
+						.header_menu__btn.header_menu__btn--desktop_mod
+							a.btn_v2(href="#")
+								.btn_icon
+									+icon('calendar', 'icon--size_mod')
+								span Book a call
+					.header_menu__col
+						ul.header_menu__secondary
+							each item in headerNav.secondary
+								li.header_menu__secondary_item
+									a.header_menu__secondary_link(href="#")= item
+						.header_menu__block_link
+							a.header_menu__secondary_link(href="#") Get Financed
+						.header_menu__btn.header_menu__btn--mobile_mod
+							a.btn_v2(href="#")
+								.btn_icon
+									+icon('calendar', 'icon--size_mod')
+								span Book a call
+				+picture({
+					img: 'hero/hero.jpg',
+					class: 'header_menu__pic',
+					img_class: 'header_menu__img',
+					alt: 'menu banner',
+				})
+
+			ul.header_links
+				each item in headerButtons
+					li.header_links__item(class=`${item.mobileHidden ? 'header_links__item--hidden_mod' : ''}`)
+						a(class=item.class href="#")
+							if item.icon
+								- icon_mod = `${item.double_icon ? 'btn_icon--double_mod' : ''}`
+								.btn_icon(class = icon_mod)
+									+icon(item.icon, 'icon--size_mod')
+									if item.double_icon
+										+icon(item.double_icon, 'icon--size_mod icon--double_mod')
+							if item.text
+								span= item.text

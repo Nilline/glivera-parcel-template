@@ -1,0 +1,53 @@
+.whats_included {
+	@include bp($point_2, min) {
+		padding-top: 5.8rem;
+	}
+
+	@include bp($point_3) {
+		padding-top: 2rem;
+	}
+}
+
+.whats_included__heading {
+	max-width: 69rem;
+
+	@include bp($point_3) {
+		padding-left: 0.5rem;
+	}
+
+	&:not(:last-child) {
+		@include bp($point_2, min) {
+			margin-bottom: 7.8rem;
+		}
+
+		@include bp($point_3) {
+			margin-bottom: 3rem;
+		}
+	}
+
+	p {
+		@include text;
+
+		@include bp($point_2, min) {
+			width: 89%;
+		}
+	}
+}
+
+.whats_included__title {
+	color: $black;
+
+	@include h1;
+
+	line-height: 1.27;
+
+	&:not(:last-child) {
+		@include bp($point_2, min) {
+			margin-bottom: 5.5rem;
+		}
+
+		@include bp($point_3) {
+			margin-bottom: 4.1rem;
+		}
+	}
+}

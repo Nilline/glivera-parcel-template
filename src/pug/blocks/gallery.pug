@@ -1,0 +1,20 @@
+include ../templates/mixins/m-slider-controls
+//- include ./gallery-popup
+
+section.section.gallery.js-fade-item
+	.gallery__slider.js-gallery-section-wrapper
+		+slider_controls({
+			icon: 'left_mini',
+			wrapper_class: 'gallery__controls',
+			class: 'gallery',
+		})
+		.gallery__list.js-gallery-section-slider
+			+loop_while(8)
+				.gallery__item.js-popup-gallery(data-slider-index=i - 1)
+					+picture({
+						img: `gallery/gal-${i - 1}.jpg`,
+						class: 'gallery__img_w',
+						img_class: 'gallery__img',
+						alt: 'some image',
+					})
+		.gallery__scrollbar.js-gallery-scrollbar

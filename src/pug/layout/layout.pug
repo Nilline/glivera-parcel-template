@@ -11,13 +11,14 @@ html(lang="en" data-template-name= array.template_name)
 	head
 		+head(array)
 	body(class= array.body_class)
-		.preloader
+		include ../blocks/preloader
 		+header
-		.wrapper(class= array.layout_mod)
-			.base(class= array.layout_mod)
-				block content_block
-			+footer
+		.scroll_wrapper.js-scroll-wrapper
+			.wrapper.js-scroll-inner(class= array.layout_mod)
+				.base(class= array.layout_mod)
+					block content_block
+				+footer
 		block local_popup
 		script(type="module" src='/src/js/index.js')
-		script(type="module" src=`/src/js/pages/${array.template_name}.js`)
+		//- script(type="module" src=`/src/js/pages/${array.template_name}.js`)
 		+dev_widget

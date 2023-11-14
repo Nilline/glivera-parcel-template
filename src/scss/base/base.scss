@@ -7,21 +7,80 @@
 :root {
 	--full-screen: calc(var(--vh, 1vh) * 100);
 
-	--height-header: 10rem;
 	--height-footer: 10rem;
-	--gl-indent: 5rem;
+
+	::-webkit-scrollbar {
+		width: 4px;
+	}
+
+	::-webkit-scrollbar-track {
+		background: $gray_2;
+	}
+
+	::-webkit-scrollbar-thumb {
+		background-color: $dark_2;
+	}
+
+	@include bp($point_2, min) {
+		--height-header: 10.8rem;
+		--gl-vr-indent: 5.4rem;
+		--gl-hr-indent: 9.6rem;
+	}
+
+	@include bp($point_1 - 1) {
+		--gl-hr-indent: 2.4rem;
+	}
+
+	@include bp($point_3) {
+		--height-header: 7.6rem;
+		--gl-vr-indent: 2rem;
+	}
 }
 
-html {
+@mixin disable_mobile_bars {
+	.touch_device_state &,
+	&.touch_device_state {
+		position: fixed !important;
+		left: 0;
+		top: 0;
+		height: var(--full-screen) !important;
+		width: 100%;
+		overflow: hidden !important;
+	}
+}
+
+html:not(.wp-toolbar) {
 	height: 100%;
-	font: 400 calc(100vw / 1920 * 10) / 1.33 $font_1;
+	min-height: var(--full-screen);
+	font: 400 calc(100vw / 1920 * 10) / 1.6 $font_1;
+
+	// font-size: 10px !important;
+
+	@include bp($point_1, min) {
+		font-size: calc(100vw / 1920 * 10);
+	}
+
+	@include bp($point_1 - 1, $point_2) {
+		font-size: 8px;
+	}
+
+	@include bp($point_3, $point_9) {
+		font-size: 10px;
+	}
+
+	@include bp($point_9 - 1) {
+		font-size: calc(100vw / 390 * 10);
+	}
+
+	@include disable_mobile_bars;
 }
 
-body {
+body:not(.wp-admin) {
 	position: relative;
 
 	display: flex;
 	height: 100%;
+	overflow: hidden;
 
 	font-size: $font_size_base;
 	color: $color_text_base;
@@ -35,24 +94,41 @@ body {
 	@supports (display: grid) {
 		display: block;
 	}
+
+	&.body--open_menu_state,
+	&.body--popup_active_mod,
+	&.video-active {
+		overflow: hidden !important;
+	}
+
+	&.body--loaded_state {
+		overflow: auto;
+	}
+
+	@include disable_mobile_bars;
 }
 
-.preloader {
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100vh;
-	background-color: $white;
+.scroll_wrapper {
+	height: 100%;
 
-	opacity: 1;
-	transition: opacity 0.3s;
+	.touch_device_state & {
+		height: var(--full-screen);
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+		align-items: stretch;
 
-	z-index: 1000;
+		::-webkit-scrollbar {
+			width: 4px;
+		}
 
-	.body--loaded & {
-		pointer-events: none;
-		opacity: 0;
+		::-webkit-scrollbar-track {
+			background: $gray_2;
+		}
+
+		::-webkit-scrollbar-thumb {
+			background-color: $dark_2;
+		}
 	}
 }
 
@@ -66,12 +142,18 @@ body {
 	height: auto !important;
 
 	overflow-x: hidden;
+	// will-change: transform;
+
+	body.body--popup_active_mod & {
+		overflow: hidden !important;
+	}
 }
 
 .base {
 	width: 100%;
 	position: relative;
 	padding: var(--height-header) 0 0;
+	// padding: 0;
 
 	flex: 1 0 auto;
 }
@@ -91,6 +173,7 @@ a {
 .editor-styles-wrapper .wp-block {
 	margin-bottom: 5rem;
 }
+
 html :where(.wp-block) {
 	max-width: 1200px;
 }

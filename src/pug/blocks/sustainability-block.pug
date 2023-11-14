@@ -1,0 +1,43 @@
+-
+	list = [
+		{
+			icon: 'home',
+			title: 'One Hapi Home'
+		},
+		{
+			icon: 'tree',
+			title: '250 trees planted'
+		},
+	]
+
+
+
+section.section.sustainability
+	.section_in.sustainability__in
+		.sustainability__row
+			.sustainability__col
+				.sustainability__info
+					p We’re driven is to create sustainable, housing solutions, designed for harmonious living with the environment
+					p Our team of designers, engineers, and crafts people is driven to create positive change in the building industry through intelligent design, manufacturing & material choices. We believe a small footprint can still mean highly functional and high-quality living.
+					p In addition to significant material waste reduction during the production process and the energy efficiencies that are standard with each of our homes, we're helping to re-forest our planet for future generations, with every Hapi Home we sell we plant 10 trees. We have joined the One Tree Planted ecosystem to do this.
+					p We approach sustainability by combining advanced manufacturing techniques with principles of the circular economy to minimise our materials and carbon footprint.
+
+			.sustainability__col.sustainability__col--offset_mod
+				.sustainability__list_w.js-fade-item
+					ul.sustainability__icon_list
+						each item in list
+							li.sustainability__icon_item
+								.sustainability__icon_w
+									img.sustainability__icon(src=`/src/images/${item.icon}.svg`, alt="some images")
+								.sustainability__icon_title= item.title
+				.sustainability__img_item
+					+picture({
+						img: 'live_sustainably/0.jpg',
+						class: 'sustainability__img_w js-fade-item',
+						img_class: 'sustainability__img',
+						alt: 'some image',
+						media: 768,
+						img_mob: 'live_sustainably/0.jpg',
+					})
+					.live_sustainably__img_logo_w
+						img.sustainability__img_logo(src="/src/images/live_sustainably/live_sustainably__logo.svg" alt="some logo pic")

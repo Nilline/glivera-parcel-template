@@ -1,0 +1,154 @@
+-
+	contactFormData = [
+		[
+			{
+				type: 'select',
+				label: 'Is your project for Personal or Business use?',
+				options: ['Personal / Residential', 'v2', 'v3', 'v4', 'v5', 'v6', 'v7', 'v8']
+			},
+			{
+				type: 'select',
+				multiple: true,
+				label: 'What model are you interested in?',
+				options: ['Kenmare', 'Kenmare v2', 'Kenmare v3']
+			},
+			{
+				type: 'select',
+				label: 'What stage is your project at?',
+				options: ['I’m keen to learn more', 'I have financing in place', 'have land/site and am interested in a Hapi Home', 'I have land/site and financing ready?']
+			},
+			{
+				type: 'select',
+				label: 'How will you use your home?',
+				options: ['Primary Residence', 'qq']
+			},
+			{
+				type: 'text',
+				label: 'Where is your project located?',
+				placeholder: 'Location'
+			},
+			{
+				type: 'text',
+				label: 'How many homes do you want?',
+				placeholder: 'Number of houses'
+			},
+		],
+		[
+			{
+				type: 'text',
+				label: 'Name',
+				placeholder: 'Your name'
+			},
+			{
+				type: 'email',
+				label: 'Email',
+				placeholder: 'email@example.com'
+			},
+			{
+				type: 'tel',
+				label: 'Mobile number',
+				placeholder: '+'
+			},
+			{
+				country: true,
+				type: 'select',
+				label: 'Country',
+				placeholder: 'Location',
+				options: [],
+			},
+		]
+	]
+
+-
+	contactFormContacts = [
+		{
+			icon: 'slack',
+			href: '#',
+			title: 'Live Chat'
+		},
+		{
+			icon: 'tel',
+			href: 'tel:+12124571323',
+			title: '+1 212-457-1323'
+		},
+		{
+			icon: 'calendar',
+			href: '#',
+			title: 'Book a call'
+		},
+	]
+
+section.section.contact_form
+	.contact_form__success.js-contact-form-success
+		.section_in
+			.contact_form__success_cols
+				.contact_form__success_col
+					h2.contact_form__success_title Success
+					.contact_form__success_descr We've received your request. We'll be in touch within 24 hours or sooner.
+				.contact_form__success_col
+					+picture({
+						img: 'contact/contact.jpg',
+						class: 'contact_form__success_pic',
+						img_class: 'contact_form__success_img',
+					})
+
+	.section_in
+		form.contact_form__main
+			.contact_form__blocks
+				each block in contactFormData
+					.contact_form__block
+						ul.contact_form__list.js-fade-item
+							each item in block
+								li.contact_form__list_item
+									if item.type === 'select'
+										if item.country
+											+form_select({
+												mod: 'contact_form__country', 
+												class: 'form_select__v2 js-form-country',
+												label: item.label,
+												options: item.options
+											})
+										else
+											+form_select({
+												class: 'form_select__v2 js-select',
+												multiple: item.multiple,
+												label: item.label,
+												options: item.options
+											})
+									else if item.type === 'tel'
+										+form_input({
+											field_class: 'form_input__field contact_form__tel_wrap js-form-tel-wrap',
+											class: 'form_input__element contact_form__tel_fake js-form-tel',
+											type: item.type,
+											label: item.label,
+											placeholder: item.placeholder,
+										})
+											.form_input__element.contact_form__tel
+												.contact_form__emoji
+													.contact_form__emoji_in.js-form-tel-emoji
+												//- input.form_input__element.contact_form__tel_input.js-form-tel-output
+									else
+										+form_input({
+											type: item.type,
+											label: item.label,
+											placeholder: item.placeholder,
+										})
+			.contact_form__captcha.js-fade-item
+				+picture({
+					img: 'captcha.jpg',
+					class: 'contact_form__captcha_pic',
+					img_class: 'contact_form__captcha_img',
+				})
+			.contact_form__btn.js-fade-item
+				button.btn_v1.js-contact-form-submit(type='button') 
+					span Submit
+
+		.contact_form__contacts.js-fade-item
+			ul.contact_form__contacts_list
+				each item in contactFormContacts
+					li.contact_form__contacts_item
+						a.contact_form__contacts_link(href=item.href)
+							.contact_form__contacts_icon_block
+								.contact_form__contacts_icon
+									+icon(item.icon, 'icon--size_mod')
+							.contact_form__contacts_title= item.title

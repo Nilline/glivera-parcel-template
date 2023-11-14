@@ -1,0 +1,15 @@
+extends ../layout/layout
+
+block vars
+	//- include ../templates/project-vars
+	include ../templates/mixins/m-hero-v2
+	- array = {body_class:'', layout_mod:'', sub_keywords:'', title_inner:'Blog', template_name: 'blog'}
+
+block content_block
+	+hero_v2({
+		mod: 'hero_v2--mod_3 hero_v2--no_title_mod',
+		img: 'hero_v2/hero_v2_blog.jpg',
+		img_mob: 'hero_v2/hero_v2_blog_mob.jpg',
+		title: 'Blog',
+	})
+	include ../blocks/blog-list

@@ -1,0 +1,158 @@
+@import 'ScssHelpers/helpers-all.scss';
+
+.bio {
+	@include bp($point_2, min) {
+		padding-top: 10.4rem;
+	}
+
+	@include bp($point_3) {
+		padding-top: 0;
+	}
+}
+
+.bio__btn_back_w {
+	@include bp(1512px) {
+		display: none;
+	}
+}
+
+.bio__row {
+	@include flex_block(row, wrap, flex-start, stretch, stretch);
+
+	margin-bottom: -9rem;
+}
+
+.bio__col {
+	padding-bottom: 9rem;
+
+	@include bp($point_2, min) {
+		&.bio__col--image_mod {
+			width: 48%;
+		}
+
+		&.bio__col--info_mod {
+			width: 52%;
+
+			padding-left: 4.8rem;
+		}
+	}
+
+	@include bp($point_3) {
+		width: 100%;
+
+		&.bio__col--image_mod {
+			position: relative;
+
+			&:after {
+				position: absolute;
+				bottom: 4rem;
+				left: 0;
+				display: block;
+				width: 100%;
+				height: 2px;
+				background-color: $gray_6;
+				content: '';
+			}
+		}
+	}
+}
+
+.bio__img_w {
+	position: relative;
+
+	display: block;
+	width: 100%;
+
+	@include bp($point_4, min) {
+		padding-bottom: 78%;
+	}
+
+	@include bp($point_4 - 1) {
+		padding-bottom: 94.4%;
+	}
+
+	&:not(:last-child) {
+		@include bp($point_2, min) {
+			margin-bottom: 5.4rem;
+		}
+
+		@include bp($point_3) {
+			margin-bottom: 2.4rem;
+		}
+	}
+}
+
+.bio__img {
+	@include cover_img;
+
+	position: absolute;
+	top: 0;
+	top: 0;
+}
+
+.bio__info {
+	position: relative;
+	padding-left: 2.4rem;
+
+	@include bp($point_2, min) {
+		padding-bottom: 4.8rem;
+		&:after {
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			display: block;
+			width: 100%;
+			height: 2px;
+			background-color: $gray_6;
+			content: '';
+		}
+	}
+}
+
+.bio__name {
+	@include h2;
+	color: $black;
+
+	&:not(:last-child) {
+		@include bp($point_2, min) {
+			margin-bottom: 0.4rem;
+		}
+
+		@include bp($point_3) {
+			margin-bottom: 1rem;
+		}
+	}
+}
+
+.bio__descr {
+	@include h3;
+
+	font-weight: 400;
+}
+
+.bio__article {
+	h2 {
+		@include h1;
+		line-height: 1.3;
+	}
+
+	h3 {
+		@include h3;
+	}
+
+	p {
+		@include text;
+
+		line-height: 160%;
+
+		&:not(:last-child) {
+			@include bp($point_2, min) {
+				margin-bottom: 3.4rem;
+			}
+
+			@include bp($point_3) {
+				margin-bottom: 3.4rem;
+			}
+		}
+	}
+}

@@ -18,13 +18,13 @@
 		@include h3;
 	}
 	h4 {
-		@include h4;
+		@include title;
 	}
 	h5 {
-		@include h5;
+		@include text;
 	}
 	h6 {
-		@include h6;
+		@include caption;
 	}
 
 	@include flex_block(row, nowrap, flex-start);

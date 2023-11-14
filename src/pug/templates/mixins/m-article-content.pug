@@ -1,0 +1,5 @@
+mixin article_content(data)
+	.article_content.js-article-content(class=data.mod)
+		block
+		each item in data.content
+			!=item

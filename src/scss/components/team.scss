@@ -1,0 +1,116 @@
+@import 'ScssHelpers/helpers-all.scss';
+
+.team {
+	@include bp($point_3) {
+		padding-bottom: 7rem;
+	}
+}
+
+.team__title {
+	@include h1;
+	color: $dark;
+
+	&:not(:last-child) {
+		@include bp($point_2, min) {
+			margin-bottom: 10.8rem;
+		}
+
+		@include bp($point_3) {
+			margin-bottom: 4rem;
+		}
+	}
+}
+
+.team__row {
+	@include flex_block(row, wrap, flex-start, stretch, stretch);
+
+	@include bp($point_4, min) {
+		margin: 0 -2.4rem -11rem 0;
+	}
+
+	@include bp($point_4 - 1) {
+		margin: 0 -2.4rem -7.5rem 0;
+	}
+}
+
+.team__item {
+	@include bp($point_2, min) {
+		width: calc(100% / 3);
+
+		padding: 0 2.4rem 11rem 0;
+	}
+
+	@include bp($point_3, $point_4) {
+		width: calc(100% / 2);
+
+		padding: 0 2.4rem 11rem 0;
+	}
+
+	@include bp($point_4 - 1) {
+		width: 100%;
+
+		padding: 0 2.4rem 7.5rem 0;
+	}
+}
+
+.team__item_in {
+
+	&:focus,
+	&:hover {
+		text-decoration: none;
+	}
+}
+
+.team__img_w {
+	position: relative;
+
+	display: block;
+	width: 100%;
+
+	overflow: hidden;
+
+	@include bp($point_4, min) {
+		padding-bottom: 88%;
+	}
+
+	@include bp($point_4 - 1) {
+		padding-bottom: 94.4%;
+	}
+
+	&:not(:last-child) {
+		margin-bottom: 1.8rem;
+	}
+}
+
+.team__img {
+	position: absolute;
+	top: 0;
+	width: 100%;
+	height: 100%;
+
+	transition: transform ease 0.4s;
+
+	.team__item_in:hover & {
+		transform: scale(1.05);
+	}
+}
+
+.team__item_info {
+	padding-left: 2.4rem;
+}
+
+.team__item_title {
+	font-size: 2.8rem;
+	font-weight: 700;
+	line-height: 160%;
+	color: $black;
+
+	&:not(:last-child) {
+		margin-bottom: 4px;
+	}
+}
+
+.team__item_descr {
+	font-size: 2rem;
+	line-height: 160%;
+}

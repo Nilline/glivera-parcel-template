@@ -267,12 +267,13 @@ mixin social(socialArray)
 //- works
 mixin icon(name, mod)
 	- mod = mod || 'icon--size_mod';
-	- const svgInline = readFileSync(`.${assetsImage}/icons/sprite-icons/${name}.icon.svg`, "utf-8");
-	!= svgInline
-	if environment === 'development'
-		//- need for parcel rerender
-		object(data=`${assetsImage}/icons/sprite-icons/${name}.icon.svg` type="image/svg+xml" style="display: none")
-		//- need for parcel rerender#
+	span.icon(class=mod)
+		- const svgInline = readFileSync(`.${assetsImage}/icons/sprite-icons/${name}.svg`, "utf-8");
+		!= svgInline
+		if environment === 'development'
+			//- need for parcel rerender
+			object(data=`${assetsImage}/icons/sprite-icons/${name}.svg` type="image/svg+xml" style="display: none")
+			//- need for parcel rerender#
 
 mixin slider_navigation(buttonMod = '')
 	button.slider_navigation.slider_navigation--prev_mod.js-slider-navigation-prev(class=buttonMod type="button" aria-label="Prev slide")
@@ -356,6 +357,7 @@ mixin picture(data)
 			src=source,
 			alt=alt,
 			loading=loading
+			onload= data.onload ? 'if (window.onImageLoaded) window.onImageLoaded();' : undefined
 		)
 
 mixin dev_widget

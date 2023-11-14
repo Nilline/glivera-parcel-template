@@ -2,8 +2,35 @@ extends ../layout/layout
 
 block vars
 	//- include ../templates/project-vars
+	include ../templates/mixins/m-hero
+	include ../templates/mixins/m-chat-with-us
 	- array = {body_class:'', layout_mod:'', sub_keywords:'', title_inner:'Index', template_name: 'index'}
 
 block content_block
-	section.section.index_section.demo_mod
-		h1.section_title Hola #[a.test(href='https://glivera-team.com/') Maketodor] :)
+	+hero({
+		mod: 'hero--color_white_mod hero--1_mod',
+		img: 'hero/hero.jpg',
+		img_mob: 'hero/hero_mob.jpg',
+		social: ['instagram', 'twitter', 'linkedin'],
+		content: [
+			'<h1>Experience a new standard of living</h1>',
+			'<p>For over two decades, the founders of Hapi Homes have been offering, accessory dwelling units (ADUs), tiny, modular and pre-fabricated homes,  using the highest quality materials to clients globally.</p>',
+		],
+		btn: 'Learn more',
+		btn_mod: 'btn_primary',
+	})
+
+	include ../blocks/dream-home
+	include ../blocks/create-your-dream
+	include ../blocks/live-sustainably
+	+chat_with_us({
+		content: [
+			'<h2>Chat with us</h2>',
+			'<p>Getting started with a Hapi Home couldn’t be any easier. Our range in price and aesthetic, we don’t compromise on quality or design, and our clients love the fact that our homes are ready to ship in less than six weeks.</p>',
+			'<p>With concierge-level service from the blueprint to delivery, you have a dedicated Hapi Home expert with you for every part of the process.</p>',
+		],
+		btn_title: 'Book a call',
+		btn_mod: 'btn_primary',
+		icon: 'calendar',
+	})
+	include ../blocks/partners-section

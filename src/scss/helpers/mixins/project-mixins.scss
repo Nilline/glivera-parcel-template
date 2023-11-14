@@ -40,3 +40,44 @@
 		pointer-events: initial;
 	}
 }
+
+@mixin accordion($toggle_class) {
+	max-height: 0;
+	opacity: 0;
+
+	transition: all 0.25s ease-out;
+	will-change: max-height;
+	overflow: hidden;
+	pointer-events: none;
+
+	#{$toggle_class} & {
+		opacity: 1;
+		pointer-events: auto;
+	}
+}
+
+@mixin button_back($top, $left) {
+	position: absolute;
+	top: $top;
+	left: $left;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 8rem;
+	height: 8rem;
+
+	color: $black;
+
+	background-color: $gray_6;
+	transition: color 0.3s;
+	cursor: pointer;
+
+	&:hover {
+		color: $gray_2;
+	}
+
+	@include bp($point_1) {
+		display: none;
+	}
+}

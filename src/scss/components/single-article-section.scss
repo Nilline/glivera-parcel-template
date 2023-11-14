@@ -1,0 +1,99 @@
+@import 'ScssHelpers/helpers-all.scss';
+
+.single_article {
+	@include bp($point_2, min) {
+		padding-top: 9.8rem;
+		padding-bottom: 10rem;
+	}
+
+	@include bp($point_3) {
+		padding-top: 4.3rem;
+	}
+}
+
+.single_article__heading {
+	&:not(:last-child) {
+		margin-bottom: 3.9rem;
+	}
+
+	h1 {
+		@include h1;
+
+		color: $dark;
+		line-height: 1.27;
+
+		&:not(:last-child) {
+			@include bp($point_2, min) {
+				margin-bottom: 2.7rem;
+			}
+
+			@include bp($point_3) {
+				margin-bottom: 3.8rem;
+			}
+		}
+	}
+}
+
+.single_article__date {
+	@include text;
+
+	color: $dark_2;
+}
+
+.single_article__picture {
+	&:not(:last-child) {
+		@include bp($point_2, min) {
+			margin-bottom: 8rem;
+		}
+
+		@include bp($point_3) {
+			margin: 0 -2.4rem 4.2rem;
+		}
+	}
+}
+
+.single_article__img_wrap {
+	position: relative;
+
+	display: block;
+
+	width: 100%;
+	height: 100%;
+
+	@include bp($point_2, min) {
+		padding-top: 37.5%;
+	}
+
+	@include bp($point_3) {
+		padding-top: 83%;
+	}
+}
+
+.single_article__img {
+	@include cover_img;
+
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+.single_article__subtitle {
+	@include h2;
+
+	color: $dark;
+	line-height: 1.25;
+
+	@include bp($point_3) {
+		font-size: 4.8rem;
+		line-height: 1.27;
+	}
+
+	&:not(:last-child) {
+		@include bp($point_2, min) {
+			margin-bottom: 7.8rem;
+		}
+		@include bp($point_3) {
+			margin-bottom: 4.5rem;
+		}
+	}
+}

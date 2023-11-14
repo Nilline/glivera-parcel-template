@@ -1,0 +1,53 @@
+include ../templates/mixins/m-article-content
+
+-
+	article_content = {
+		title: 'Ways to finance your Hapi Home:',
+		link_logo: 'content_section/logo.png',
+		link_icon: 'arrow_top_r',
+		content: [
+			`
+				<p>RenoFi Loans are the best of both worlds. Like a construction loan, the homeowner can borrow based on the after-renovation value and thus unlocks significant borrowing power, BUT, it's in the form of a Home Equity Loan so it doesn't require the homeowner to refinance their existing mortgage. No one is going to give up their 3% rate to go into a 7% mortgage.</p>
+				<p>Additionally, 100% of the funds are available to the homeowner at closing, there are no draws or inspections like there normally would be with a construction loan. No headaches for you, no delays in getting paid. </p>
+				<p>The financing comes from Credit Unions and thus the rates and fees are as competitive as any homeowner could possibly find. Loan product options for ADUs projects of all sizes.</p>
+				<p>Homeowners can borrow up to $500,000 leveraging the future value of homes post-renovation (up to 90% after-renovation loan-to-value). Future rental income can be considered too.</p>
+				<p>&nbsp</p>
+			`,
+			`
+				<h3>Cash Out Refinance:</h3>
+				<p>An option for homeowners with significant equity in their property. By refinancing, you can access the equity built in your home to finance your Hapi Home.</p>
+			`,
+			`
+				<h3>HELOC (Home Equity Line of Credit):</h3>
+				<p>Another option for homeowners with significant equity in their property. A HELOC allows you to borrow against the equity in your home, providing the funds needed for your Hapi Home.</p>
+			`,
+			`
+				<h3>Construction Loan:</h3>
+				<p>Commonly used by homeowners planning to rent out their ADU, but also a potential fit for owner-users. A construction loan provides the financing needed during the construction phase of your Hapi Home.</p>
+			`,
+			`
+				<h3>Cash:</h3>
+				<p>For those looking to invest in their property without using financing, paying in cash is a straightforward option. This allows you to make a direct investment in your Hapi Home.</p>
+			`,
+			`
+				<h3>No Payment Equity Loan:</h3>
+				<p>This option caters to investors who request no monthly payment for 10 years, with a small equity share for repayment in 10 years. It provides an alternative financing solution for specific investment scenarios.</p>
+			`,
+		]
+	}
+
+section.section.text_block
+	.section_in.text_block__in
+		.text_block__article
+			+article_content(article_content)
+				h2!=article_content.title
+				.article_content__link_block
+					a.article_content__link.js-fade-item(href='#' aria-label='renofi link')
+						+picture({
+							img: article_content.link_logo,
+							class: 'article_content__link_logo_w',
+							img_class: 'article_content__link_logo_in',
+							alt: 'Content section link logo',
+						})
+						.article_content__link_icon
+							+icon(article_content.link_icon, 'icon--size_mod')

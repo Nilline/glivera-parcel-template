@@ -1,0 +1,106 @@
+-
+	head = [
+		{
+			wrap: true,
+			mod: 'product-thumbnail',
+		},
+		{
+			mod: 'product-name',
+		},
+		{
+			title: 'Price',
+			mod: 'product-price',
+		},
+		{
+			mod: 'product-quantity',
+			title: 'Quantity',
+		},
+		{
+			title: 'Total',
+			mod: 'product-subtotal',
+		},
+	],
+
+-
+	list = [
+		{
+			remove: true,
+			img: '/src/images/cart/cart-0.jpg',
+			info: [
+				'<h3>Kenmare</h3>',
+				'<span>1024.724 sq.ft | 1 Living | 1 Kitchen | 2 Bed | 2 Bath</span>',
+			],
+			price: '299',
+		},
+		{
+			img: '/src/images/cart/cart-1.jpg',
+			info: [
+				'<h3>Clifton</h3>',
+				'<span>1 Living | 1 Kitchen | 1 Bedroom 1 Bath | 1 Deck 70.87 / 762.83 sq.ft</span>',
+			],
+			price: '299',
+		},
+	]
+
+.woocommerce
+	section.section.cart_block
+		.section_in.cart_block__in
+			.cart_block__table_w(data-title="Grand Total")
+				table.shop_table.shop_table_responsive.cart.woocommerce-cart-form__contents
+					thead
+						tr
+							each item in head
+								if item.wrap
+									th(class=item.mod)
+										span.screen-reader-text= item.title
+								else
+									th(class=item.mod)= item.title
+					tbody
+						each item in list
+							tr.woocommerce-cart-form__cart-item.cart_item.js-fade-item
+								td.product-thumbnail
+									div(class="tt-product-img")
+										a(href="https://woo.glivera.com/product/beanie/")
+											img.attachment-woocommerce_thumbnail.size-woocommerce_thumbnail.loading(src=item.img alt="" loading="lazy" data-was-processed="true")
+								td.product-name(data-title="Product")
+									.tt-title!= item.info
+								td(data-title="Price")
+									div.tt-price
+										span.woocommerce-Price-amount.amount
+											bdi
+												span.woocommerce-Price-currencySymbol $
+												=item.price
+								td(data-title="Quantity")
+									div.quantity
+										label.screen-reader-text(for="") Kenmare
+										div.numberstyle-qty
+											if item.remove
+												a.tt-btn-close(href="#" aria-label="Remove this item" data-product_id="" data-product_sku="")
+											else
+												div(class="qty-btn qty-rem") -
+											input.numberstyle(type="number" id="" step="1" min="0" max="" name="" value="1" title="Qty" placeholder="" inputmode="numeric" autocomplete="off")
+											div.qty-btn.qty-add +
+								td(data-title="Subtotal")
+									div.tt-price.subtotal
+										span.woocommerce-Price-amount.amount
+											bdi
+												span.woocommerce-Price-currencySymbol $
+												=item.price
+
+			.cart_block__total_price_w.js-fade-item
+				bdi
+					.cart_block__total_price.woocommerce-Price-amount.amount
+						span.woocommerce-Price-currencySymbol $
+						| 897
+				.cart_block__total_price_title Total
+
+			.cart_block__checkout_w.js-fade-item
+				.cart_block__checkout_stripe_logo
+					img.cart_block__checkout_stripe_logo_img(src="/src/images/cart/stripe.svg", alt="stripe logo")
+				a.cart_block__btn.btn_v5(href="#")
+					span Check Out
+
+
+
+
+

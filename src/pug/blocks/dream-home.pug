@@ -1,0 +1,27 @@
+include ../templates/mixins/m-building-tabs
+include ../templates/project-vars
+include ../templates/mixins/m-image
+
+section.section.dream_home
+	.section_in
+		h2.dream_home__title Your dream home delivered in 8 weeks
+		+building_tabs({
+			slider: true,
+			content: buildingsData,
+		})
+		.dream_home__text.js-fade-item
+			p Stop waiting for months or even years to get your dream home. With Hapi Homes, you can have your custom-built tiny, modular, accessory dwelling units (ADUs), or light steel frame house delivered in just 8 weeks.
+			p Enjoy sophisticated building solutions that fit any style and budget, whether for residential, commercial, or hospitality purposes. Get started on your dream today!
+	+image({
+		not_section: true,
+		img: `dream_home/poster.jpg`,
+		img_mob: `dream_home/poster_mob.jpg`
+	})
+	//- +picture({
+	//- 	media: 768,
+	//- 	class: 'dream_home__poster js-fade-item',
+	//- 	img_class: 'dream_home__poster_img',
+	//- 	img: 'dream_home/poster.jpg',
+	//- 	img_mob: 'dream_home/poster_mob.jpg',
+	//- })
+

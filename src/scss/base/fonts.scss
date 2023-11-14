@@ -1,1 +1,4 @@
-@include font_face('RobotoCondensed-Regular', 'RobotoCondensed', $font_path, 400);
+@include font_face('Sohne-Dreiviertelfett', 'Sohne', $font_path, 700);
+@include font_face('Sohne-Buch', 'Sohne', $font_path, 400);
+
+@include font_face('NotoColorEmoji-Regular', 'NotoEmoji', $font_path, 400);

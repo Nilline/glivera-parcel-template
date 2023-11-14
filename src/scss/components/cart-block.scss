@@ -1,0 +1,535 @@
+@import 'ScssHelpers/helpers-all';
+
+@mixin text {
+	font-size: 2rem;
+	letter-spacing: 0.02em;
+	line-height: 160%;
+	font-weight: 700;
+}
+
+.woocommerce {
+	input::-webkit-inner-spin-button {
+		display: none;
+	}
+	input::-moz-inner-spin-button {
+		display: none;
+	}
+
+	.cart_block {
+		.shop_table {
+			width: 100%;
+			border: none;
+			margin-bottom: 0;
+
+			thead {
+				@include bp($point_2, min) {
+					position: relative;
+
+					&:after {
+						position: absolute;
+						bottom: 2.2rem;
+						left: 0;
+						display: block;
+						width: 100%;
+						height: 2px;
+						background-color: $gray_3;
+						content: '';
+					}
+				}
+
+				@include bp($point_3) {
+					display: none;
+				}
+
+				th {
+					font-size: 2rem;
+					line-height: 160%;
+					color: $gray_2;
+					padding: 0 0 5rem 2.4rem;
+				}
+
+				th:nth-child(1) {
+					width: 25%;
+				}
+
+				th:nth-child(2) {
+					width: 26.4%;
+				}
+
+				th:nth-child(3) {
+					@include text;
+					width: 13.2%;
+					text-align: center;
+				}
+
+				th:nth-child(4) {
+					@include text;
+					width: 23.8%;
+					text-align: center;
+
+					padding-left: 1.4rem;
+				}
+
+				th:nth-child(5) {
+					@include text;
+					text-align: end;
+				}
+			}
+		}
+
+		.tt-product-img {
+			position: relative;
+
+			width: 100%;
+
+			&:before {
+				content: '';
+				display: block;
+
+				@include bp($point_2, min) {
+					padding-bottom: 75%;
+				}
+
+				@include bp($point_3) {
+					padding-bottom: 63%;
+				}
+			}
+
+			img {
+				position: absolute;
+				top: 0;
+				left: 0;
+
+				@include cover_img;
+			}
+		}
+
+		.tt-title {
+			font-size: 1.7rem;
+			line-height: 160%;
+			color: $gray_2;
+
+			h3 {
+				margin-bottom: 0.8rem;
+				color: $black;
+				font-size: 2.8rem;
+				line-height: 160%;
+			}
+		}
+
+		.cart_item {
+			position: relative;
+
+			width: 100%;
+			height: 26.6rem;
+
+			&:after {
+				position: absolute;
+				left: 0;
+				display: block;
+				width: 100%;
+				height: 2px;
+				content: '';
+
+				background-color: $gray_3;
+			}
+
+			@include bp($point_2, min) {
+				&:after {
+					bottom: 2.5rem;
+				}
+
+				& td {
+					vertical-align: top;
+					border: none !important;
+				}
+
+				& td:nth-child(1) {
+					width: 25%;
+					padding: 0 0 4.8rem 0;
+				}
+
+				& td:nth-child(2) {
+					width: 26.4%;
+					padding: 1.8rem 0 4.8rem 2.4rem;
+				}
+
+				& td:nth-child(3) {
+					@include text;
+					width: 13.2%;
+					padding: 2.8rem 0 4.8rem 2.4rem;
+					text-align: center;
+				}
+
+				& td:nth-child(4) {
+					@include text;
+					width: 23.8%;
+					padding: 2.8rem 1.4rem 4.8rem 2.4rem;
+				}
+
+				& td:nth-child(5) {
+					@include text;
+					padding: 2.8rem 0 4.8rem 2.4rem;
+					text-align: end;
+				}
+			}
+
+			@include bp($point_3, $point_4) {
+				@include flex_block(row, wrap, flex-start, center, center);
+				height: 100%;
+				padding-bottom: 2.5rem;
+
+				&:after {
+					bottom: 0;
+				}
+
+				&:not(:last-child) {
+					margin-bottom: 2.5rem;
+				}
+
+				& td {
+					vertical-align: top;
+					border: none !important;
+				}
+
+				& td:nth-child(1) {
+					width: 50%;
+					padding: 0 0 4.8rem 0;
+				}
+
+				& td:nth-child(2) {
+					width: 50%;
+					padding: 1.8rem 0 4.8rem 2.4rem;
+				}
+
+				& td:nth-child(3) {
+					display: none;
+				}
+
+				& td:nth-child(4) {
+					@include text;
+					width: 50%;
+					padding: 0 1.2rem 0 2.4rem;
+				}
+
+				& td:nth-child(5) {
+					@include text;
+					width: 50%;
+					padding: 0 2.4rem 0 1.2rem;
+
+					text-align: end;
+				}
+			}
+
+			@include bp($point_4 - 1) {
+				@include flex_block(row, wrap, flex-start, center, center);
+				height: 100%;
+				padding-bottom: 2.5rem;
+
+				&:after {
+					bottom: 0;
+				}
+
+				&:not(:last-child) {
+					margin-bottom: 2.5rem;
+				}
+
+				& td {
+					display: block;
+					vertical-align: top;
+					border: none !important;
+				}
+
+				& td:nth-child(1) {
+					// height: 55.5vw;
+					width: 100%;
+
+					padding: 0;
+					margin-bottom: 2.6rem;
+				}
+
+				& td:nth-child(2) {
+					width: 100%;
+
+					padding: 0 0 0 2.5rem;
+					margin-bottom: 3rem;
+					text-align: left !important;
+				}
+
+				& td:nth-child(3) {
+					display: none;
+				}
+
+				& td:nth-child(4) {
+					@include text;
+					width: 50%;
+					padding: 0 1.2rem 0 2.4rem;
+				}
+
+				& td:nth-child(5) {
+					@include text;
+					width: auto;
+					margin-left: auto;
+					margin-top: auto;
+					padding: 0 2.4rem 0 1.2rem;
+
+					text-align: end;
+				}
+			}
+
+			.numberstyle-qty {
+				position: relative;
+
+				width: 100%;
+
+				@include bp($point_2, min) {
+					@include flex_block(row, nowrap, center, center, center);
+				}
+				@include bp($point_3) {
+					@include flex_block(row, nowrap, flex-start, center, center);
+				}
+
+				input {
+					background-color: transparent;
+				}
+			}
+
+			.quantity {
+				width: 100%;
+			}
+
+			.numberstyle {
+				@include text;
+
+				width: 5rem;
+				border: none;
+				outline: none;
+				text-align: center;
+			}
+
+			.qty-btn {
+				cursor: pointer;
+				font-size: 3.4rem;
+				width: 2.4rem;
+				color: $gray_2;
+
+				transition: color ease 0.3s;
+
+				&:hover,
+				&:focus {
+					color: $dark;
+				}
+			}
+
+			.remove {
+				position: absolute;
+				top: 50%;
+				z-index: 2;
+
+				width: 2.4rem;
+				height: 2.4rem;
+
+				background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTYgNnYxNWgxMlY2TTYgNmgxMk02IDZING0xNCAwaDJtLTYgNXY1bS00LTV2NU05IDZhMyAzIDAgMSAxIDYgMCIgc3Ryb2tlPSIjQjVCNEMzIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJzcXVhcmUiLz48L3N2Zz4=);
+				background-position: center;
+				background-repeat: no-repeat;
+				background-size: 100%;
+				cursor: pointer;
+
+				transform: translateY(-50%);
+
+				transition: background-image ease 0.3s;
+				font-size: 0;
+
+				@include bp($point_2, min) {
+					margin-left: -4.8rem;
+				}
+
+				&:hover,
+				&:focus {
+					background-image: url(data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMjQgMjQiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTYgNnYxNWgxMlY2TTYgNmgxMk02IDZING0xNCAwaDJtLTYgNXY1bS00LTV2NU05IDZhMyAzIDAgMSAxIDYgMCIgc3Ryb2tlPSIjRkYyMzYyIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJzcXVhcmUiLz48L3N2Zz4=);
+				}
+			}
+		}
+	}
+
+	.cart_block__table_w {
+		&:not(:last-child) {
+			@include bp($point_2, min) {
+				margin-bottom: 1.8rem;
+			}
+			@include bp($point_3) {
+				margin-bottom: 4.8rem;
+			}
+		}
+	}
+}
+
+.cart_block__total_price_w {
+	&:not(:last-child) {
+		@include bp($point_2, min) {
+			margin-bottom: 4.8rem;
+		}
+		@include bp($point_3) {
+			margin-bottom: 2.4rem;
+		}
+	}
+
+	@include bp($point_2, min) {
+		text-align: right;
+	}
+	@include bp($point_3) {
+		@include flex_block(row-reverse, wrap, space-between);
+
+		padding: 0 2.5rem;
+	}
+}
+
+.cart_block__total_price_w .blockUI.blockOverlay::before {
+	display: none;
+}
+
+.cart_block__total_price {
+	font-size: 4.8rem;
+	line-height: 1;
+	font-weight: 700;
+
+	@include bp($point_2, min) {
+		margin-bottom: 1rem;
+	}
+
+	@include bp($point_3) {
+		margin-bottom: 2rem;
+	}
+}
+
+.cart_block__total_price_title {
+	font-size: 2rem;
+	line-height: 160%;
+	color: $gray_2;
+}
+
+.cart_block__checkout_w {
+	@include flex_block(row, wrap, flex-end, center, center);
+}
+
+.cart_block__btn {
+	@include bp($point_3) {
+		width: 100%;
+	}
+}
+
+.cart_block__checkout_stripe_logo {
+	width: 14.2rem;
+	height: 2.2rem;
+
+	&:not(:last-child) {
+		margin-right: 4.8rem;
+	}
+
+	@include bp($point_3) {
+		display: none;
+	}
+}
+
+.cart_block__checkout_stripe_logo_img {
+	@include contain_img;
+}
+
+.cart_block__empty_w {
+	position: relative;
+
+	&:after {
+		position: absolute;
+
+		left: 0;
+		display: block;
+		width: 100%;
+		height: 2px;
+		content: '';
+		background-color: $gray_3;
+
+		@include bp($point_2, min) {
+			top: 5.2rem;
+		}
+		@include bp($point_3) {
+			top: 0;
+		}
+	}
+
+	@include bp($point_2, min) {
+		padding-top: 8.8rem;
+	}
+	@include bp($point_3) {
+		padding-top: 2.8rem;
+	}
+}
+
+.cart_block__empty {
+	@include flex_block(column, wrap, center, center, center);
+
+	background-color: $light_2;
+	text-align: center;
+
+	@include bp($point_2, min) {
+		min-height: 32.4rem;
+		padding: 4rem;
+	}
+	@include bp($point_3) {
+		min-height: 21.5rem;
+		padding: 4rem 2rem;
+	}
+}
+
+.cart_block__empty_link {
+	font-size: 1.7rem;
+	line-height: 160%;
+	text-decoration: underline;
+	text-underline-offset: 0.4rem;
+
+	&:hover,
+	&:focus {
+		text-decoration: none;
+	}
+}
+
+.cart_block__empty_title {
+	font-size: 2.8rem;
+	line-height: 160%;
+
+	font-weight: 700;
+
+	&:not(:last-child) {
+		margin-bottom: 1.5rem;
+	}
+}
+
+#editing-view-port {
+	font-family: $font_1;
+	color: $dark;
+}
+
+.woocommerce-Price-amount.amount {
+	color: $dark;
+}
+
+.woocommerce table.shop_table_responsive tr td::before,
+.woocommerce-page table.shop_table_responsive tr td::before {
+	display: none;
+}
+
+@media (max-width: 768px) {
+	.woocommerce-page table.cart .product-thumbnail {
+		display: block !important;
+	}
+	.woocommerce table.shop_table_responsive tr td,
+	.woocommerce-page table.shop_table_responsive tr td {
+		text-align: left !important;
+	}
+}
+
+@include bp($point_6) {
+	.woocommerce-cart table.cart td.actions .coupon .input-text {
+		width: 100% !important;
+		margin-bottom: 2rem;
+	}
+}

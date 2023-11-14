@@ -1,0 +1,158 @@
+@import 'ScssHelpers/helpers-all.scss';
+
+.article_content {
+	@include text;
+
+	.single_article & {
+		&:not(:last-child) {
+			@include bp($point_2, min) {
+				margin-bottom: 11.2rem;
+			}
+			@include bp($point_3) {
+				margin-bottom: 4rem;
+			}
+		}
+	}
+
+	h1,
+	h2,
+	h3 {
+		color: $dark;
+
+		&:not(:last-child) {
+			margin-bottom: 2.4rem;
+			margin-top: 4.2rem;
+		}
+
+		&:first-child {
+			margin-top: 0;
+		}
+	}
+	h1 {
+		@include h1;
+	}
+	h2 {
+		@include h2;
+
+		.text_block__article & {
+			@include h1;
+
+			@include bp($point_2, min) {
+				line-height: 1.26;
+			}
+
+			@include bp($point_3) {
+				line-height: 1.28;
+			}
+
+			&:not(:last-child) {
+				@include bp($point_2, min) {
+					margin-bottom: 7.6rem;
+				}
+
+				@include bp($point_3) {
+					margin-bottom: 3.6rem;
+				}
+			}
+		}
+	}
+	h3 {
+		@include bp($point_2, min) {
+			@include h3;
+		}
+
+		@include bp($point_3) {
+			font-size: 2.8rem;
+		}
+
+		.single_article & {
+			@include bp($point_3) {
+				font-size: 2.8rem;
+			}
+		}
+	}
+
+	p {
+		color: $dark_2;
+
+		@include bp($point_3) {
+			line-height: 1.59;
+		}
+
+		&:not(:last-child) {
+			margin-bottom: 2.4rem;
+		}
+
+		.single_article & {
+			color: $dark_1;
+		}
+	}
+
+	p + h3 {
+		margin-top: 4rem;
+	}
+
+	ul {
+		@include text;
+
+		li {
+		}
+	}
+}
+
+.article_content__link_block {
+	&:not(:last-child) {
+		margin-bottom: 4rem;
+	}
+}
+
+.article_content__link {
+	@include flex_block(row, nowrap, space-between, center);
+	max-width: $page_width_4;
+
+	background-color: rgba($gray_2, 0.1);
+
+	@include bp($point_2, min) {
+		padding: 1.5rem 4.8rem 2.4rem;
+	}
+
+	@include bp($point_3) {
+		padding: 1.5rem 2.2rem 2.4rem 2.4rem;
+	}
+}
+
+.article_content__link_icon {
+	width: 2.6rem;
+	height: 2.6rem;
+
+	color: $gray_2;
+
+	transform: translateY(4px);
+	transition: color 0.3s ease;
+
+	.article_content__link:hover &,
+	.article_content__link:focus & {
+		color: $black;
+	}
+}
+
+.article_content__link_logo_w {
+	width: 14rem;
+	height: 4.2rem;
+	flex-shrink: 0;
+
+	&:not(:last-child) {
+		margin-right: 2.4rem;
+	}
+}
+
+.article_content__link_logo_in {
+	display: block;
+	width: 100%;
+
+	.article_content__link_logo_w & {
+		height: 100%;
+	}
+
+	object-fit: contain;
+}

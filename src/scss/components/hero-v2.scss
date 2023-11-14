@@ -1,0 +1,245 @@
+.hero_v2 {
+	@include bp($point_2, min) {
+		padding-top: 0;
+	}
+
+	&:not(.hero_v2--mod_1, .hero_v2--mod_2, .hero_v2--mod_3) {
+		@include bp($point_3) {
+			padding-top: 0;
+		}
+	}
+
+	&.hero_v2--mod_1,
+	&.hero_v2--mod_2 {
+		@include bp($point_3) {
+			padding-top: 4.5rem;
+		}
+	}
+}
+
+.hero_v2__in {
+	position: relative;
+
+	max-width: $page_width_3;
+
+	@include bp($point_2, min) {
+		min-height: 43.2rem;
+	}
+
+	@include bp($point_3) {
+		display: grid;
+	}
+
+	&:not(.hero_v2--mod_1 &, .hero_v2--mod_2 &, .hero_v2--mod_3 &) {
+		@include bp($point_3) {
+			align-items: end;
+			min-height: 68.8rem;
+		}
+	}
+
+	.hero_v2--mod_1 & {
+		@include bp($point_3) {
+			row-gap: 3.4rem;
+		}
+	}
+
+	.hero_v2--mod_2 & {
+		@include bp($point_3) {
+			row-gap: 4rem;
+		}
+	}
+}
+
+.hero_v2__img_w {
+	display: block;
+
+	@include bp($point_2, min) {
+		@include stretch;
+	}
+
+	@include bp($point_3) {
+		margin: 0 calc(var(--gl-hr-indent) * -1);
+	}
+
+	&::before {
+		content: '';
+		z-index: 1;
+
+		@include stretch;
+
+		.hero_v2--mod_1 & {
+			@include bp($point_2, min) {
+				background-color: rgba($black, 0.4);
+			}
+		}
+	}
+
+	&:not(.hero_v2--mod_1 &, .hero_v2--mod_2 &, .hero_v2--mod_3 &) {
+		@include bp($point_3) {
+			@include stretch;
+		}
+
+		&::before {
+			background: linear-gradient(0deg, rgba($black, 0.6) 0%, rgba($black, 0) 100%);
+		}
+	}
+
+	.hero_v2--mod_1 &,
+	.hero_v2--mod_2 &,
+	.hero_v2--mod_3 & {
+		@include bp($point_3, $point_4) {
+			padding-bottom: 25%;
+		}
+
+		@include bp($point_3) {
+			position: relative;
+			order: 2;
+		}
+
+		@include bp($point_4 - 1) {
+			padding-bottom: 95.8%;
+		}
+	}
+
+	.hero_v2--mod_2 & {
+		&::before {
+			@include bp($point_2, min) {
+				background: linear-gradient(9deg, rgba($black, 0.6) 0%, rgba($black, 0) 100%);
+			}
+		}
+	}
+}
+
+.hero_v2__img {
+	display: block;
+	width: 100%;
+
+	object-fit: cover;
+
+	.hero_v2__img_w & {
+		height: 100%;
+	}
+
+	@include bp($point_3) {
+		@include stretch;
+	}
+}
+
+.hero_v2__body {
+	position: relative;
+	z-index: 2;
+
+	@include bp($point_2, min) {
+		max-width: calc($page_width + var(--gl-hr-indent) * 2);
+		padding: 9.8rem var(--gl-hr-indent);
+		margin: 0 auto;
+	}
+
+	&:not(.hero_v2--mod_1 &, .hero_v2--mod_2 &, .hero_v2--mod_3 &) {
+		color: $white;
+
+		@include bp($point_3) {
+			padding: 6rem 0 4rem;
+		}
+	}
+
+	.hero_v2--mod_1 &,
+	.hero_v2--mod_2 & {
+		@include bp($point_2, min) {
+			color: $white;
+		}
+
+		@include bp($point_3) {
+			order: 1;
+		}
+	}
+
+	h1 {
+		@include h1;
+
+		.hero_v2--no_title_mod & {
+			@include bp($point_3) {
+				display: none;
+			}
+		}
+
+		.hero_v2--mod_1 &,
+		.hero_v2--mod_2 & {
+			@include bp($point_3) {
+				color: $black;
+			}
+		}
+
+		&:not(:last-child) {
+			@include bp($point_2, min) {
+				margin-bottom: 2.4rem;
+			}
+
+			@include bp($point_3) {
+				&:not(.hero_v2--mod_1 &) {
+					margin-bottom: 4rem;
+				}
+
+				.hero_v2--mod_1 & {
+					margin-bottom: 3.4rem;
+				}
+			}
+		}
+
+		.hero_v2--mod_3 & {
+			@include bp($point_2, min) {
+				color: $white;
+			}
+			@include bp($point_3) {
+				color: $black;
+			}
+		}
+	}
+
+	p {
+		@include text;
+
+		.hero_v2--mod_1 &,
+		.hero_v2--mod_2 & {
+			@include bp($point_3) {
+				color: $dark_2;
+			}
+		}
+	}
+
+	a {
+		color: inherit;
+		font-weight: 700;
+
+		transition: color 0.3s ease;
+
+		@include bp($point_2, min) {
+			letter-spacing: -0.012em;
+		}
+
+		@include bp($point_3) {
+			font-size: 2rem;
+		}
+
+		&:hover,
+		&:focus {
+			color: $gray_2;
+
+			text-decoration: none;
+		}
+	}
+}
+
+.hero_v2__content {
+	&:not(.hero_v2--mod_1 &, .hero_v2--mod_2 &) {
+		max-width: 94rem;
+	}
+
+	.hero_v2--mod_1 & {
+		max-width: 59rem;
+	}
+
+	.hero_v2--mod_2 & {
+		max-width: 48.5rem;
+	}
+}

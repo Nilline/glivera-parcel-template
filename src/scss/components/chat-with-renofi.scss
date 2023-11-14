@@ -1,0 +1,114 @@
+@import 'ScssHelpers/helpers-all.scss';
+
+.chat_with_renofi {
+	@include bp($point_3) {
+		padding-bottom: 2.8rem;
+	}
+}
+
+.chat_with_renofi__title {
+	text-align: center;
+	color: $black;
+
+	@include h1;
+
+	@include bp($point_3) {
+		line-height: 1.26;
+	}
+
+	&:not(:last-child) {
+		@include bp($point_2, min) {
+			margin-bottom: 5.4rem;
+		}
+
+		@include bp($point_3) {
+			margin-bottom: 3.8rem;
+		}
+	}
+}
+
+.chat_with_renofi__body {
+	background-color: $light_2;
+
+	@include bp($point_2, min) {
+		padding: 5.2rem;
+	}
+
+	@include bp($point_3) {
+		padding: 2.4rem;
+	}
+}
+
+.chat_with_renofi__row {
+	max-width: 73.2rem;
+	margin: 0 auto;
+}
+
+.chat_with_renofi__content {
+	margin: 0 -4rem -4rem 0;
+
+	@include flex_block(row, wrap, flex-start, stretch);
+}
+
+.chat_with_renofi__col {
+	padding: 0 4rem 4rem 0;
+
+	@include flex_block(column, nowrap, flex-end);
+
+	&:not(:last-child) {
+		margin-right: auto;
+	}
+}
+
+.chat_with_renofi__item {
+	&:not(:last-child) {
+		margin-bottom: 2.4rem;
+	}
+
+	&.chat_with_renofi__item--mod_1 {
+		&:not(:last-child) {
+			@include bp($point_2, min) {
+				margin-bottom: 3.2rem;
+			}
+		}
+	}
+}
+
+.chat_with_renofi__link {
+	color: $blue;
+
+	transition: color 0.3s ease;
+
+	@include title;
+
+	&:hover,
+	&:focus {
+		color: $gray_2;
+
+		text-decoration: none;
+	}
+}
+
+.chat_with_renofi__text {
+	color: $black;
+
+	@include title;
+
+	font-weight: 400;
+
+	strong,
+	a {
+		font-weight: 900;
+	}
+
+	a {
+		transition: color 0.3s ease;
+
+		&:hover,
+		&:focus {
+			color: $gray_2;
+
+			text-decoration: none;
+		}
+	}
+}

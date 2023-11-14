@@ -1,0 +1,31 @@
+include ../templates/mixins/m-button-back
+
+//- .qq
+//- 	.qq1.js-bio-person
+//- 	.qq2.js-bio-article
+
+section.section.bio
+	.section_in.bio__in
+		.bio__btn_back_w
+			+button_back()
+		.bio__row.js-bio-wrapper
+			.bio__col.bio__col--image_mod
+				.bio__person.js-bio-person
+					+picture({
+						media: 1024,
+						img: `/team/bio-0.jpg`,
+						img_mob: '/team/bio-0-mobile.png',
+						class: 'bio__img_w',
+						img_class: 'bio__img',
+						alt: 'some image',
+						lazy: true,
+					})
+					.bio__info
+						.bio__name Mohamed Ahmed
+						.bio__descr Chief Executive Officer
+
+			.bio__col.bio__col--info_mod.js-fade-item
+				.bio__article.js-bio-article
+					p Meet Mohamed Ahmed, an accomplished professional with a diverse background and a keen eye for real estate opportunities. Before founding Hapi Homes, he established EHC Equities and worked with Oxford Properties, a company immersed in the real estate sector working with DHS and local shelters in New York placing families, individuals, and vets in accommodation from his wide network of landlords. Mohamed is also dedicated in a personal capacity to working with a network of individuals and organizations who come together to donate food, clothes, and personal items for those in need
+					p With a wealth of experience spanning almost two decades in the telecom industry, Mohamed Ahmed has proven his strategic acumen. Notably, he directed sales and distribution for STI PREPAID, one of the largest calling card companies in the US. From its humble beginnings as a startup in 2001 to achieving over $1 billion in sales by 2007. Consequently, the company was acquired by Leucadia National in 2007 for $120 million.
+					p Prepare to embark on an exciting journey with Mohamed Ahmed as he spearheads Hapi Homes, a visionary venture specializing in modular homes, tiny homes, and accessory dwelling units. Mohamed’s day-to-day focus is on equitable, sustainable, and enduring partnerships that come with scaling Hapi Homes.

@@ -1,0 +1,57 @@
+extends ../layout/layout
+
+block vars
+	//- include ../templates/project-vars
+	include ../templates/mixins/m-hero
+	include ../templates/mixins/m-chat-with-us
+	include ../templates/mixins/m-text-block
+	include ../templates/mixins/m-image
+	- array = {body_class:'', layout_mod:'', sub_keywords:'', title_inner:'About', template_name: 'about'}
+
+block content_block
+	+hero({
+		mod: 'hero--2_mod js-fade-item',
+		img: 'hero/hero-about.jpg',
+		img_mob: 'hero/hero-about-mobile.jpg',
+	})
+
+	+text-block({
+		title: 'We rethink the future of living',
+		content_left: [
+			"<p>At Hapi Homes our mission was always to build. Not a portfolio of properties, but a reputation for creating exceptional homes across the globe.</p>",
+			"<p>Whilst every project is unique, the philosophy behind each is unwavering: we strive to craft environments that are both intrinsically beautiful and faultlessly functional.</p>",
+		],
+		content_rigth: [
+			"<p>This ethos spans all aspects of design and extends beyond to encompass every facet of a property’s story, wherever you are in the world.</p>",
+			"<p>From helping you to find the perfect site until the day you turn the key in the door. We’re all about rethinking the future of living. We believe that this is possible by utilizing offsite construction and the way of building efficiently and sustainably.</p>",
+		],
+	})
+
+	+image({
+		img: `image-section/about.jpg`,
+		img_mob: `image-section/about-mob.jpg`,
+	})
+
+	+text-block({
+		content_left: [
+			"<p>Homes have been built the same way for centuries, driven by an industry focused on its own needs instead of its customers. Cost, complexity, and variability have gone up while innovation has fallen behind. Hapi Homes is changing all that.</p>",
+		],
+		content_rigth: [
+			"<p>As a tech-led vertically integrated home builder, we provide a truly turnkey solution offered in-house.</p>",
+			"<p>Our process includes digital architectural & structural design, full panelized manufacturing, off-site construction, and on-site installation.</p>",
+			"<p><strong>All the products are in line with ISO9001 standards and have passed the certifications like CE, CNAS, BV and ICC.</strong></p>"
+		],
+	})
+
+	include ../blocks/team
+
+	+chat_with_us({
+		content: [
+			'<h2>Chat with us</h2>',
+			'<p>Getting started with a Hapi Home couldn’t be any easier. Our range in price and aesthetic, we don’t compromise on quality or design, and our clients love the fact that our homes are ready to ship in less than six weeks.</p>',
+			'<p>With concierge-level service from the blueprint to delivery, you have a dedicated Hapi Home expert with you for every part of the process.</p>',
+		],
+		btn_title: 'Book a call',
+		btn_mod: 'btn_primary',
+		icon: 'calendar',
+	})

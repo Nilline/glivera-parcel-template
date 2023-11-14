@@ -1,0 +1,44 @@
+-
+	list = [
+		{
+			name: 'Mohamed Ahmed',
+			descr: 'Chief Executive Officer',
+		},
+		{
+			name: 'Nadim Matta',
+			descr: 'Chief Innovation Officer',
+		},
+		{
+			name: 'Martin Amschler',
+			descr: 'Head of Growth',
+		},
+		{
+			name: 'Charles Jackson',
+			descr: 'Head of Commercial (North West Region)',
+		},
+		{
+			name: 'Michael Moore',
+			descr: 'Head of Commercial (Mid-Atlantic Region)',
+		},
+		{
+			name: 'Damian Kissane',
+			descr: 'Financial Advisor',
+		},
+	]
+
+section.section.team
+	.section_in.team__in
+		h2.team__title Team
+		ul.team__row
+			each item, index in list
+				li.team__item.js-fade-item
+					a.team__item_in(class=item.mod href="#")
+						+picture({
+							img: `/team/${index}.jpg`,
+							class: 'team__img_w',
+							img_class: 'team__img',
+							alt: 'some image',
+						})
+						.team__item_info
+							.team__item_title= item.name
+							.team__item_descr= item.descr

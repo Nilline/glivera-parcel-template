@@ -1,0 +1,26 @@
+extends ../layout/layout
+
+block vars
+	//- include ../templates/project-vars
+	include ../templates/mixins/m-hero-v2
+	include ../templates/mixins/m-hero
+	- array = {body_class:'', layout_mod:'', sub_keywords:'', title_inner:'Contact Us', template_name: 'contact-us'}
+
+block content_block
+	+hero({
+		mod: 'hero--1_mod hero--color_white_mod hero--text-align_center_mod js-fade-item',
+		img: 'hero_v2/hero_v2_contact_us.jpg',
+		img_mob: 'hero_v2/hero_v2_contact_us_mob.jpg',
+		content: [
+			'<h1>Get in touch</h1>',
+			"<p>We can handle any job, whatever the size. Tell us what you're looking for and we'll get back to you as soon as possible and we'll get back to you in no time.</p>",
+		],
+	})
+	//- +hero_v2({
+	//- 	mod: 'hero_v2--mod_1',
+	//- 	img: 'hero_v2/hero_v2_contact_us.jpg',
+	//- 	img_mob: 'hero_v2/hero_v2_contact_us_mob.jpg',
+	//- 	title: 'Get in touch',
+	//- 	subtitle: "We can handle any job, whatever the size. Tell us what you're looking for and we'll get back to you as soon as possible and we'll get back to you in no time.",
+	//- })
+	include ../blocks/contact-form

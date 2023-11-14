@@ -2,7 +2,7 @@ import gsap from 'gsap';
 import ScrollTrigger from 'gsap/dist/ScrollTrigger';
 
 import Swiper, { Navigation } from 'swiper';
-import 'swiper/css';
+import 'swiper/swiper-bundle.css';
 import 'swiper/scss/scrollbar';
 import { buildSwiper, removeSwiper } from './build-swiper';
 

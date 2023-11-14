@@ -1,0 +1,81 @@
+extends ../layout/layout
+
+block vars
+	//- include ../templates/project-vars
+
+	include ../templates/mixins/m-chat-with-us
+	include ../templates/mixins/m-image
+	include ../templates/mixins/m-text-block
+	include ../templates/mixins/m-hero-v3
+	- array = {body_class:'', layout_mod:'product-template-default', sub_keywords:'', title_inner:'Project', template_name: 'project'}
+
+block content_block
+
+	+hero_v3({
+		form: true,
+		title: 'Kenmare',
+		price: '$299',
+		info: [
+			{
+				icon: 'ft',
+				text: '1024.72 sq ft'
+			},
+			{
+				icon: 'living',
+				text: '1 Living'
+			},
+			{
+				icon: 'kitchen',
+				text: '1 Kitchen'
+			},
+			{
+				icon: 'bedroom',
+				text: '2 Bedroom'
+			},
+			{
+				icon: 'bathroom',
+				text: '2 Bathroom'
+			},
+		],
+	})
+
+	include ../blocks/gallery
+
+	+text-block({
+		content_left: [
+			"<p>Step into the future of architectural design with the Kenmare, a two-story house that redefines stylish and functional living. This cutting-edge masterpiece is designed to meet your every need, providing a seamless blend of elegance and practicality.</p>",
+			"<p>Unveiling the Kenmare: With a total area of 95.2 square meters / 1024.72 square feet, this contemporary dwelling offers ample space for you to create a home that reflects your unique taste.</p>",
+		],
+		content_rigth: [
+			"<p>The ground floor boasts a generous 68 square meters/ 731.94 square feet, housing a spacious living room,a fully equipped kitchen, two comfortable bedrooms, and two luxurious bathrooms. Ascend to the second floor, a loft area spanning 27.2 square meters / 292.77 square feet, and let your imagination soar.</p>",
+		],
+	})
+
+	+image({
+		img: `gallery/galery-image.png`,
+		img_mob: `gallery/galery-image-mob.jpg`,
+	})
+
+	+text-block({
+		content_left: [
+			"<p>The Deck of Dreams: Prepare to be captivated by the Kenmare's standout feature—a magnificent 21.2 square meter / 228.19 square feet deck. This outdoor oasis is the epitome of versatility, perfect for entertaining guests or simply savoring the beauty of the surrounding weather.</p>",
+			"<p>Whether you wish to host memorable gatherings or unwind in tranquility after a long day, the deck provides the ideal setting for your desires.</p>",
+		],
+		content_rigth: [
+			"<p>A Stylish Haven for Modern Living: The Kenmare is an ideal choice for those who crave a sophisticated and contemporary living space without compromising on functionality.</p>",
+			"<p>It caters to small families or individuals who prioritize comfort and affordability without sacrificing quality or style. Embrace a life of effortless elegance within these walls, carefully crafted to suit your lifestyle.</p>",
+		],
+	})
+
+	+chat_with_us({
+		content: [
+			'<h2>Chat with us</h2>',
+			'<p>Getting started with a Hapi Home couldn’t be any easier. Our range in price and aesthetic, we don’t compromise on quality or design, and our clients love the fact that our homes are ready to ship in less than six weeks.</p>',
+			'<p>With concierge-level service from the blueprint to delivery, you have a dedicated Hapi Home expert with you for every part of the process.</p>',
+		],
+		btn_title: 'Book a call',
+		btn_mod: 'btn_primary',
+		icon: 'calendar',
+	})
+block local_popup
+	include ../blocks/gallery-popup

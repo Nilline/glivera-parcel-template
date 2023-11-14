@@ -1,0 +1,20 @@
+include ../templates/mixins/m-slider-controls
+
+.gallery_popup.js-gallery-popup-section-wrapper
+	.gallery_popup__in
+		.gallery_popup__slider
+			.gallery_popup__list.js-gallery-popup-section-slider.swiper
+					.gallery_popup__list_in.swiper-wrapper
+						+loop_while(8)
+							.gallery_popup__item.swiper-slide
+								+picture({
+									img: `gallery/gal-${i - 1}.jpg`,
+									class: 'gallery_popup__img_w',
+									img_class: 'gallery_popup__img',
+									alt: 'some image',
+									lazy: true,
+								})
+			+slider_controls({
+				wrapper_class: 'gallery_popup__controls',
+				class: 'gallery_popup',
+			})

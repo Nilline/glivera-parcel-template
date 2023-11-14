@@ -1,0 +1,9 @@
+mixin slider_controls(data)
+	.slider_controls(class = data.wrapper_class)
+		+loop_while(2)
+				.slider_controls__item
+					- direction = i === 1 ?  'prev' : 'next'
+					- icon = i === 1 ?  'left_mini' : 'right'
+					button.slider_controls__btn(class=`js-${data.class}-${direction}`)
+						.slider_controls__icon
+							+icon(data.icon || icon, 'icon--size_mod')

@@ -1,0 +1,31 @@
+include m-home
+include m-slider-controls
+
+mixin building_tabs(data)
+	- no_tabs = data.no_tabs || ''
+	.building__tabs
+		if !data.no_tabs
+			.building__tabs_head_wrap.js-fade-item
+				.building__tabs_head
+					each item, index in data.content
+						.building__tabs_head_item
+							- mod = index === 0 ? 'building__tabs_head_button--active_state'  : ''
+							button.building__tabs_head_button(data-tab=index class=mod type='button').js-building-tab-trigger= item.title
+		.building__tabs_main
+			each block, index in data.content
+				.building__tabs_item(data-tab=index class=`${!no_tabs ? 'js-building-tab-content' : ''} ${index === 0 ? 'building__tabs_item--active_state' : ''} ${data.slider ? 'js-building-wrapper' : ''}`)
+					if data.slider
+						+slider_controls({
+							wrapper_class: 'building__controls',
+							class: 'building',
+						})
+					.building_list__wrap
+						.building_list(class=`${data.slider ? 'building_slider--slider_mod js-building-slider' : ''}`)
+							each item in block.list
+								.building_list__item.js-fade-item
+									+home(item)
+					if data.slider
+						.building__scrollbar.js-building-scrollbar
+			if data.side_text
+				.building__side
+					.building__side_text= data.side_text

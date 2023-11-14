@@ -1,0 +1,9 @@
+extends ../layout/layout
+
+block vars
+	//- include ../templates/project-vars
+	include ../templates/mixins/m-hero-v2
+	- array = {body_class:'', layout_mod:'', sub_keywords:'', title_inner:'Single article', template_name: 'single-article'}
+
+block content_block
+	include ../blocks/single-article-section

@@ -1,33 +1,55 @@
 //---------------------------------------------fonts
 $font_path: '../fonts/';
-$font_1: 'RobotoCondensed', sans-serif;
-$font_size_base: 1.6rem;
+$font_1: 'Sohne', sans-serif;
+$emoji: 'NotoEmoji';
+$font_size_base: 2.2rem;
 //---------------------------------------------fonts###
 
 //---------------------------------------------colors
 $white: #fff;
 $black: #000;
 
-$color_text_base: $black;
-$color_link_base: #4aa3df;
-$body_bg: $white;
+$dark: #080912;
+$dark_1: #161833;
+$dark_2: #46465b;
+
+$gray: #fafafc;
+$gray_2: #b5b4c3;
+$gray_3: #ebebef;
+$gray_4: #dae2e9;
+$gray_5: #6d6f76;
+$gray_6: #ececef;
+$gray_7: #dbdbe2;
+
+$light: rgba(#dae2e9, 0.2);
+$light_2: #f3f3f3;
+$light_3: #eeebeb;
+
+$blue: #1f93ff;
+
+$color_text_base: $dark_1;
+$color_link_base: $dark_1;
+$body_bg: $gray;
 //---------------------------------------------colors###
 
 //---------------------------------------------z-index
 $z-index: (
+	header: 120,
 	popup: 101,
-	header: 100,
 	footer: 100,
 );
 //---------------------------------------------z-index###
 
 //---------------------------------------------layout
-$page_width: 96rem;
+$page_width: 115.2rem;
+$page_width_2: 192rem;
+$page_width_3: 172.8rem;
+$page_width_4: 90.5rem;
 
 //---------------------------------------------layout###
 
 //---------------------------------------------global values
-$gl_radius: 0.5rem;
+$gl_radius: 0;
 //---------------------------------------------global values###
 
 //---------------------------------------------media points
@@ -39,15 +61,16 @@ $point_5: 640px;
 $point_6: 480px;
 $point_7: 375px;
 $point_8: 320px;
+$point_9: 390px;
 //---------------------------------------------media points
 
 //---------------------------------------------forms
-$input_height: 4rem;
-$input_offset: 0 2rem;
-$input_font_size: $font_size_base;
+$input_height: 6.8rem;
+$input_offset: 1.8rem 1rem 3rem 0;
+$input_font_size: 2rem;
 $input_border_color: #ccc;
-$input_border_color_active: $black;
-$input_placeholder_color: rgba($black, 0.4);
-$input_text_color: $black;
+$input_border_color_active: $dark_1;
+$input_placeholder_color: $gray_2;
+$input_text_color: $dark_1;
 $input_radius: $gl_radius;
 //---------------------------------------------forms###

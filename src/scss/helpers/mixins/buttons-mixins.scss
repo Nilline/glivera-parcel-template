@@ -19,27 +19,168 @@
 	}
 }
 
+@mixin st_before {
+	position: relative;
+	overflow: hidden;
+
+	transition: color 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+
+	&::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		z-index: 1;
+		transform: translateY(calc(100% + 2px));
+		border-radius: inherit;
+
+		width: 200%;
+		height: 100%;
+
+		transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+
+		will-change: transform;
+	}
+
+	button {
+		color: inherit;
+		font-weight: inherit;
+		cursor: pointer;
+	}
+
+	span,
+	button,
+	.btn_icon {
+		position: relative;
+		z-index: 1;
+	}
+
+	svg {
+		transition: opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+	}
+}
+
 //color mixins:
 @mixin btn_style_blue {
 	font-weight: 700;
 	color: $white;
 	background-color: $color_link_base;
-	transition: background-color 0.3s ease;
 
 	@include st_btn;
+	@include st_before;
+
+	&::before {
+		background-color: darken($color_link_base, 10%);
+	}
 
 	&:hover {
-		background-color: darken($color_link_base, 10%);
+		&::before {
+			transform: translateY(0);
+		}
+	}
+}
+
+@mixin btn_style_black {
+	font-weight: 700;
+	color: $white;
+	background-color: $dark;
+	transition: color ease 0.3s;
+
+	@include st_btn;
+	@include st_before;
+
+	&::before {
+		background-color: $gray_3;
+	}
+
+	&:hover {
+		color: $dark;
+
+		&::before {
+			transform: translateY(0);
+		}
+	}
+}
+
+@mixin btn_style_gray {
+	font-weight: 700;
+	color: $dark;
+	background-color: $gray_3;
+
+	@include st_btn;
+	@include st_before;
+
+	&::before {
+		background-color: $dark;
+	}
+
+	&:hover {
+		color: $white;
+
+		&::before {
+			transform: translateY(0);
+		}
+	}
+}
+
+@mixin btn_style_white {
+	font-weight: 700;
+	color: $dark;
+	background-color: $gray;
+
+	@include st_btn;
+	@include st_before;
+
+	&::before {
+		background-color: $black;
+	}
+
+	&:hover {
+		color: $white;
+
+		&::before {
+			transform: translateY(0);
+		}
 	}
 }
 
 //size mixins:
 @mixin btn_size_normal {
-	height: 4rem;
-	padding: 0 1.2rem;
+	height: 6rem;
+	padding: 0 3.2rem 0 4rem;
 
-	line-height: 4rem;
-	font-size: 1.6rem;
+	line-height: 6rem;
+	font-size: 2rem;
+}
 
-	border-radius: $gl_radius;
+@mixin btn_size_v2 {
+	height: 6rem;
+	padding: 0 3.2rem 0 2.4rem;
+
+	line-height: 6rem;
+	font-size: 2rem;
+}
+
+@mixin btn_size_v3 {
+	height: 6rem;
+	padding: 0 1.8rem;
+
+	line-height: 6rem;
+	font-size: 2rem;
+}
+
+@mixin btn_size_v4 {
+	height: 6rem;
+	padding: 0 5.6rem 0 4.4rem;
+
+	line-height: 6rem;
+	font-size: 2rem;
+}
+
+@mixin btn_size_v5 {
+	height: 6rem;
+	padding: 0 4rem;
+
+	line-height: 6rem;
+	font-size: 2rem;
 }

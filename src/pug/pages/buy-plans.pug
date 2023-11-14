@@ -1,0 +1,17 @@
+extends ../layout/layout
+
+block vars
+	//- include ../templates/project-vars
+	include ../templates/mixins/m-hero-v2
+	- array = {body_class:'', layout_mod:'', sub_keywords:'', title_inner:'Buy Plans', template_name: 'buy-plans'}
+
+block content_block
+	+hero_v2({
+		mod: 'hero_v2--mod_2',
+		img: 'hero_v2/hero_v2_plans.jpg',
+		img_mob: 'hero_v2/hero_v2_plans_mob.jpg',
+		title: 'Plans',
+		subtitle: "Welcome to your ultimate destination for exceptional house plans that blend style, comfort, and functionality.",
+	})
+	include ../blocks/whats-included
+	include ../blocks/shop-plans

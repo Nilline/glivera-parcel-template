@@ -1,0 +1,14 @@
+mixin news_card(data)
+	a.news_card.js-fade-item(href="#")
+		+picture({
+			img: data.img,
+			class: 'news_card__pic',
+			img_class: 'news_card__img',
+			alt: 'some image',
+		})
+		.news_card__content
+			.news_card__date= data.date
+			.news_card__title= data.title
+			.news_card__link= data.link
+				.news_card__link_icon
+					+icon('arrow_right', 'icon--size_mod')

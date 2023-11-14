@@ -2,6 +2,145 @@
 	@include form_el_label;
 }
 
-.form_select__element {
-	@include form_el_default;
+.form_select__v2 {
+	padding: 0;
+
+	font-size: 2rem;
+	color: $dark;
+
+	&.dropdown-active {
+		.ts-control {
+			border-color: $gray_3 !important;
+		}
+	}
+
+	&.dropdown-active .ts-control:after {
+		transform: rotateZ(180deg) translateY(0.9rem);
+	}
+
+	&.ts-wrapper.multi .ts-control > div {
+		position: relative;
+
+		background-color: transparent !important;
+		padding: 0 !important;
+
+		pointer-events: none;
+
+		.remove {
+			pointer-events: initial;
+			// position: absolute;
+			// top: 0;
+			// left: 0;
+
+			// width: 100%;
+			// height: 100%;
+			// padding: 0;
+			// margin: 0;
+
+			// opacity: 0;
+		}
+
+		&:not(:last-child) {
+			margin-right: 1.6rem;
+		}
+	}
+
+	.ts-dropdown {
+		top: calc(100% - 2px);
+
+		width: auto;
+		max-width: 88.4%;
+		min-width: 52%;
+		margin: 0;
+
+		background-color: $gray_3;
+		border: none;
+		box-shadow: none;
+		border-radius: 0;
+
+		.ts-dropdown-content {
+			max-height: 30rem;
+
+			&::-webkit-scrollbar {
+				width: 0.4rem;
+			}
+
+			&::-webkit-scrollbar-track {
+				background-color: transparent;
+			}
+
+			&::-webkit-scrollbar-thumb {
+				background-color: $dark_2;
+			}
+		}
+
+		.option {
+			position: relative;
+			padding: 2.1rem 3rem;
+			font-size: 2rem;
+			color: $dark_2;
+			font-weight: 700;
+
+			&[aria-disabled='true'] {
+				display: none;
+			}
+
+			&:hover,
+			&.active {
+				color: $black;
+				background-color: $gray_7;
+			}
+		}
+	}
+
+	.ts-control {
+		position: relative;
+		padding: 1.6rem 1rem 2rem 3.2rem !important;
+		min-height: 6.8rem;
+
+		font-size: 2rem;
+		letter-spacing: 0.2px;
+		font-weight: 700;
+		color: $dark;
+		border: none;
+		border-bottom: 2px solid $gray_3;
+		background-color: transparent !important;
+		border-radius: 0;
+
+		transition: border-color 0.3s;
+
+		.contact_form__country & {
+			padding-left: 0 !important;
+			background-color: tomato;
+		}
+
+		input[type='select-one'] {
+			font-size: $input_font_size;
+			font-weight: 700;
+			color: $dark;
+			caret-color: $dark;
+		}
+
+		&:after {
+			border: 0.7rem solid transparent;
+			border-top: 0.9rem solid $gray_2;
+
+			position: absolute;
+			top: 2.3rem;
+			left: 0;
+
+			z-index: 1;
+
+			content: '';
+			transform-origin: center;
+
+			.contact_form__country & {
+				display: none !important;
+			}
+		}
+
+		&:hover {
+			border-color: $dark;
+		}
+	}
 }

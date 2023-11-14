@@ -1,0 +1,114 @@
+@import 'ScssHelpers/helpers-all.scss';
+
+.text_block {
+	&.text_block--offset_1_mod {
+		padding-top: 11rem;
+	}
+
+	// &.text_block--offset_2_mod {
+	// 	@include bp($point_2, min) {
+	// 		padding-top: 11rem;
+	// 	}
+	// 	@include bp($point_3) {
+	// 		padding-top: 4.4rem;
+	// 	}
+	// }
+}
+
+.text_block__article {
+	max-width: $page_width_4;
+}
+
+.text_block__title {
+	@include h1;
+	line-height: 1.3;
+
+	max-width: 80rem;
+	width: 100%;
+	color: $dark;
+
+	&:not(:last-child) {
+		@include bp($point_1, min) {
+			margin-bottom: 7.4rem;
+		}
+		@include bp($point_1 - 1) {
+			margin-bottom: 3.2rem;
+		}
+	}
+}
+
+.text_block__info {
+	width: 100%;
+
+	h2 {
+		@include h1;
+
+		@include bp($point_2, min) {
+			line-height: 1.3;
+		}
+		@include bp($point_3) {
+			line-height: 1.2;
+		}
+	}
+
+	h3 {
+		@include h3;
+	}
+
+	p {
+		@include text;
+
+		line-height: 160%;
+		color: $dark_2;
+
+		&:not(:last-child) {
+			@include bp($point_2, min) {
+				margin-bottom: 2.8rem;
+			}
+			@include bp($point_3) {
+				margin-bottom: 3.4rem;
+			}
+		}
+	}
+
+	strong {
+		color: $dark_1;
+	}
+}
+
+.text_block__row_w {
+	&:not(:last-child) {
+		margin-bottom: 4.8rem;
+	}
+}
+
+.text_block__row {
+	@include bp($point_1, min) {
+		@include flex_block(row, wrap, center, stretch, stretch);
+		margin: 0 -4.8rem -4.8rem 0;
+	}
+	@include bp($point_1 - 1) {
+		margin: 0 -4.8rem -3.4rem 0;
+	}
+}
+
+.text_block__col {
+	@include bp($point_1, min) {
+		width: 50%;
+		padding: 0 4.8rem 4.8rem 0;
+	}
+	@include bp($point_1 - 1) {
+		width: 100%;
+		padding: 0 4.8rem 3.4rem 0;
+	}
+
+	.disaster_relief_hero__row--text_block_mod & {
+		@include bp($point_1 - 1) {
+			padding-bottom: 3.4rem;
+		}
+	}
+}
+
+.text_block__btn_w {
+	@include flex_block(row, wrap, center, center, center);
+}

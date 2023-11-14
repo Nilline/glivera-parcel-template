@@ -1,0 +1,89 @@
+include ../templates/mixins/m-accordion
+
+-
+	accordion_data = {
+		class_js: 'js-accordion-head',
+		icon: 'arrow_down',
+		icon_class: 'faq_accordion_sub__item_icon',
+		content: [
+			{
+				title: 'Exterior Elevations (front, rear, left & right sides) typically include:',
+				list: [
+					'All interior and exterior dimensions',
+					'Location and sizes of doors and windows',
+					'Types of interior doors that correspond to a schedule',
+					'Indication of the structure above (second floor or roof)',
+					'Location of columns, beams, and floor joists, including dimensions',
+				],
+			},
+			{
+				title: 'Foundation plans typically include:',
+				list: [
+					'All interior and exterior dimensions',
+					'Location and sizes of doors and windows',
+					'Types of interior doors that correspond to a schedule',
+					'Indication of the structure above (second floor or roof)',
+					'Location of columns, beams, and floor joists, including dimensions',
+				],
+			},
+			{
+				title: 'Floor plan(s) typically include:',
+				list: [
+					'All interior and exterior dimensions',
+					'Location and sizes of doors and windows',
+					'Types of interior doors that correspond to a schedule',
+					'Indication of the structure above (second floor or roof)',
+					'Location of columns, beams, and floor joists, including dimensions',
+				],
+			},
+			{
+				title: "Roof plans typically include:",
+				list: [
+					'All interior and exterior dimensions',
+					'Location and sizes of doors and windows',
+					'Types of interior doors that correspond to a schedule',
+					'Indication of the structure above (second floor or roof)',
+					'Location of columns, beams, and floor joists, including dimensions',
+				],
+			},
+			{
+				title: "Building cross-section(s) and truss details typically include:",
+				list: [
+					'All interior and exterior dimensions',
+					'Location and sizes of doors and windows',
+					'Types of interior doors that correspond to a schedule',
+					'Indication of the structure above (second floor or roof)',
+					'Location of columns, beams, and floor joists, including dimensions',
+				],
+			},
+			{
+				title: "Construction details typically include:",
+				list: [
+					'All interior and exterior dimensions',
+					'Location and sizes of doors and windows',
+					'Types of interior doors that correspond to a schedule',
+					'Indication of the structure above (second floor or roof)',
+					'Location of columns, beams, and floor joists, including dimensions',
+				],
+			},
+			{
+				title: "Typical wall sections typically include;",
+				list: [
+					'All interior and exterior dimensions',
+					'Location and sizes of doors and windows',
+					'Types of interior doors that correspond to a schedule',
+					'Indication of the structure above (second floor or roof)',
+					'Location of columns, beams, and floor joists, including dimensions',
+				],
+			},
+
+		]
+	}
+
+section.section.whats_included
+	.section_in
+		.whats_included__heading
+			h2.whats_included__title What's included in your plans?
+			p Welcome to your ultimate destination for exceptional house plans that blend style, comfort, and functionality.
+		+accordion(accordion_data, 'faq_accordion_sub')
+

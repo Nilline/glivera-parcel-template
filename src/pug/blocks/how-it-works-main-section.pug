@@ -1,0 +1,73 @@
+-
+	list = [
+		{
+			img: 'how_it_works/1.jpg',
+			number: '01',
+			title: 'Begin',
+			text: ['Speak to our concierge team to discuss your needs and the optimal solutions we offer, customizations, and pricing.'],
+		},
+		{
+			img: 'how_it_works/2.jpg',
+			number: '02',
+			title: 'Select',
+			text: ["Once you've found your ideal Hapi Home, you can purchase the plans. Collaborate with your local architect, designer, contractor, or engineer to customize the design to your liking.", "Or we can handle this for you if you prefer."],
+		},
+		{
+			img: 'how_it_works/3.jpg',
+			number: '03',
+			title: 'Configure',
+			text: ['Choose your Hapi Home, and make your selection for layout, solar, windows, doors, deck, finishings, and interiors.'],
+		},
+		{
+			img: 'how_it_works/4.jpg',
+			number: '04',
+			title: 'Finalizing your Purchase',
+			text: ["Ready to move forward? Simply send us the modified plans and your chosen finishes. We'll provide you with a comprehensive final quote and design pack with all finishes. Upon acceptance, we'll prepare the sales contract and invoice.", "Sign the contract and pay a 30% deposit, and we'll initiate the production process."],
+		},
+		{
+			img: 'how_it_works/5.jpg',
+			number: '05',
+			title: ' Production and Shipping',
+			text: ["In just 30-45 days, depending on your chosen unit, your Hapi Home will be ready for shipping. We take care of transportation to your destination.", "<strong>This is where your contractor takes over and hey presto you're ready for your housewarming party!</strong>", "<i>*In some locations we can provide an end-end service including installation, ask us for more details today.</i>"],
+		},
+		{
+			img: 'how_it_works/6.jpg',
+			number: '06',
+			title: 'Some title missing in design',
+			text: ["Owning a Hapi Home has never been easier. These straightforward steps are designed so you'll be enjoying the comfort and joy of your very own Hapi Home in no time."],
+		},
+		{
+			img: 'how_it_works/7.jpg',
+			text: ["“The future of construction undoubtedly lies with Hapi Homes. Their commitment to honesty, transparency, and quality craftsmanship is unrivaled. If you're looking for a stress-free building experience with no hidden costs, Hapi Homes is the way to go. We can't recommend them highly enough, and we're truly grateful for the home of our dreams they've created for us.”"],
+			blockquote: 'Charles Martin, NY',
+		},
+	]
+
+section.section.how_it_works
+	.section_in.how_it_works__in
+		.how_it_works__block
+			ul.how_it_works__list
+				each item in list
+					li.how_it_works__item.js-fade-item
+						.how_it_works__item_col
+							+picture({
+								img: item.img,
+								class: 'how_it_works__item_img_w',
+								img_class: 'how_it_works__item_img',
+								alt: 'img',
+							})
+						.how_it_works__item_col
+							.how_it_works__item_decors
+								.how_it_works__item_decor.how_it_works__item_decor--square_mod
+								.how_it_works__item_decor.how_it_works__item_decor--line_mod
+							.how_it_works__item_content
+								if item.title
+									.how_it_works__item_heading
+										.how_it_works__item_number!= item.number
+										h3.how_it_works__item_title!= item.title
+								each text in item.text
+									p!= text
+								if item.blockquote
+									b!= item.blockquote
+
+

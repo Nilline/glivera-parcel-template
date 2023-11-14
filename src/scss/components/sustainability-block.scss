@@ -1,0 +1,180 @@
+@import 'ScssHelpers/helpers-all.scss';
+
+.sustainability {
+	@include bp($point_2, min) {
+		padding-top: 11rem;
+	}
+	@include bp($point_3) {
+		padding-top: 4rem;
+	}
+}
+
+.sustainability__row {
+	display: grid;
+
+	@include bp($point_2, min) {
+		grid-template-columns: 1fr 1fr;
+		gap: 4.8rem;
+	}
+
+	@include bp($point_3) {
+		grid-template-columns: 1fr;
+	}
+}
+
+.sustainability__col {
+	&:not(:last-child) {
+		@include bp($point_3) {
+			margin-bottom: 4.4rem;
+		}
+	}
+
+	&.sustainability__col--offset_mod {
+		@include bp($point_2, min) {
+			margin-right: -29rem;
+		}
+	}
+}
+
+.sustainability__info {
+	width: 100%;
+
+	@include bp($point_1, min) {
+		max-width: 49rem;
+	}
+
+	h2 {
+		@include h1;
+		line-height: 1.3;
+	}
+
+	h3 {
+		@include h3;
+	}
+
+	p {
+		@include text;
+
+		line-height: 160%;
+
+		&:not(:last-child) {
+			@include bp($point_2, min) {
+				margin-bottom: 3.4rem;
+			}
+			@include bp($point_3) {
+				margin-bottom: 3.4rem;
+			}
+		}
+	}
+}
+
+.sustainability__list_w {
+	@include bp($point_2, min) {
+		padding-top: 1.8rem;
+		max-width: 32vw;
+	}
+
+	&:not(:last-child) {
+		@include bp($point_2, min) {
+			margin-bottom: 10.6rem;
+		}
+		@include bp($point_3) {
+			margin-bottom: 5rem;
+		}
+	}
+}
+
+.sustainability__icon_list {
+	@include flex_block(row, wrap, flex-start, stretch, stretch);
+
+	margin: 0 -6.8rem -4rem 0;
+}
+
+.sustainability__icon_item {
+	@include flex_block(row, nowrap, flex-start, center, center);
+
+	position: relative;
+
+	max-width: 34rem;
+	width: 100%;
+	padding: 0 6.8rem 4rem 0;
+
+	color: $black;
+}
+
+.sustainability__icon_w {
+	flex: none;
+
+	width: 6.4rem;
+	height: 6.4rem;
+
+	&:not(:last-child) {
+		margin-right: 3.2rem;
+	}
+}
+
+.sustainability__icon {
+	@include cover_img;
+}
+
+.sustainability__icon_title {
+	line-height: 160%;
+	font-weight: 700;
+
+	@include bp($point_2, min) {
+		font-size: 2.8rem;
+	}
+	@include bp($point_3) {
+		font-size: 2rem;
+	}
+}
+
+.sustainability__img_item {
+	position: relative;
+
+	@include bp($point_2, min) {
+		width: min(44vw, 84.4rem);
+	}
+	@include bp($point_3) {
+		width: 100%;
+	}
+}
+
+.sustainability__img_w {
+	position: relative;
+	display: block;
+
+	width: 100%;
+
+	@include bp($point_2, min) {
+		padding-bottom: 77%;
+	}
+	@include bp($point_3) {
+		padding-bottom: 94%;
+	}
+}
+
+.sustainability__img {
+	@include cover_img;
+
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+.live_sustainably__img_logo_w {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+
+	transform: translate(-50%, -50%);
+
+	@include bp($point_1, min) {
+		width: 34.5rem;
+		height: 8rem;
+	}
+	@include bp($point_1 - 1) {
+		width: 25.9rem;
+		height: 6rem;
+	}
+}

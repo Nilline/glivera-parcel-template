@@ -1,0 +1,49 @@
+mixin text-block(data)
+	if !data.not_section
+		section.section.text_block(class=data.mod)
+			.section_in.text_block__in
+				.text_block__content(class=data.mod_content)
+
+					if data.title
+						h2.text_block__title= data.title
+
+					if data.content_left || data.content_right
+						.text_block__row_w
+							.text_block__row
+								.text_block__col.text_block__col--left_mod
+									.text_block__info
+										each item in data.content_left
+											!=item
+								.text_block__col.text_block__col--right_mod
+									.text_block__info
+										each item in data.content_rigth
+											!=item
+						if data.btn
+							.text_block__btn_w
+								a.btn_primary_v1.btn_primary--icon_mod(href="#" class=data.btn_mod)
+									=data.btn
+									span.btn_primary__arrow_r
+										+icon('arrow_r', 'icon--size_mod')
+	else
+		.text_block__content(class=data.mod_content)
+
+			if data.title
+				h2.text_block__title= data.title
+
+			if data.content_left || data.content_right
+				.text_block__row_w
+					.text_block__row
+						.text_block__col.text_block__col--left_mod
+							.text_block__info
+								each item in data.content_left
+									!=item
+						.text_block__col.text_block__col--right_mod
+							.text_block__info
+								each item in data.content_rigth
+									!=item
+				if data.btn
+					.text_block__btn_w
+						a.btn_primary_v1.btn_primary--icon_mod(href="#" class=data.btn_mod)
+							=data.btn
+							span.btn_primary__arrow_r
+								+icon('arrow_r', 'icon--size_mod')

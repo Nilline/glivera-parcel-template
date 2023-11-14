@@ -145,25 +145,14 @@ export const documentReady = (cb) => {
 
 export const pageLoad = (cb) => {
 	if (!cb && !isFunction(cb)) return;
-	window.addEventListener('load', () => {
-		window.loaded = true;
-		cb();
-
-		window.onWindowLoadCallbacks?.forEach((cbLocal) => {
-			if (!cbLocal && !isFunction(cbLocal)) return;
-			cbLocal();
-		});
-		window.onWindowLoadCallbacks = [];
-	});
+	window.addEventListener('load', cb);
 };
 
-export const page = (cb) => {
-	if (!cb && !isFunction(cb)) return;
-
-	if (window.loaded) {
-		cb();
-	} else {
-		if (!window.onWindowLoadCallbacks) window.onWindowLoadCallbacks = [];
-		window.onWindowLoadCallbacks.push(cb);
-	}
+export const tomSelectConfig = {
+	onDropdownOpen() {
+		window.scrollSmoother?.paused(true);
+	},
+	onDropdownClose() {
+		window.scrollSmoother?.paused(false);
+	},
 };

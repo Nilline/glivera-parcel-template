@@ -1,0 +1,303 @@
+.hero {
+	min-height: calc(var(--full-screen) - var(--height-header));
+	padding: 9.4rem var(--gl-hr-indent);
+
+	&.hero--text-align_center_mod {
+		@include bp($point_2, min) {
+			@include flex_block(row, wrap, center, center, center);
+		}
+	}
+
+	&.hero--text-align_bottom_mod {
+		@include bp($point_2, min) {
+			@include flex_block(row, wrap, center, flex-end, flex-end);
+		}
+	}
+
+	&.hero--color_white_mod {
+		color: $white;
+	}
+
+	&.hero--1_mod {
+		margin-bottom: var(--gl-vr-indent);
+
+		@include bp($point_3) {
+			@include flex_block(column, wrap, flex-end);
+
+			padding-bottom: 4.8rem;
+		}
+	}
+
+	&.hero--2_mod {
+		margin-bottom: var(--gl-vr-indent);
+
+		@include bp($point_2, min) {
+			min-height: 43.2rem;
+			padding-top: 0;
+			padding-bottom: 0;
+		}
+
+		@include bp($point_3) {
+			min-height: 32.4rem;
+		}
+	}
+
+	&.hero--3_mod {
+		@include bp($point_2, min) {
+			padding: 10rem var(--gl-hr-indent) 5rem;
+			min-height: 54rem;
+		}
+
+		@include bp($point_3) {
+			min-height: 32.4rem;
+			padding: 4rem var(--gl-hr-indent);
+		}
+	}
+
+	&.hero--4_mod {
+		@include bp($point_2, min) {
+			min-height: 48.6rem;
+			padding-bottom: 0;
+		}
+
+		@include bp($point_3) {
+			min-height: unset;
+			padding-bottom: 1.8rem;
+			padding-top: 4.4rem;
+		}
+	}
+
+	&.hero--5_mod {
+		@include bp($point_2, min) {
+			min-height: 48.6rem;
+			padding-top: 9.4rem;
+			padding-bottom: 0;
+		}
+
+		@include bp($point_3) {
+			min-height: 50.5rem;
+			padding-top: 4.4rem;
+			padding-bottom: 2rem;
+		}
+	}
+
+	&.hero--6_mod {
+		@include bp($point_2, min) {
+			min-height: 48.6rem;
+			padding-top: 9.4rem;
+			padding-bottom: 0;
+		}
+
+		@include bp($point_3) {
+			min-height: 46.5rem;
+			padding-top: 5rem;
+			padding-bottom: 2.4rem;
+		}
+	}
+}
+
+.hero__img_w {
+	position: absolute;
+	top: 0;
+	left: 0;
+
+	width: 100%;
+	height: 100%;
+
+	.hero--2_mod & {
+		@include bp($point_2, min) {
+			// position: static;
+			max-width: $page_width_3;
+			left: 50%;
+			transform: translateX(-50%);
+
+			display: block;
+		}
+	}
+}
+
+.hero__img {
+	display: block;
+	width: 100%;
+
+	.hero__img_w & {
+		height: 100%;
+	}
+
+	object-fit: cover;
+}
+
+.hero__social_w {
+	position: absolute;
+	top: 8.5rem;
+	left: 50%;
+	z-index: 1;
+
+	max-width: 173rem;
+	width: 100%;
+	padding: 2.6rem;
+
+	transform: translateX(-50%);
+
+	@include bp($point_3) {
+		display: none;
+	}
+}
+
+.hero__social_item {
+	&:not(:last-child) {
+		margin-bottom: 4.8rem;
+	}
+}
+
+.hero__social_icon_w {
+	display: block;
+
+	width: 2.4rem;
+	height: 2.4rem;
+
+	transition: opacity ease 0.3s;
+
+	.hero--color_white_mod & {
+		color: $white;
+	}
+
+	&:hover,
+	&:focus {
+		opacity: 0.6;
+	}
+}
+
+.hero__content {
+	position: relative;
+	z-index: 2;
+
+	.hero--4_mod & {
+		max-width: 81rem;
+	}
+}
+
+.hero__info {
+	.hero--1_mod & {
+		max-width: 84rem;
+	}
+
+	.hero--3_mod & {
+		max-width: 100rem;
+	}
+
+	h1 {
+		@include h1;
+
+		.hero--3_mod & {
+			max-width: 68rem;
+		}
+
+		@include bp($point_2, min) {
+			line-height: 1.3;
+		}
+
+		@include bp($point_3) {
+			line-height: 1.2;
+		}
+
+		.hero--4_mod &,
+		.hero--5_mod & {
+			@include bp($point_3) {
+				line-height: 1.26;
+			}
+		}
+
+		&:not(.hero--color_white_mod &) {
+			color: $black;
+		}
+
+		&:not(:last-child) {
+			@include bp($point_2, min) {
+				margin-bottom: 1.8rem;
+			}
+
+			@include bp($point_3) {
+				margin-bottom: 3.4rem;
+			}
+
+			.hero--4_mod & {
+				@include bp($point_3) {
+					margin-bottom: 4rem;
+				}
+			}
+
+			.hero--5_mod & {
+				@include bp($point_2, min) {
+					margin-bottom: 5.2rem;
+				}
+
+				@include bp($point_3) {
+					margin-bottom: 4rem;
+				}
+			}
+		}
+	}
+
+	h2 {
+		@include h2;
+
+		&:not(.hero--color_white_mod &) {
+			color: $black;
+		}
+	}
+
+	h3 {
+		@include bp($point_2, min) {
+			@include h3;
+		}
+
+		@include bp($point_3) {
+			font-size: 2.8rem;
+		}
+
+		&:not(.hero--color_white_mod &) {
+			color: $black;
+		}
+
+		&:not(:last-child) {
+			margin-bottom: 2.4rem;
+		}
+	}
+
+	// h4 {
+	// 	@include h4;
+	// }
+
+	// h5 {
+	// 	@include h5;
+	// }
+
+	// h6 {
+	// 	@include h6;
+	// }
+
+	p {
+		@include text;
+
+		line-height: 160%;
+
+		.hero--5_mod & {
+			max-width: 98rem;
+		}
+
+		&:not(:last-child) {
+			margin-bottom: 1.4rem;
+		}
+	}
+
+	&:not(:last-child) {
+		@include bp($point_2, min) {
+			margin-bottom: 5.6rem;
+		}
+
+		@include bp($point_3) {
+			margin-bottom: 3.8rem;
+		}
+	}
+}

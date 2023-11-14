@@ -1,0 +1,52 @@
+@import 'ScssHelpers/helpers-all.scss';
+
+.slider_controls {
+	display: flex;
+}
+
+.slider_controls__btn {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 8rem;
+	height: 8rem;
+
+	color: $black;
+
+	transition: color 0.3s;
+	cursor: pointer;
+
+	.slider_controls__item:nth-child(1) & {
+		background-color: rgba($gray_5, 0.04);
+
+		.gallery__controls & {
+			background-color: $white;
+			pointer-events: auto;
+		}
+	}
+
+	.slider_controls__item:nth-child(2) & {
+		background-color: #ececef;
+
+		.gallery__controls & {
+			transform: rotate(180deg);
+			background-color: $white;
+			pointer-events: auto;
+		}
+	}
+
+	&.swiper-button-lock {
+		display: none;
+	}
+
+	&:hover {
+		color: $gray_2;
+	}
+}
+
+.slider_controls__icon {
+	width: 2.8rem;
+	height: 2.8rem;
+
+	pointer-events: none;
+}

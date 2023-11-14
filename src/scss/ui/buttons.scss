@@ -1,3 +1,171 @@
-// .btn_base {
+.btn_primary {
+	@include btn_style_white;
+	@include btn_size_normal;
 
-// }
+	&.btn_primary--icon_mod {
+		.btn_primary__arrow_r {
+			display: inline-block;
+			width: 2.4rem;
+			height: 2.6rem;
+
+			margin-left: 2.8rem;
+		}
+	}
+}
+
+.btn_primary_v1 {
+	@include btn_style_black;
+	@include btn_size_normal;
+
+	&.btn_primary--icon_mod {
+		.btn_primary__arrow_r {
+			display: inline-block;
+			width: 2.4rem;
+			height: 2.6rem;
+
+			margin-left: 2.8rem;
+		}
+	}
+}
+
+.btn_v1 {
+	@include btn_style_black;
+	@include btn_size_v2;
+}
+
+.btn_v2 {
+	@include btn_style_gray;
+	@include btn_size_v3;
+}
+
+.btn_v3 {
+	@include btn_style_black;
+	@include btn_size_v4;
+
+	.how_it_works__btn_w & {
+		padding: 0 3.4rem 0 4.4rem;
+	}
+
+	.single_article & {
+		padding: 0 4.2rem 0 2.8rem;
+	}
+}
+
+.btn_v4 {
+	@include btn_style_gray;
+	@include btn_size_normal;
+}
+
+.btn_v5 {
+	@include btn_style_black;
+	@include btn_size_v5;
+}
+
+.btn_v5_nested {
+	@include btn_style_black;
+
+	button {
+		@include btn_size_v5;
+
+		font-family: inherit;
+	}
+}
+
+.btn_icon {
+	width: 2.4rem;
+	height: 2.4rem;
+
+	&:not(:last-child, .how_it_works__btn_w &) {
+		margin-right: 2.4rem;
+	}
+
+	&:not(:first-child) {
+		margin-left: 2.4rem;
+	}
+
+	&.btn_icon--double_mod {
+		position: relative;
+
+		a.btn--active_mod &,
+		button.btn--active_mod &,
+		a:hover &,
+		button:hover & {
+			svg {
+
+				&:first-child {
+					opacity: 0;
+				}
+
+				&:last-child {
+					opacity: 1;
+				}
+			}
+		}
+	}
+}
+
+.btn_icon_right {
+	width: 2.4rem;
+	height: 2.4rem;
+
+	&:not(:first-child) {
+		margin-left: 2.4rem;
+	}
+}
+
+.btn_back {
+	&:not(.article &) {
+		@include button_back(10.8rem, 9.4rem);
+
+		@include bp($point_1) {
+			display: none;
+		}
+	}
+
+	.article & {
+		@include button_back(0.5rem, 0);
+	}
+}
+
+.btn_back_icon {
+	display: block;
+	width: 2.2rem;
+	height: 2.2rem;
+}
+
+.single_add_to_cart_button {
+	.btn_icon_right {
+		position: relative;
+	}
+
+	.icon {
+		position: absolute;
+		top: 0;
+		left: 0;
+	}
+
+	.active_state {
+		opacity: 0;
+	}
+
+	// 	&.single_add_to_cart_button--active_state {
+	// 		.active_state {
+	// 			transition: opacity ease 0.3s;
+	// 			opacity: 1;
+	// 		}
+	// 		.normal_state {
+	// 			transition: opacity ease 0.3s;
+	// 			opacity: 0;
+	// 		}
+
+	// 		&:focus,
+	// 		&:hover {
+	// 			.active_state {
+	// 				opacity: 0;
+	// 			}
+	// 			.normal_state {
+	// 				opacity: 1;
+	// 			}
+	// 		}
+	// 	}
+}

@@ -21,7 +21,10 @@
 	},
 	"dependencies": {
 		"gsap": "^3.10.4",
-		"ismobilejs": "^1.1.1"
+		"ismobilejs": "^1.1.1",
+		"plyr": "^3.7.8",
+		"swiper": "^11.0.4",
+		"tom-select": "^2.3.1"
 	},
 	"devDependencies": {
 		"@parcel/config-default": "^2.9.3",

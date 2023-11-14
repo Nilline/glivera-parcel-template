@@ -1,0 +1,21 @@
+mixin home(data)
+	a.home_el(href="#")
+		+picture({
+			img: data.img,
+			class: 'home_el__pic',
+			img_class: 'home_el__img',
+			lazy: true,
+		})
+		.home_el__content
+			.home_el__title_wrap
+				.home_el__title_icon
+					+icon('arrow_45deg', 'icon--size_mod')
+				.home_el__title= data.title
+			if data.adress
+				.home_el__adress= data.adress
+			if data.link
+				.home_el__link= data.link
+					.home_el__link_icon
+						+icon('arrow_right', 'icon--size_mod')
+			if data.price
+				.home_el__price= data.price

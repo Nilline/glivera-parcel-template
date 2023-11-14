@@ -1,0 +1,35 @@
+include ../templates/mixins/m-news-card
+
+-
+	blog_list = [
+		{
+			img: 'blog_list/1.jpg',
+			date: 'April 19, 2023',
+			title: 'Unlocking the Hidden Potential: The Benefits of an Accessory Dwelling Unit (ADU)',
+			link: 'Read Article',
+		},
+		{
+			img: 'blog_list/2.jpg',
+			date: 'April 14, 2023',
+			title: "Archinect shared news of Hapi Homes' recent donation",
+			link: 'Read Article',
+		},
+		{
+			img: 'blog_list/3.jpg',
+			date: 'April 05, 2023',
+			title: "Archinect shared news of Hapi Homes' recent donation",
+			link: 'Read Article',
+		},
+	]
+
+section.section.blog_list
+	.section_in
+		h2.blog_list__title Blog
+		.blog_list__list_wrap
+			ul.blog_list__list
+				each item in blog_list
+					li.blog_list__item
+						+news_card(item)
+		.blog_list__btn_wrap.js-fade-item
+			button.blog_list__btn.btn_primary(type='button')
+				span Show more

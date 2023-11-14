@@ -1,5 +1,5 @@
 import Swiper, { Navigation, Pagination } from 'swiper';
-import 'swiper/css';
+import 'swiper/swiper-bundle.css';
 import 'swiper/scss/scrollbar';
 import { buildSwiper, removeSwiper } from './build-swiper';
 

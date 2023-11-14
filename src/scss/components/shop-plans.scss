@@ -1,0 +1,630 @@
+@import 'ScssHelpers/helpers-all.scss';
+
+.shop_plans {
+	@include bp($point_2, min) {
+		padding-bottom: 12rem;
+	}
+
+	@include bp($point_3) {
+		padding-top: 2.4rem;
+		padding-bottom: 3.2rem;
+	}
+}
+
+.shop_plans__heading {
+	&:not(:last-child) {
+		@include bp($point_2, min) {
+			margin-bottom: 4.4rem;
+		}
+
+		@include bp($point_3) {
+			margin-bottom: -6.4rem;
+		}
+	}
+}
+
+.shop_plans__title {
+	color: $black;
+
+	@include h1;
+}
+
+.shop_plans__header {
+	display: flex;
+
+	@include bp($point_2, min) {
+		padding-bottom: 0.5rem;
+		align-items: flex-end;
+		flex-wrap: wrap;
+
+		border-bottom: 1px solid $gray_3;
+	}
+
+	@include bp($point_3) {
+		position: relative;
+		z-index: 1;
+
+		align-items: flex-start;
+	}
+
+	&:not(:last-child) {
+		@include bp($point_2, min) {
+			margin-bottom: 3.2rem;
+		}
+
+		@include bp($point_3) {
+			margin-bottom: 4rem;
+		}
+	}
+}
+
+.shop_plans__filter {
+	flex-grow: 1;
+	margin-right: 0.8rem;
+
+	@include bp($point_3) {
+		position: relative;
+	}
+}
+
+.shop_plans__form {
+	display: flex;
+	align-items: flex-end;
+
+	@include bp($point_3) {
+		position: absolute;
+		top: 0;
+		left: 0;
+
+		width: 100%;
+		flex-direction: column;
+
+		background-color: $gray_3;
+		transform: scaleY(0);
+		transform-origin: 0 0;
+
+		pointer-events: none;
+		transition: transform 0.3s ease;
+		will-change: transform;
+
+		.shop_plans__form--active_state & {
+			transform: scaleY(1);
+			pointer-events: initial;
+		}
+	}
+}
+
+.shop_plans__column_form {
+	position: relative;
+
+	width: 20.7%;
+
+	font-size: 2rem;
+	color: $black;
+	font-weight: 700;
+
+	@include bp($point_3) {
+		padding: 2rem 2.4rem 2.2rem 6.4rem;
+		width: 100%;
+	}
+
+	&.shop_plans__column_form--select_mod {
+		@include bp($point_2, min) {
+			padding: 3.8rem 1rem 2.8rem 0;
+		}
+
+		@include bp($point_3) {
+			padding-left: 3.2rem;
+		}
+
+		.ts-control {
+			margin-left: 3.2rem;
+			overflow: visible;
+
+			&:before {
+				content: '';
+				position: absolute;
+				left: -3.2rem;
+
+				height: 100%;
+				width: 3.2rem;
+			}
+		}
+
+		.ts-wrapper {
+			&::before {
+				content: '';
+				position: absolute;
+				top: 0.6rem;
+				left: 0;
+
+				width: 1.6rem;
+				height: 1.2rem;
+
+				background: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTQiIGhlaWdodD0iOSIgdmlld0JveD0iMCAwIDE0IDkiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+DQo8cGF0aCBkPSJNNyA5TDEzLjkyODIgLTMuNTEzOTFlLTA3TDAuMDcxNzk2MSA4LjU5OTc1ZS0wN0w3IDlaIiBmaWxsPSIjQjVCNEMzIi8+DQo8L3N2Zz4NCg==)
+					center / contain no-repeat;
+
+				transition: transform 0.3s ease;
+				will-change: transform;
+			}
+
+			&.dropdown-active {
+				&::before {
+					transform: rotate(-180deg);
+				}
+			}
+		}
+	}
+
+	&.shop_plans__column_form--text_mod {
+		@include bp($point_2, min) {
+			padding: 3.8rem 1rem 2.2rem 0;
+		}
+
+		@include bp($point_3) {
+			line-height: 1;
+		}
+	}
+}
+
+.shop_plans__customizable {
+	display: inline-block;
+	font-weight: inherit;
+
+	font-family: inherit;
+	color: inherit;
+	line-height: 2.4rem;
+
+	cursor: pointer;
+	transition: color 0.3s ease;
+
+	.shop_plans__form--open_state & {
+		@include bp($point_3) {
+			color: $gray_2;
+		}
+	}
+
+	&:hover,
+	&:focus,
+	.shop_plans__column_form--active_state & {
+		color: $gray_2;
+	}
+}
+
+.shop_plans__label {
+	position: absolute;
+	top: 0;
+	left: 3.4rem;
+
+	font-size: 2rem;
+	color: $dark_2;
+	font-weight: 400;
+
+	opacity: 0;
+	pointer-events: none;
+
+	transition: opacity 0.2s ease;
+
+	@include bp($point_3) {
+		display: none;
+	}
+
+	.shop_plans__column_form--active_state & {
+		opacity: 1;
+		pointer-events: initial;
+	}
+}
+
+.shop_plans__select {
+	min-height: 2.1rem;
+	box-shadow: none;
+
+	@include bp($point_2, min) {
+		padding: 0;
+	}
+
+	@include bp($point_3) {
+		padding-right: 2.5rem;
+	}
+
+	.ts-control {
+		padding: 0;
+		min-height: 2.1rem;
+
+		letter-spacing: -0.04em;
+
+		border: none;
+		cursor: pointer;
+
+		@include bp($point_2, min) {
+			font-size: $input_font_size;
+		}
+
+		@include bp($point_3) {
+			font-size: 2rem;
+		}
+	}
+
+	.ts-control input {
+		position: absolute;
+		left: auto;
+		right: 0;
+		height: 100%;
+		width: 100%;
+
+		min-width: auto;
+
+		font-size: 2rem;
+		font-weight: 700;
+		color: $black;
+		caret-color: $black;
+
+		cursor: pointer;
+
+		&::-webkit-input-placeholder {
+			color: inherit;
+			font-weight: 700;
+
+			transition: color 0.3s ease;
+
+			@include bp($point_3) {
+				transition: color 0.3s ease;
+			}
+
+			.shop_plans__column_form--active_state & {
+				font-size: 0;
+			}
+
+			.shop_plans__form--open_state & {
+				@include bp($point_3) {
+					color: $gray_2;
+				}
+			}
+		}
+
+		&::-moz-placeholder {
+			color: inherit;
+			opacity: 1;
+			font-weight: 700;
+
+			transition: color 0.3s ease;
+
+			@include bp($point_3) {
+				transition: color 0.3s ease;
+			}
+
+			.shop_plans__column_form--active_state & {
+				font-size: 0;
+			}
+
+			.shop_plans__form--open_state & {
+				@include bp($point_3) {
+					color: $gray_2;
+				}
+			}
+		}
+
+		&:-ms-input-placeholder {
+			color: inherit;
+			opacity: 1;
+			font-weight: 700;
+
+			transition: color 0.3s ease;
+
+			@include bp($point_3) {
+				transition: color 0.3s ease;
+			}
+
+			.shop_plans__column_form--active_state & {
+				font-size: 0;
+			}
+
+			.shop_plans__form--open_state & {
+				@include bp($point_3) {
+					color: $gray_2;
+				}
+			}
+		}
+
+		&:hover {
+			&::-webkit-input-placeholder {
+				color: $gray_2;
+			}
+
+			&::-moz-placeholder {
+				color: $gray_2;
+			}
+
+			&:-ms-input-placeholder {
+				color: $gray_2;
+			}
+		}
+	}
+
+	.ts-dropdown {
+		left: 0;
+
+		font-size: 2rem;
+
+		border: none;
+
+		@include bp($point_2, min) {
+			top: calc(100% + 2.8rem);
+			max-height: 30rem;
+			overflow-y: auto;
+			overflow-x: hidden;
+			scroll-behavior: smooth;
+
+			background-color: $gray_3;
+		}
+
+		@include bp($point_3) {
+			top: calc(100% + 1.5rem);
+			left: -3.2rem;
+
+			width: calc(100% + 5.4rem);
+
+			color: $black;
+
+			background-color: transparent;
+			box-shadow: none;
+		}
+
+		.option {
+			transition: background-color 0.2s ease, color 0.2s ease;
+			color: $gray_2;
+
+			@include bp($point_2, min) {
+				padding: 2.3rem 2.8rem;
+			}
+
+			@include bp($point_3) {
+				padding: 2.3rem 2.8rem 2.3rem 5.8rem;
+			}
+
+			&.active,
+			&.selected {
+				color: $black;
+				background-color: $gray_7;
+			}
+		}
+	}
+
+	.ts-dropdown-content {
+		max-height: 30rem;
+	}
+
+	&.ts-wrapper.single.input-active .ts-control,
+	&.full .ts-control,
+	.ts-control {
+		background-color: transparent;
+	}
+
+	&.ts-wrapper.multi .ts-control {
+		margin-bottom: -3px;
+	}
+
+	&.ts-wrapper.multi .ts-control > div {
+		padding: 0;
+		margin-right: 0.5rem;
+		margin-bottom: 0;
+		padding-bottom: 3px;
+
+		background-color: transparent;
+		color: $black;
+		letter-spacing: -0.05em;
+
+		pointer-events: none;
+	}
+
+	&.ts-wrapper.multi.has-items .ts-control {
+		padding: 0;
+	}
+}
+
+.shop_plans__btns_control {
+	margin-left: auto;
+
+	@include bp($point_2, min) {
+		margin-bottom: -0.5rem;
+	}
+}
+
+.shop_plans__clear_btn {
+	position: absolute;
+	top: 0;
+	right: 0;
+
+	width: 1.6rem;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	cursor: pointer;
+
+	transition: opacity 0.3s ease;
+
+	&:not(.shop_plans__column_form--active_state &) {
+		opacity: 0;
+		pointer-events: none;
+	}
+
+	@include bp($point_2, min) {
+		display: none;
+	}
+
+	&::before {
+		content: '';
+		width: 100%;
+		height: 4px;
+
+		background-color: $black;
+
+		transition: background-color 0.3s ease;
+	}
+
+	&:hover,
+	&:focus {
+		&::before {
+			background-color: $gray_2;
+		}
+	}
+}
+
+.shop_plans__form_btn {
+	position: relative;
+
+	height: 6rem;
+	width: 6rem;
+
+	background-color: $gray_3;
+
+	cursor: pointer;
+
+	&.shop_plans__form_btn--desktop_mod {
+		@include bp($point_2, min) {
+			opacity: 0;
+			pointer-events: none;
+		}
+
+		transition: opacity 0.2s ease;
+
+		@include bp($point_3) {
+			display: none;
+		}
+
+		&::before,
+		&::after {
+			content: '';
+			position: absolute;
+			top: 50%;
+			left: 50%;
+
+			width: 2.1rem;
+			height: 0.4rem;
+
+			background-color: $black;
+
+			transition: background-color 0.3s ease;
+		}
+
+		&::before {
+			transform: translate(-50%, -50%) rotate(-45deg);
+		}
+
+		&::after {
+			transform: translate(-50%, -50%) rotate(45deg);
+		}
+
+		.shop_plans__form--active_state & {
+			opacity: 1;
+			pointer-events: initial;
+		}
+	}
+
+	&.shop_plans__form_btn--mobile_mod {
+		@include bp($point_2, min) {
+			display: none;
+		}
+
+		&::before,
+		&::after {
+			content: '';
+			position: absolute;
+			top: 50%;
+			left: 50%;
+
+			height: 0.4rem;
+
+			background-color: $black;
+
+			transition: background-color 0.3s ease, transform 0.3s ease;
+		}
+
+		&::before {
+			width: 2.2rem;
+
+			transform: translate(-50%, calc(-50% - 4px));
+		}
+
+		&::after {
+			width: 2.2rem;
+
+			transform: translate(-50%, calc(-50% + 4px)) scaleX(0.54);
+		}
+
+		.shop_plans__form--active_state & {
+			&::before {
+				transform: translate(-50%, -50%) rotate(45deg);
+			}
+
+			&::after {
+				transform: translate(-50%, -50%) scaleX(1) rotate(-45deg);
+			}
+		}
+	}
+
+	&:hover,
+	&:focus {
+		&::before,
+		&::after {
+			background-color: $gray_2;
+		}
+	}
+}
+
+//====No-content======================================================
+
+.shop_plans__no_content_body {
+	width: calc(100% - 2.4rem);
+}
+
+.shop_plans__no_content_content {
+	text-align: center;
+
+	background-color: $light_2;
+
+	@include bp($point_2, min) {
+		padding: 8.5rem;
+	}
+
+	@include bp($point_3) {
+		padding: 5rem 3.2rem;
+	}
+
+	&:not(:last-child) {
+		@include bp($point_2, min) {
+			margin-bottom: 8rem;
+		}
+
+		@include bp($point_3) {
+			margin-bottom: 4rem;
+		}
+	}
+}
+
+.shop_plans__no_content__title {
+	max-width: 42rem;
+	margin: 0 auto;
+
+	color: $black;
+
+	@include h3;
+
+	&:not(:last-child) {
+		margin-bottom: 2.4rem;
+	}
+}
+
+.shop_plans__no_content__subtitle {
+	max-width: 34rem;
+	margin: 0 auto;
+
+	font-size: 1.7rem;
+	color: $dark_1;
+}
+
+.shop_plans__no_content_btn_block {
+	text-align: center;
+}

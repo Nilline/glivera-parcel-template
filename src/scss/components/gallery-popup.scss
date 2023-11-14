@@ -1,0 +1,98 @@
+@import 'ScssHelpers/helpers-all';
+
+.gallery_popup {
+	display: flex;
+	justify-content: center;
+
+	position: fixed;
+	top: 0;
+	left: 0;
+
+	width: 100vw;
+	height: var(--full-screen);
+
+	z-index: 150;
+	overflow-x: hidden;
+	overflow-y: auto;
+
+	transition: opacity ease 0.3s;
+	background-color: $gray;
+	opacity: 0;
+	pointer-events: none;
+
+	&.gallery_popup--active_state_mod {
+		opacity: 1;
+		pointer-events: auto;
+	}
+
+	@include bp($point_3) {
+		padding-left: 0;
+		padding-right: 0;
+	}
+
+	.swiper-wrapper {
+		box-sizing: border-box;
+	}
+
+	.swiper-slide {
+		display: inline-flex;
+		width: auto;
+	}
+}
+
+.gallery_popup__in {
+	width: 100%;
+	margin: auto;
+	// height: 100%;
+}
+
+.gallery_popup__slider {
+	width: 100%;
+
+	transition: transform ease 0.8s;
+	will-change: transform;
+	transform-origin: 0 0;
+	transform: translateX(100%);
+
+	.gallery_popup--active_state_mod & {
+		transform: translateX(0);
+	}
+}
+
+.gallery_popup__list {
+	@include bp($point_2, min) {
+		height: 72rem;
+	}
+	@include bp($point_3) {
+		height: 50vw;
+	}
+}
+
+.gallery_popup__controls {
+	width: 100%;
+	max-width: 128rem;
+	margin: 0 auto;
+	justify-content: flex-end;
+}
+
+.gallery_popup__item {
+	@include bp($point_2, min) {
+		padding: 0 2.3rem;
+	}
+}
+
+.gallery_popup__img_w {
+	display: block;
+
+	width: 100%;
+	height: 100%;
+}
+
+.gallery_popup__img {
+	display: block;
+
+	width: 100%;
+	height: 100% !important;
+
+	object-fit: contain;
+}

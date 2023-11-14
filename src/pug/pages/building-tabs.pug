@@ -1,0 +1,25 @@
+extends ../layout/layout
+
+block vars
+	include ../templates/mixins/m-building-tabs
+	include ../templates/mixins/m-hero
+	include ../templates/project-vars
+	- array = {body_class:'', layout_mod:'', sub_keywords:'', title_inner:'Building Tabs', template_name: 'building-tabs'}
+
+block content_block
+	+hero({
+		mod: 'hero--4_mod',
+		content: [
+			'<h1>Experience a new standard of living</h1>',
+			'<p>For over two decades, the founders of Hapi Homes have been offering prefabricated homes using light steel frame systems to clients globally.</p>'
+		],
+	})
+	section.section.buildings
+		.section_in
+			//- .buildings__head
+			//- 	h2.buildings__title Experience a new standard of living
+			//- 	.buildings__descr.js-fade-item For over two decades, the founders of Hapi Homes have been offering prefabricated homes using light steel frame systems to clients globally.
+			+building_tabs({
+				content: buildingsData,
+				side_text: 'As a result of the wide range of building types and locations served by Hapi Homes, we have gained a great deal of experience and expertise. All products are ISO9001, CE, CNAS, BV and ICC certified.',
+			})

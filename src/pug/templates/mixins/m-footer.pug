@@ -1,2 +1,107 @@
+-
+	contact_list = [
+		{
+			text: '+1 212-457-1323',
+			href: 'tel:+12124571323',
+			mod: 'footer__link--font_weight_mod',
+		},
+		{
+			text: 'hello@hapihomes.com',
+			href: 'mailto:hello@hapihomes.com',
+		},
+	]
+	nav_list = [
+		{
+			list: [
+				{text: 'Products',},
+				{text: 'Shop plans',},
+				{text: 'FAQ',},
+			],
+		},
+		{
+			list: [
+				{text: 'How it works',},
+				{text: 'Sustainability',},
+				{text: 'About',},
+			],
+		},
+		{
+			list: [
+				{text: 'Contact',},
+				{text: 'Newsroom',},
+				{text: 'Blog',},
+			],
+		},
+	]
+	policy_list = [
+		{text: 'Terms of use',},
+		{text: 'Privacy Policy',},
+		{text: 'Cookies',},
+	]
+
 mixin footer
 	footer.footer
+		.section_in.footer__in
+			+picture({
+				media: 768,
+				img: 'footer/footer_image.jpg',
+				img_mob: 'footer/footer_image_mob.jpg',
+				class: 'footer__img_w js-fade-item',
+				img_class: 'footer__img_in',
+				alt: 'footer image',
+				lazy: true,
+			})
+			.footer__row.footer__row--social_mod.js-fade-item
+				.footer__col.footer__col--social_mod
+					+social({items: [
+						{ name_icon: 'instagram', aria_label: 'instagram',},
+						{ name_icon: 'twitter', aria_label: 'twitter',},
+						{ name_icon: 'linkedin', aria_label: 'linkedin',},
+					]})
+					button.footer__anchor.js-anchor(type='button' aria-label='arrow scroll to top')
+						span.footer__anchor_icon
+							+icon('arrow_top', 'icon--size_mod')
+			.footer__row.footer__row--title_mod
+				.footer__title_block
+					h2.footer__title(href='#') Insider news
+				form(action='#').js-fade-item
+					.footer__form
+						+form_input({
+							class: 'form_input__element_v2',
+							placeholder: 'Your Email',
+							id: 'footer_email',
+							name: 'footer_email',
+							title: 'Footer email',
+							type: 'email',
+							required: true,
+						})
+						button.footer__form__btn(type="submit" aria-label="send email form")
+							span.footer__form__btn_icon
+								svg.icon.icon--size_mod(xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 18.18")
+									path(d="M12.91,18.18l9.09-9.09L12.91,0l-3.03,3.03,4.06,4.06H0v4H13.94l-4.06,4.06,3.03,3.03Z" fill="currentColor" fill-rule="evenodd")
+			.footer__row.footer__row--nav_mod.js-fade-item
+				.footer__col.footer__col--contacts_mod
+					ul.footer__list
+						each item in contact_list
+							li.footer__list_item
+								a.footer__link(href=item.href || '#' class=item.mod)!=item.text
+				.footer__col.footer__col--nav_mod
+					each list in nav_list
+						ul.footer__list
+							each link in list.list
+								li.footer__list_item
+									a.footer__link(href='#')!=link.text
+			.footer__row.footer__row--bottom_mod.js-footer-bottom
+				.footer__col.footer__col--info_mod
+					.footer__iso_icon
+						+icon('iso', 'icon--size_mod')
+					p ISO 14001, ISO 9001, ISO/TC 59/SC 19
+				.footer__col.footer__col--year_mod
+					p 2023 © Hapi Homes Inc
+				.footer__col.footer__col--policy_mod
+					ul.footer__policy_list
+						each item in policy_list
+							li.footer__policy_item
+								a.footer__policy_link(href='#')!=item.text
+
+

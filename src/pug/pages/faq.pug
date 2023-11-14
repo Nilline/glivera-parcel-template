@@ -1,0 +1,59 @@
+extends ../layout/layout
+
+block vars
+	//- include ../templates/project-vars
+
+	include ../templates/mixins/m-chat-with-us
+	include ../templates/mixins/m-hero
+
+	- array = {body_class:'', layout_mod:'', sub_keywords:'', title_inner:'FAQs', template_name: 'faq'}
+
+block content_block
+	+hero({
+		mod: 'hero--4_mod',
+		content: [
+			'<h1>FAQs</h1>',
+			"<p>Welcome to Hapi Homes! We understand that exploring the world of modular and tiny homes can raise numerous questions. That's why we've created a comprehensive guide to provide you with all the information you need. Whether you're curious about our construction process, customization options, or anything in between, we've got you covered. If you can't find what you're looking for, don't hesitate to reach out to us. We are always hapi to help!</p>",
+		],
+		btn_back: true,
+	})
+	include ../blocks/faq-main-section
+	+chat_with_us({
+		mod: 'chat_with_us--v2_mod',
+		content: [
+			'<h2>More information</h2>',
+			'<p>If your question hasn’t been answered here, no worries, contact us and we’ll get you the answers in a jiffy.</p>',
+		],
+		btn_title: 'Book a call',
+		btn_mod: 'btn_primary',
+		icon: 'calendar',
+	})
+	-
+		contactFormContacts = [
+			{
+				icon: 'slack',
+				href: '#',
+				title: 'Live Chat'
+			},
+			{
+				icon: 'tel',
+				href: 'tel:+12124571323',
+				title: '+1 212-457-1323'
+			},
+			{
+				icon: 'calendar',
+				href: '#',
+				title: 'Book a call'
+			},
+		]
+	section.section
+		.section_in
+			.contact_form__contacts.js-fade-item
+				ul.contact_form__contacts_list
+					each item in contactFormContacts
+						li.contact_form__contacts_item
+							a.contact_form__contacts_link(href=item.href)
+								.contact_form__contacts_icon_block
+									.contact_form__contacts_icon
+										+icon(item.icon, 'icon--size_mod')
+								.contact_form__contacts_title= item.title

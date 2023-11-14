@@ -1,0 +1,57 @@
+include ../templates/mixins/m-article-content
+include ../templates/mixins/m-button-back
+
+-
+	article_content = {
+		content: [
+			`
+				<p>In recent years, Accessory Dwelling Units (ADUs) have emerged as a popular and practical solution to address housing needs and maximize property potential. ADUs, also known as granny flats, in-law suites, or backyard cottages, offer homeowners a range of benefits. Here, we will delve into the advantages of ADUs and highlight why they are becoming an increasingly attractive option for homeowners.</p>
+			`,
+			`	<h3>Increased Property Value:</h3>
+				<p>One of the significant benefits of an ADU is the potential increase in property value. By adding a separate living unit on your property, you create an additional space that can be appealing to potential buyers. ADUs provide flexibility and versatility, making your property more attractive in the competitive real estate market.</p>
+			`,
+			`	<h3>Additional Rental Income:</h3>
+				<p>ADUs offer homeowners the opportunity to generate additional income through rental opportunities. Whether you choose to rent out the ADU on a long-term basis or utilize platforms like Airbnb for short-term rentals, the extra income can help offset mortgage payments, property taxes, or other expenses. This income stream can also contribute to financial stability and provide a pathway to financial independence.</p>
+			`,
+			`	<h3>Multigenerational Living:</h3>
+				<p>ADUs provide an ideal solution for multigenerational living arrangements. Aging parents, adult children, or other family members can have their own self-contained space within close proximity to the main residence. This arrangement allows for independence and privacy while fostering a sense of togetherness and support. ADUs facilitate flexible living situations, bringing families closer and enhancing the overall quality of life.</p>
+			`,
+			`	<h3>Home Office or Studio Space:</h3>
+				<p>In an evolving work environment, ADUs offer a dedicated space for a home office or creative studio. Whether you are a remote worker, freelancer, or artist, having a separate workspace away from the distractions of the main residence can significantly increase productivity and focus. ADUs provide a professional and inspiring environment within the comfort of your own property.</p>
+			`,
+				`	<h3>Aging in Place:</h3>
+				<p>As homeowners age, they may prefer to stay in their familiar neighborhood and community. ADUs offer a viable aging-in-place solution, allowing homeowners to downsize and move into the ADU while renting out the main residence. This arrangement provides financial security, independence, and the ability to maintain connections with neighbors and friends.</p>
+			`,
+				`	<h3>Sustainable and Affordable Housing:</h3>
+				<p>ADUs contribute to sustainable and affordable housing options. They maximize the use of existing infrastructure, reduce urban sprawl, and promote efficient land utilization. ADUs can be more cost-effective than building a separate property, making homeownership more attainable for individuals or families seeking affordable housing options.</p>
+			`,
+				`	<h3>Conclusion:</h3>
+				<p>The benefits of an Accessory Dwelling Unit (ADU) are undeniable. From increasing property value and generating additional income to fostering multigenerational living and supporting sustainable housing, ADUs offer a range of advantages for homeowners. Whether you are looking to accommodate family members, generate rental income, or create a dedicated workspace, ADUs provide a versatile and practical solution.</p>
+				<p>As ADUs gain popularity, it is important to research local regulations and zoning requirements to ensure compliance and a smooth construction process. Consulting with professionals and architects experienced in ADU design and construction can help you navigate the process with ease.</p>
+				<p>Unlock the hidden potential of your property with an ADU and embrace the numerous benefits it offers. Experience the joy of versatile living, financial stability, and the satisfaction of optimizing your property's value.</p>
+			`,
+		]
+	}
+
+section.section.single_article
+	+button_back()
+	.section_in
+		.single_article__heading.js-fade-item
+			h1 Unlocking the Hidden Potential: The Benefits of an Accessory Dwelling Unit (ADU)
+			.single_article__date April 19, 2023
+		.single_article__picture.js-fade-item
+			+picture({
+					media: 1024,
+					img: 'single_article/1.jpg',
+					img_mob: 'single_article/1_mob.jpg',
+					class: 'single_article__img_wrap',
+					img_class: 'single_article__img',
+					alt: 'section image',
+				})
+		+article_content(article_content)
+		.single_article__subtitle.js-split-fade Book a call today with our team to find the best off-grid living to suit your needs.
+		.single_article__btn_w.js-fade-item
+			a.btn_v3(href="#")
+				.btn_icon
+					+icon('calendar', 'icon--size_mod')
+				span Book a call

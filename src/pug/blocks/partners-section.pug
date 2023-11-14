@@ -1,0 +1,59 @@
+-
+	partners_list = [
+		{
+			img: '/src/images/partners_section/yahoo.svg',
+			img_mob: '/src/images/partners_section/yahoo_mobile.svg',
+		},
+		{
+			img: '/src/images/partners_section/the_new_york_times.svg',
+			img_mob: '/src/images/partners_section/the_new_york_times_mobile.svg',
+		},
+		{
+			img: '/src/images/partners_section/bloomberg.svg',
+			img_mob: '/src/images/partners_section/bloomberg_mobile.svg',
+		},
+		{
+			img: '/src/images/partners_section/business_insider.png',
+			img_mob: '/src/images/partners_section/business_insider_mobile.png',
+		},
+		{
+			img: '/src/images/partners_section/ap.svg',
+			img_mob: '/src/images/partners_section/ap_mobile.svg',
+		},
+		{
+			img: '/src/images/partners_section/the_washington_post.svg',
+			img_mob: '/src/images/partners_section/the_washington_post_mobile.svg',
+		},
+		{
+			img: '/src/images/partners_section/market_watch.svg',
+			img_mob: '/src/images/partners_section/market_watch_mobile.svg',
+		},
+		{
+			img: '/src/images/partners_section/fox_news.svg',
+			img_mob: '/src/images/partners_section/fox_news_mobile.svg',
+		},
+		{
+			img: '/src/images/partners_section/archinect.svg',
+			img_mob: '/src/images/partners_section/archinect_mobile.svg',
+		},
+		{
+			img: '/src/images/partners_section/real_estate_weekly.svg',
+			img_mob: '/src/images/partners_section/real_estate_weekly_mobile.svg',
+		},
+	]
+
+section.section.partners_section.js-partners-section-wrapper.js-fade-item
+	.section_in.partners_section__in
+		.partners_section__slider.js-partners-section-slider
+			each partner in partners_list
+				.partners_section__slide
+					a.partners_section__link(href='#')
+						if partner.img_mob
+							picture.partners_section__img-w
+								source(media="(min-width: 1024px)" srcset=partner.img type="image/png")
+								source(media="(max-width: 1023px)" srcset=partner.img_mob type="image/png")
+								img.partners_section__img(src=partner.img alt="partner")
+						else
+							picture.partners_section__img-w
+								source(srcset=partner.img type="image/png")
+								img.partners_section__img(src=partner.img alt="partner")

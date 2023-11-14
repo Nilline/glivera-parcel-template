@@ -1,0 +1,65 @@
+include ../templates/mixins/m-building-tabs
+include ../templates/project-vars
+
+-
+	plans_fields = [
+		{
+			label: "Size sq. ft ",
+			placeholder: 'Size',
+			id: "plans_size",
+			options: ['300 – 500, +1', '300 – 500, +2', '300 – 500, +3'],
+		},
+		{
+			label: "Bedrooms",
+			placeholder: 'Bedrooms',
+			id: "plans_bedrooms",
+			options: ['Studio', '1 Bed', '2 Bed', '3+ Bed'],
+		},
+		{
+			label: "Floors",
+			placeholder: 'Floors',
+			id: "plans_floors",
+			options: ['1 floor', '2 floor', '2 floor'],
+		},
+	]
+
+section.section.shop_plans
+	.section_in
+		.shop_plans__heading
+			h2.shop_plans__title Shop plans
+		.shop_plans__body
+			.shop_plans__header.js-filter-wrapper
+				.shop_plans__filter
+					.shop_plans__form
+						each field in plans_fields
+							.shop_plans__column_form.shop_plans__column_form--select_mod.js-filter-select-col
+								label.shop_plans__label(for=field.id)!=field.label
+								.shop_plans__select_w
+									select.shop_plans__select.js-tom-select(multiple class=field.mod id=field.id placeholder=field.placeholder autocomplete="off")
+										each subitem in field.options
+											option=subitem
+
+						.shop_plans__column_form.shop_plans__column_form--text_mod
+							button.shop_plans__customizable.js-customizable(type='button') Customizable
+
+				.shop_plans__btns_control
+					button.shop_plans__form_btn.shop_plans__form_btn--mobile_mod.js-filter-open-btn(type='button' aria-label='form open')
+					button.shop_plans__form_btn.shop_plans__form_btn--desktop_mod.js-filter-reset-btn(type='button' aria-label='form reset')
+
+			.shop_plans__building.building
+				+building_tabs({
+					slider: false,
+					no_tabs: true,
+					content: plansData,
+				})
+			.shop_plans__no_content_body.js-fade-item
+				.shop_plans__no_content_content
+					.shop_plans__no_content__title Unfortunately, no house with such characteristics was found.
+					.shop_plans__no_content__subtitle Contact us and we can create a personal offer for you.
+				.shop_plans__no_content_btn_block
+					a.btn_v1(href='#')
+						.btn_icon
+							+icon('calendar', 'icon--size_mod')
+						span Book a call
+
+

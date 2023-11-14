@@ -1,0 +1,51 @@
+-
+	renofi_items_list = [
+		{
+			list: [
+				{
+					content: [
+						{text: '<strong>Francie Franks</strong>',},
+						{text: 'Market Manager'},
+					],
+				},
+				{
+					content: [
+						{text: '<strong>M: <a href="#">(303) 888-2585</a></strong>'},
+						{text: '<strong>O: <a href="#">(720) 710-2191</a></strong>'},
+					],
+				},
+			],
+		},
+		{
+			list: [
+				{
+					item_mod: 'chat_with_renofi__item--mod_1',
+					content: [
+						{link: 'www.renofi.com '},
+					],
+				},
+				{
+					content: [
+						{text: '<strong>NMLS ID: 2188127</strong>'},
+						{text: '<strong>RenoFi (NMLS ID: 1802847)</strong>'},
+					],
+				},
+			],
+		},
+	]
+
+section.section.chat_with_renofi
+	.section_in
+		h2.chat_with_renofi__title Chat with Renofi today
+		.chat_with_renofi__body.js-fade-item
+			.chat_with_renofi__row
+				.chat_with_renofi__content
+					each list in renofi_items_list
+						.chat_with_renofi__col
+							each item in list.list
+								.chat_with_renofi__item(class=item.item_mod)
+									each content in item.content
+										if content.link
+											a.chat_with_renofi__link(href='#' target='_blank')!=content.link
+										else
+											.chat_with_renofi__text!=content.text

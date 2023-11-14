@@ -1,9 +1,441 @@
+@import '../components/social.scss';
+
 .footer {
 	width: 100%;
 	min-height: var(--height-footer);
 	flex: 0 0 auto;
+	padding: var(--gl-vr-indent) var(--gl-hr-indent) 4rem;
 
 	font-size: 1rem;
 
 	will-change: transform;
+
+	@include bp($point_2, min) {
+		padding-bottom: 4.8rem;
+	}
+}
+
+.footer__in {
+	max-width: $page_width_3;
+
+	@include bp($point_3) {
+		display: grid;
+		row-gap: 4.8rem;
+	}
+}
+
+.footer__img_w {
+	position: relative;
+
+	display: block;
+
+	@include bp($point_4, min) {
+		padding-bottom: 25%;
+	}
+
+	@include bp($point_3) {
+		order: 1;
+	}
+
+	@include bp($point_4 - 1) {
+		padding-bottom: 94.8%;
+		margin: 0 calc(var(--gl-hr-indent) * -1);
+	}
+
+	.disaster_relief & {
+		@include bp($point_2, min) {
+			display: none;
+		}
+	}
+}
+
+.footer__img_in {
+	display: block;
+	width: 100%;
+
+	object-fit: cover;
+
+	.footer__img_w & {
+		height: 100%;
+	}
+
+	@include stretch;
+}
+
+.footer__row {
+	display: grid;
+
+	&.footer__row--social_mod {
+		@include bp($point_2, min) {
+			justify-content: end;
+		}
+
+		@include bp($point_3) {
+			order: 3;
+
+			justify-content: center;
+		}
+
+		.disaster_relief & {
+			@include bp($point_2, min) {
+				display: none;
+			}
+		}
+	}
+
+	&.footer__row--title_mod {
+		@include bp($point_3) {
+			order: 2;
+		}
+
+		&:not(:last-child) {
+			@include bp($point_2, min) {
+				margin-bottom: 1.8rem;
+			}
+		}
+	}
+
+	&.footer__row--nav_mod {
+		@include bp($point_1, min) {
+			grid-template-columns: repeat(2, 1fr);
+		}
+
+		@include bp($point_2, min) {
+			align-items: end;
+		}
+
+		@include bp($point_1 - 1, $point_2) {
+			grid-template-columns: 0.8fr 1.2fr;
+		}
+
+		@include bp($point_3) {
+			order: 4;
+
+			justify-items: center;
+
+			text-align: center;
+		}
+
+		&:not(:last-child) {
+			@include bp($point_2, min) {
+				margin-bottom: 8rem;
+			}
+
+			@include bp($point_3) {
+				margin-bottom: 0.6rem;
+			}
+		}
+	}
+
+	&.footer__row--bottom_mod {
+		color: $gray_2;
+		font-size: 1.8rem;
+		letter-spacing: 0.005em;
+
+		@include bp($point_1, min) {
+			grid-template-columns: 1fr minmax(19.5rem, 0.398fr) minmax(40rem, 0.602fr);
+		}
+
+		@include bp($point_2, min) {
+			align-items: end;
+			gap: 4rem;
+		}
+
+		@include bp($point_1 - 1, $point_2) {
+			grid-template-columns: 1fr auto;
+		}
+
+		@include bp($point_3) {
+			order: 5;
+
+			justify-items: center;
+			gap: 2rem;
+		}
+	}
+}
+
+.footer__col {
+	&.footer__col--social_mod {
+		display: flex;
+		align-items: center;
+	}
+
+	&.footer__col--contacts_mod {
+		@include bp($point_2, min) {
+			padding-right: 4rem;
+		}
+
+		&:not(:last-child) {
+			@include bp($point_3) {
+				margin-bottom: 4.8rem;
+			}
+		}
+	}
+
+	&.footer__col--nav_mod {
+		@include bp($point_2, min) {
+			@include flex_block(row, nowrap, flex-start);
+
+			margin: 0 -2rem -2rem 0;
+		}
+	}
+
+	&.footer__col--info_mod {
+		@include bp($point_1 - 1, $point_2) {
+			grid-column: span 2;
+		}
+
+		@include bp($point_3) {
+			order: 1;
+		}
+	}
+
+	&.footer__col--year_mod {
+		@include bp($point_3) {
+			order: 3;
+		}
+	}
+
+	&.footer__col--policy_mod {
+		@include bp($point_1, min) {
+			padding-right: 4.2rem;
+		}
+
+		@include bp($point_3) {
+			order: 2;
+		}
+	}
+}
+
+//===social-row============================================================================================
+
+.footer__anchor {
+	@include flex_block(row, nowrap, center, center, center);
+	width: 8rem;
+	height: 8rem;
+	flex-shrink: 0;
+
+	background-color: rgba($gray_5, 0.04);
+
+	cursor: pointer;
+
+	@include bp($point_3) {
+		display: none;
+	}
+
+	&:not(:first-child) {
+		margin-left: 4rem;
+	}
+}
+
+.footer__anchor_icon {
+	width: 1.8rem;
+	height: 1.8rem;
+
+	color: $black;
+
+	transition: color 0.3s ease;
+
+	.footer__anchor:hover &,
+	.footer__anchor:focus & {
+		color: $gray_2;
+	}
+}
+
+//===title-row============================================================================================
+
+.footer__title_block {
+	&:not(:last-child) {
+		@include bp($point_2, min) {
+			margin-bottom: 3.4rem;
+		}
+
+		@include bp($point_3) {
+			margin-bottom: 2.6rem;
+		}
+	}
+}
+
+.footer__title {
+	@include h1;
+
+	color: $black;
+
+	transition: color 0.3s ease;
+
+	@include bp($point_2, min) {
+		line-height: 1.36;
+	}
+
+	@include bp($point_3) {
+		line-height: 1.4;
+	}
+}
+
+.footer__form {
+	position: relative;
+
+	@include bp($point_2, min) {
+		max-width: 49.2rem;
+	}
+}
+
+.footer__form__btn {
+	position: absolute;
+	top: 1px;
+	right: 1px;
+	bottom: 1px;
+
+	@include flex_block(row, nowrap, center, center, center);
+
+	color: $gray_2;
+
+	cursor: pointer;
+	transition: color 0.3s ease, background-color 0.3s ease;
+
+	@include bp($point_2, min) {
+		width: 9.2rem;
+	}
+
+	@include bp($point_3) {
+		width: 7.8rem;
+	}
+
+	&:hover,
+	&:focus {
+		color: $gray_5;
+
+		background-color: $gray_3;
+	}
+}
+
+.footer__form__btn_icon {
+	width: 2.2rem;
+	height: 2.2rem;
+}
+
+//===nav-row============================================================================================
+
+.footer__list {
+	.footer__col--nav_mod & {
+		@include bp($point_2, min) {
+			padding: 0 2rem 2rem 0;
+		}
+	}
+
+	@include bp($point_2, min) {
+		margin: 0 -4rem -2rem 0;
+	}
+
+	&:not(:last-child) {
+		@include bp($point_2, min) {
+			margin-right: auto;
+		}
+
+		@include bp($point_3) {
+			margin-bottom: 2rem;
+		}
+	}
+}
+
+.footer__list_item {
+	@include bp($point_2, min) {
+		padding: 0 4rem 2rem 0;
+	}
+
+	&:not(:last-child) {
+		@include bp($point_3) {
+			margin-bottom: 2rem;
+		}
+	}
+}
+
+.footer__link {
+	position: relative;
+
+	display: inline-block;
+
+	line-height: 1.6;
+
+	transition: color 0.3s ease;
+
+	&:not(.footer__link--font_weight_mod) {
+		font-size: 2.2rem;
+		color: $dark_2;
+	}
+
+	&.footer__link--font_weight_mod {
+		font-size: 2rem;
+		font-weight: 700;
+		color: $black;
+	}
+
+	&:hover,
+	&:focus {
+		color: $gray_2;
+
+		text-decoration: none;
+	}
+}
+
+//===bottom-row============================================================================================
+
+.footer__iso_icon {
+	width: 4.8rem;
+	height: 3.9rem;
+
+	@include bp($point_3) {
+		margin: 0 auto;
+	}
+
+	&:not(:last-child) {
+		@include bp($point_2, min) {
+			margin-bottom: 1.8rem;
+		}
+
+		@include bp($point_3) {
+			margin-bottom: 2.2rem;
+		}
+	}
+}
+
+.footer__policy_list {
+	@include bp($point_2, min) {
+		margin: 0 -2rem -2rem 0;
+
+		@include flex_block(row, wrap, flex-start, center);
+	}
+
+	@include bp($point_3) {
+		text-align: center;
+	}
+}
+
+.footer__policy_item {
+	@include bp($point_2, min) {
+		padding: 0 2rem 2rem 0;
+	}
+
+	&:not(:last-child) {
+		@include bp($point_2, min) {
+			margin-right: auto;
+		}
+
+		@include bp($point_3) {
+			margin-bottom: 2rem;
+		}
+	}
+}
+
+.footer__policy_link {
+	position: relative;
+
+	display: inline-block;
+
+	color: inherit;
+
+	&:hover,
+	&:focus {
+		text-decoration: none;
+	}
 }

@@ -1,0 +1,80 @@
+@import 'ScssHelpers/helpers-all.scss';
+
+.gallery {
+	@include bp($point_3) {
+		padding-right: 0;
+	}
+}
+
+.gallery__item {
+	background-color: $white;
+	// padding: 2rem;
+}
+
+.gallery__img_w {
+	display: block;
+
+	width: 100%;
+
+	cursor: pointer;
+
+	@include bp($point_2, min) {
+		height: 43.2rem;
+	}
+	@include bp($point_3) {
+		height: 56vw;
+	}
+}
+
+.gallery__img {
+	display: block;
+	width: 100%;
+
+	.gallery__img_w & {
+		height: 100%;
+	}
+
+	object-fit: contain;
+}
+
+.gallery__slider {
+	position: relative;
+}
+
+.gallery__list {
+	@include bp($point_3) {
+		margin-bottom: 2.3rem;
+	}
+}
+
+.gallery__controls {
+	@include flex_block(row, wrap, space-between, center, center);
+	position: absolute;
+	z-index: 10;
+	top: 50%;
+	left: 0;
+
+	width: 100%;
+	padding: 0 2.4rem;
+	transform: translateY(-50%);
+
+	pointer-events: none;
+
+	@include bp($point_3) {
+		display: none;
+	}
+}
+
+.gallery__scrollbar {
+	height: 2px;
+	background-color: $gray_3;
+
+	.swiper-scrollbar-drag {
+		height: 100%;
+		background-color: $gray_2;
+	}
+
+	@include bp($point_2, min) {
+		display: none;
+	}
+}

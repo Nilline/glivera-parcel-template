@@ -1,0 +1,78 @@
+include ../templates/mixins/m-accordion
+
+-
+	accordion_data = {
+		class_js: 'js-accordion-head',
+		content: [
+			{
+				title: 'About Hapi Homes & Products',
+			},
+			{
+				title: 'Pricing',
+			},
+			{
+				title: 'Financing',
+			},
+			{
+				title: "Plans & Planning Phase",
+			},
+			{
+				title: "Specification",
+			},
+			{
+				title: "Delivery & Shipping",
+			},
+			{
+				title: "Leadtime, Installation and Construction",
+			},
+			{
+				title: "Fit-out",
+			},
+			{
+				title: "Utilities",
+			},
+			{
+				title: "Energy Efficiency",
+			},
+			{
+				title: "Accessibility",
+			},
+		]
+	}
+
+-
+	accordion_sub_data = {
+		class_js: 'js-accordion-sub-head',
+		content: [
+			{
+				title: 'How much does a Hapi Home cost?',
+				descr: 'Wistia is the perfect video hosting platform. Integrations with other systems are massively time-saving. We use it for everything: lead capture for marketing videos, webinars, internal documentation— the works.',
+			},
+			{
+				title: 'What is included in the price?',
+				descr: 'Wistia is the perfect video hosting platform. Integrations with other systems are massively time-saving. We use it for everything: lead capture for marketing videos, webinars, internal documentation— the works. Wistia is the perfect video hosting platform. Integrations with other systems are massively time-saving. We use it for everything: lead capture for marketing videos, webinars'
+			},
+			{
+				title: 'How much is shipping?',
+				descr: "The shipping cost is included in your final price. We take care of all the shipping arrangements for you, ensuring a hassle-free process. If you prefer an ex-works or FOB price, we can provide you with those options as well. We understand that our clients want a seamless experience, and that's why we typically handle the shipping to your destination."
+			},
+			{
+				title: "What are the other costs involved?",
+				descr: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Omnis sed, distinctio, accusantium reprehenderit maxime, molestias voluptatem debitis tempore aperiam fugit dolorem adipisci tempora eum! Natus, reiciendis! Ipsa voluptatum corporis eveniet!'
+			},
+		]
+	}
+
+section.section.faq
+	.section_in
+		+accordion(accordion_data, 'faq_accordion')
+			ul.faq_accordion_sub
+				each item, index in accordion_sub_data.content
+					- itemIndex = `item-${index + 1}`;
+					li.faq_accordion_sub__item
+						button.faq_accordion_sub__item_head(class=`${accordion_sub_data.class_js}` aria-controls=itemIndex aria-expanded='false' type='button')
+							h3.faq_accordion_sub__item_title!= item.title
+							span.faq_accordion_sub__item_icon_w
+								+icon('arrow_down', 'faq_accordion_sub__item_icon icon--size_mod')
+						div.faq_accordion_sub__item_body(id=itemIndex aria-hidden="true")
+							div.faq_accordion_sub__item_body_in!= item.descr

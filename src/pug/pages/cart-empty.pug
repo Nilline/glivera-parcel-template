@@ -1,0 +1,14 @@
+extends ../layout/layout
+
+block vars
+	include ../templates/mixins/m-button-back
+	- array = {body_class:'', layout_mod:'', sub_keywords:'', title_inner:'Cart empty', template_name: 'cart-empty'}
+
+block content_block
+	section.section.hero_cart
+		.hero_cart__btn_back_w
+			+button_back
+		.section_in.hero_cart__in
+			h1.hero_cart__title Cart
+
+	include ../blocks/cart-block-empty

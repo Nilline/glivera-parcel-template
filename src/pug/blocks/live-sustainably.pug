@@ -1,0 +1,74 @@
+-
+	list = [
+		{
+			content: [
+				"<p>Living sustainably doesn't mean sacrificing comfort and quality. With Hapi Homes, you can experience a small footprint without compromising functionality or style.</p>",
+				'<p>Our housing solutions are designed with the sustainability in mind, so you can enjoy harmonious living while reducing your carbon footprint.</p>',
+			],
+			icon_list: [
+				{
+					icon: 'home',
+					title: 'One Hapi Home'
+				},
+				{
+					icon: 'tree',
+					title: '250 trees planted'
+				},
+			],
+			btn: true,
+			logo: true,
+			img: 'live_sustainably/0.jpg',
+		},
+		{
+			mod: 'live_sustainably__list_item--reverse_mod live_sustainably__list_item--1v_mod',
+			img: 'live_sustainably/1.jpg',
+			content: [
+				"<h2>You can do a lot with a little space</h2>",
+				"<p>Every square inch of a Hapi Home is engineered to maximize the living potential of the location.</p>",
+				"<p>From beginning to end, we've designed our entire company around making your modern home purchase as easy, reliable, and enjoyable as it should be.</p>",
+			],
+			img_mob: 'live_sustainably/1-mob.png',
+		},
+	]
+
+
+section.section.live_sustainably
+	.section_in.live_sustainably
+		h2.live_sustainably__title Live sustainably with a Hapi Home
+		ul.live_sustainably__list
+			each item in list
+				li.live_sustainably__list_item(class=item.mod)
+					.live_sustainably__col
+						.live_sustainably__info.js-fade-item
+							each sub in item.content
+								!=sub
+						if item.icon_list
+							.live_sustainably__icon_list_w.js-fade-item
+								ul.live_sustainably__icon_list
+									each el in item.icon_list
+										li.live_sustainably__icon_item
+											.live_sustainably__icon_w
+												//- +icon(el.icon, 'icon--size_mod')
+												img.live_sustainably__icon(src=`/src/images/${el.icon}.svg`, alt="some images" loading="lazy")
+											.live_sustainably__icon_title= el.title
+						if item.btn
+							.live_sustainably__btn_w.js-fade-item
+								a.btn_primary_v1.btn_primary--icon_mod(href="#")
+									span Learn more
+									span.btn_primary__arrow_r
+										+icon('arrow_r', 'icon--size_mod')
+
+					.live_sustainably__col.js-fade-item
+						.live_sustainably__col_img_in
+							+picture({
+								img: item.img,
+								class: 'live_sustainably__img_w',
+								img_class: 'live_sustainably__img',
+								alt: 'some image',
+								media: 768,
+								img_mob: item.img_mob || item.img,
+								lazy: true,
+							})
+							if item.logo
+								.live_sustainably__img_logo_w
+									img.live_sustainably__img_logo(src="/src/images/live_sustainably/live_sustainably__logo.svg" alt="some logo pic" loading="lazy")

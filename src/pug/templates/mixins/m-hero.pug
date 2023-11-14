@@ -1,0 +1,35 @@
+include ./m-button-back
+
+mixin hero(data)
+	section.section.hero(class=data.mod)
+		if data.btn_back
+			+button_back()
+		if data.img
+			+picture({
+				media: 480,
+				img: data.img,
+				class: 'hero__img_w',
+				img_class: 'hero__img',
+				alt: 'some image',
+				img_mob: data.img_mob,
+			})
+
+		if data.social || data.content
+			.section_in.hero__in
+				if data.social
+					.hero__social_w
+						ul.hero__cosial_list
+							each item in data.social
+								li.hero__social_item
+									a.hero__social_icon_w(href="#" aria-label=`social link ${item}`)
+										+icon(item, 'icon--size_mod')
+				if data.content
+					.hero__content
+						.hero__info
+							each item in data.content
+								!=item
+						if data.btn
+							a.btn_primary.btn_primary--icon_mod(href="#" class=data.btn_mod)
+								span=data.btn
+								span.btn_primary__arrow_r
+									+icon('arrow_r', 'icon--size_mod')

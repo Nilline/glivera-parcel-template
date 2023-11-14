@@ -1,0 +1,32 @@
+extends ../layout/layout
+
+block vars
+	//- include ../templates/project-vars
+
+	include ../templates/mixins/m-chat-with-us
+	include ../templates/mixins/m-hero
+
+	- array = {body_class:'', layout_mod:'', sub_keywords:'', title_inner:'How it works', template_name: 'how-it-works'}
+block content_block
+
+	+hero({
+		mod: 'hero--6_mod',
+		content: [
+			'<h1>From configuration to delivery in as little as 8 weeks</h1>',
+		],
+		btn: 'Jump to FAQs',
+		btn_mod: 'btn_v3'
+	})
+
+	include ../blocks/how-it-works-main-section
+
+	+chat_with_us({
+		content: [
+			'<h2>Chat with us</h2>',
+			'<p>Getting started with a Hapi Home couldn’t be any easier. Our range in price and aesthetic, we don’t compromise on quality or design, and our clients love the fact that our homes are ready to ship in less than six weeks.</p>',
+			'<p>With concierge-level service from the blueprint to delivery, you have a dedicated Hapi Home expert with you for every part of the process.</p>',
+		],
+		btn_title: 'Book a call',
+		btn_mod: 'btn_primary',
+		icon: 'calendar',
+	})

@@ -1,0 +1,17 @@
+mixin hero_v2(data)
+	section.section.hero_v2(class=data.mod)
+		.section_in.hero_v2__in
+			+picture({
+				media: 768,
+				img: data.img,
+				img_mob: data.img_mob,
+				class: 'hero_v2__img_w js-fade-item',
+				img_class: 'hero_v2__img',
+				alt: 'some image',
+			})
+			.hero_v2__body
+				.hero_v2__content
+					h1!=data.title
+					if data.subtitle
+						p!=data.subtitle
+

@@ -1,0 +1,23 @@
+extends ../layout/layout
+
+block vars
+	//- include ../templates/project-vars
+	include ../templates/mixins/m-hero
+	include ../templates/mixins/m-image
+	- array = {body_class:'', layout_mod:'', sub_keywords:'', title_inner:'Get Financed', template_name: 'get-financed'}
+
+block content_block
+	+hero({
+		mod: 'hero--5_mod',
+		content: [
+			'<h1>Financing your Hapi Home</h1>',
+			'<h3>Enjoy a worry-free purchase process with Renofi financing</h3>',
+			"<p>At Hapi Homes, we believe that financing your dream modular home should be a seamless and stress-free experience. That's why we offer a range of financing options to suit your individual needs. Whether you're looking to leverage your existing equity or explore other financing avenues, we have solutions to help you make your Hapi Home a reality.</p>",
+		],
+	})
+	+image({
+		img: `content_section/financing_image.jpg`,
+		img_mob: `content_section/financing_image_mob.jpg`,
+	})
+	include ../blocks/content-section
+	include ../blocks/chat-with-renofi

@@ -1,0 +1,27 @@
+include ../templates/mixins/m-home
+
+-
+	case_list = [
+		{
+			img: 'case_section/1.jpg',
+			title: 'USVI Department of Corrections',
+			adress: 'Case Study Coming Soon',
+		},
+		{
+			img: 'case_section/2.jpg',
+			title: 'Ukraine',
+			link: 'Learn more',
+		},
+	]
+
+section.section.case_section
+	.section_in
+		h2.case_section__title Case Studies
+		ul.case_section__list
+			each item in case_list
+				li.case_section__item.js-fade-item
+					+home(item)
+
+
+
+

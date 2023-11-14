@@ -1,5 +1,50 @@
 @use 'sass:math';
 
+@mixin rec_gradient_bot() {
+	&:after {
+		position: absolute;
+		z-index: 0;
+		bottom: 0;
+		left: 0;
+
+		width: 4.8rem;
+		height: 4.8rem;
+
+		background: rgb(181, 180, 195);
+		background: linear-gradient(
+			45deg,
+			rgba(181, 180, 195, 1) 33%,
+			rgba(255, 255, 255, 0.6) 33%,
+			rgba(255, 255, 255, 1) 33%,
+			rgba(255, 255, 255, 1) 50%,
+			rgba(255, 255, 255, 0) 50%
+		);
+		content: '';
+	}
+}
+@mixin rec_gradient_top() {
+	&:after {
+		position: absolute;
+		z-index: 0;
+		top: 0;
+		right: 0;
+
+		width: 4.8rem;
+		height: 4.8rem;
+
+		background: rgb(255, 255, 255);
+		background: linear-gradient(
+			45deg,
+			rgba(255, 255, 255, 0) 50%,
+			rgba(255, 255, 255, 1) 50%,
+			rgba(255, 255, 255, 1) 67%,
+			rgba(255, 255, 255, 0) 67%,
+			rgba(181, 180, 195, 1) 67%
+		);
+		content: '';
+	}
+}
+
 @mixin overflow-text($line) {
 	display: -webkit-box;
 	overflow: hidden;
@@ -124,14 +169,27 @@
 
 @mixin dashed-border($dashlength, $spacelength, $borderwidth, $color) {
 	$per: percentage($dashlength / ($dashlength + $spacelength));
-	background-image: linear-gradient(to right, $color 0%, $color $per, rgba(0, 0, 0, 0) $per), linear-gradient(to bottom, $color 0%, $color $per, rgba(0, 0, 0, 0) $per),
-		linear-gradient(to right, $color 0%, $color $per, rgba(0, 0, 0, 0) $per), linear-gradient(to bottom, $color 0%, $color $per, rgba(0, 0, 0, 0) $per);
+	background-image: linear-gradient(to right, $color 0%, $color $per, rgba(0, 0, 0, 0) $per),
+		linear-gradient(to bottom, $color 0%, $color $per, rgba(0, 0, 0, 0) $per),
+		linear-gradient(to right, $color 0%, $color $per, rgba(0, 0, 0, 0) $per),
+		linear-gradient(to bottom, $color 0%, $color $per, rgba(0, 0, 0, 0) $per);
 	background-position: (-$spacelength) 0, 0 (-$spacelength), (-$spacelength) 100%, 100% (-$spacelength);
-	background-size: ($dashlength + $spacelength) $borderwidth, $borderwidth ($dashlength + $spacelength), ($dashlength + $spacelength) $borderwidth, $borderwidth ($dashlength + $spacelength);
+	background-size: ($dashlength + $spacelength) $borderwidth, $borderwidth ($dashlength + $spacelength),
+		($dashlength + $spacelength) $borderwidth, $borderwidth ($dashlength + $spacelength);
 	background-repeat: repeat-x, repeat-y, repeat-x, repeat-y;
 }
 
-@mixin style_separator($var: false, $var2: false, $var3: false, $var4: false, $var5: false, $var6: false, $var7: false, $var8: false, $var9: false) {
+@mixin style_separator(
+	$var: false,
+	$var2: false,
+	$var3: false,
+	$var4: false,
+	$var5: false,
+	$var6: false,
+	$var7: false,
+	$var8: false,
+	$var9: false
+) {
 	@if $var ==
 		$local_var or
 		$var2 ==
@@ -155,7 +213,17 @@
 	}
 }
 
-@mixin sub_style_separator($var: false, $var2: false, $var3: false, $var4: false, $var5: false, $var6: false, $var7: false, $var8: false, $var9: false) {
+@mixin sub_style_separator(
+	$var: false,
+	$var2: false,
+	$var3: false,
+	$var4: false,
+	$var5: false,
+	$var6: false,
+	$var7: false,
+	$var8: false,
+	$var9: false
+) {
 	@if $var ==
 		$local_var or
 		$var2 ==
@@ -197,7 +265,13 @@
 	appearance: $value;
 }
 
-@mixin flex_block($flex-direction: row, $flex-wrap: wrap, $content: space-between, $align-items: flex-start, $align-content: flex-start) {
+@mixin flex_block(
+	$flex-direction: row,
+	$flex-wrap: wrap,
+	$content: space-between,
+	$align-items: flex-start,
+	$align-content: flex-start
+) {
 	display: flex;
 	flex-direction: $flex-direction;
 	flex-wrap: $flex-wrap;

@@ -1,0 +1,52 @@
+@import 'ScssHelpers/helpers-all.scss';
+
+.case_section {
+	@include bp($point_2, min) {
+		padding-top: 6rem;
+		padding-bottom: 0;
+	}
+
+	@include bp($point_3) {
+		padding-top: 2.2rem;
+		padding-bottom: 4.4rem;
+	}
+}
+
+.case_section__title {
+	color: $black;
+
+	@include h1;
+
+	&:not(:last-child) {
+		@include bp($point_2, min) {
+			margin-bottom: 10.6rem;
+		}
+
+		@include bp($point_3) {
+			margin-bottom: 4rem;
+		}
+	}
+}
+
+.case_section__list {
+	margin: 0 -1.6rem -0.6rem 0;
+
+	@include flex_block(row, wrap, flex-start);
+}
+
+.case_section__item {
+	flex-shrink: 0;
+	padding: 0 1.6rem 0.6rem 0;
+
+	@include bp($point_2, min) {
+		width: 33.333%;
+	}
+
+	@include bp($point_3, $point_4) {
+		width: 50%;
+	}
+
+	@include bp($point_4 - 1) {
+		width: 100%;
+	}
+}

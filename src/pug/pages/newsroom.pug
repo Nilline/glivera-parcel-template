@@ -1,0 +1,15 @@
+extends ../layout/layout
+
+block vars
+	//- include ../templates/project-vars
+	include ../templates/mixins/m-hero-v2
+	- array = {body_class:'', layout_mod:'', sub_keywords:'', title_inner:'Newsroom', template_name: 'newsroom'}
+
+block content_block
+	+hero_v2({
+		img: 'hero_v2/hero_v2_newsroom.jpg',
+		img_mob: 'hero_v2/hero_v2_newsroom_mob.jpg',
+		title: 'Newsroom',
+		subtitle: "We’re building hundreds of homes every month, so as you can imagine we’re moving quickly. Check back for regular updates or reach out to Greg McGunagle with any questions or requests: <a href='#'>gmcgunagle@transmitterpr.com</a>",
+	})
+	include ../blocks/news-list
