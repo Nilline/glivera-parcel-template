@@ -21,7 +21,8 @@
 	},
 	"dependencies": {
 		"gsap": "^3.10.4",
-		"ismobilejs": "^1.1.1"
+		"ismobilejs": "^1.1.1",
+		"three": "^0.160.0"
 	},
 	"devDependencies": {
 		"@parcel/config-default": "^2.9.3",
