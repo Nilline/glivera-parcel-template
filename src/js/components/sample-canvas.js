@@ -1,4 +1,5 @@
 /* eslint-disable no-unreachable */
+import gsap from 'gsap';
 import * as T from 'three';
 
 /**
@@ -18,6 +19,12 @@ export default class SampleCanvas {
 
 		this.setupEvironment();
 		this.setupScene();
+
+		try {
+			await this.loadObjects();
+		} catch (e) {
+			console.log(e);
+		}
 
 		this.addObjects();
 		// this.addLights();
@@ -47,7 +54,43 @@ export default class SampleCanvas {
 
 		/** User View: */
 		this.camera = new T.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.001, 1000);
-		this.camera.position.set(0, 0, 8);
+		this.camera.position.set(0, 0, 5);
+	}
+
+	loadObjects() {
+		const loader = new T.TextureLoader();
+
+		const img1 = new Promise((resolve, reject) => {
+			loader.load(
+				'https://buffer.com/cdn-cgi/image/w=1000,fit=contain,q=90,f=auto/library/content/images/size/w1200/2023/10/free-images.jpg',
+				(data) => {
+					this.tx1 = data;
+					resolve();
+				},
+				() => {},
+				(err) => {
+					console.log(err);
+					reject();
+				},
+			);
+		});
+
+		const img2 = new Promise((resolve, reject) => {
+			loader.load(
+				'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg',
+				(data) => {
+					this.tx2 = data;
+					resolve();
+				},
+				() => {},
+				(err) => {
+					console.log(err);
+					reject();
+				},
+			);
+		});
+
+		return Promise.all([img1, img2]);
 	}
 
 	/** Setup Events */
@@ -72,66 +115,66 @@ export default class SampleCanvas {
 				derivatives: '#extension GL_OES_standard_derivatives : enable',
 			},
 			side: T.DoubleSide,
+			depthTest: true,
 			uniforms: {
 				time: { type: 'f', value: 0 },
 				resolution: { type: 'v4', value: new T.Vector4() },
 				transparent: true,
-				uvRate1: {
-					value: new T.Vector2(1, 1),
-				},
+				uTexture: { value: this.tx1 },
+				uSize: { value: 1.5, type: 'f' },
 			},
-			wireframe: true,
+			// wireframe: true,
 			// transparent: true, // если в текстурке используется альфа-канал
 			vertexShader: `
 
 				uniform float time;
+				uniform float uSize;
 				varying vec2 vUv;
-				varying float curvePower;
-				uniform vec2 pixels;
+				varying vec4 vPosition;
 				float PI = 3.141592653589793238;
+
 				void main() {
 
 					vUv = uv;
 
-					vec4 vPosition = modelViewMatrix * vec4( position, 1.0 );
-					vec4 oldPos = vPosition;
-					float curvePower = 1. - vUv.y + 1. - vUv.x;
+					vPosition = modelViewMatrix * vec4( position, 1.0 );
 
-					float curveRadius = 3.;
+					vPosition.xy += uSize / 2.;
 
-					float zCoef = vUv.x * vUv.x * vUv.y * vUv.y;
+					float xCoef = vPosition.x * vPosition.x;
+					float yCoef = vPosition.y * vPosition.y;
+					float diagCoef = xCoef * yCoef;
 
-					// vPosition.x *= -1. * time / 2.;
-						vPosition.x *= -1. * (zCoef * 0.5) * time * 4.;
+					float progress = clamp(time + time * diagCoef / 5., 0., 1.);
 
-					if (vPosition.x < -1.) {
-						vPosition.x = oldPos.x * -1.;
-					}
+					vPosition.z = sin(PI / 2. * progress * 2.) * (xCoef / 4.);
+					vPosition.x *= 1. - (sin(PI / 2. * progress)) * 2.;
 
-					// vPosition.z *= zCoef * 5. + 1.;
-					oldPos = mix(oldPos, vPosition,  time);
-					gl_Position = projectionMatrix * oldPos;
+					vPosition.y -= uSize / 2.;
+					vPosition.z -= 3.;
+
+
+					gl_Position = projectionMatrix * vPosition;
 				}
 			`,
 			fragmentShader: `
-				uniform float time;
-				uniform float progress;
-				uniform sampler2D texture1;
-				uniform vec4 resolution;
+				uniform sampler2D uTexture;
 				varying vec2 vUv;
-				varying vec3 vPosition;
-				float PI = 3.141592653589793238;
+
 				void main()	{
-					// vec2 newUV = (vUv - vec2(0.5))*resolution.zw + vec2(0.5);
-					gl_FragColor = vec4(vUv,0.0,1.);
+					vec4 textureColor = texture2D(uTexture, vUv);
+					gl_FragColor = textureColor;
 				}
 			`,
 		});
+
+		this.secondMaterial = this.material.clone();
+		this.material.uniforms.uTexture.value = this.tx2;
 	}
 
 	/** Setup Mesh geometry */
 	setGeometries() {
-		this.geometry = new T.PlaneGeometry(3, 3, 50, 50);
+		this.geometry = new T.PlaneGeometry(1.5, 1.5, 50, 50);
 	}
 
 	/** Create and add meshes to the scene */
@@ -140,22 +183,28 @@ export default class SampleCanvas {
 		this.setMaterials();
 
 		this.plane = new T.Mesh(this.geometry, this.material);
+		this.plane2 = new T.Mesh(this.geometry.clone(), this.secondMaterial);
 		this.scene.add(this.plane);
+		this.scene.add(this.plane2);
 
-		this.plane.position.z = 3;
-		this.plane.position.x = 1.5;
-		this.plane.position.y = 1.5;
+		gsap.fromTo(
+			this.material.uniforms.time,
+			{
+				value: 0,
+			},
+			{
+				value: 1,
+				duration: 2,
+				repeat: -1,
+				ease: 'Power1.inOut',
+			},
+		);
+
 		// this.plane.rotation.y = Math.PI / 1.9;
-
-		console.log(); //!
 	}
 
 	/** Сanvas drawing */
 	render() {
-		this.time += 0.005;
-		if (this.time >= 1) this.time = 0;
-		this.material.uniforms.time.value = this.time;
-
 		window.requestAnimationFrame(this.render.bind(this));
 		this.renderer.render(this.scene, this.camera);
 	}
