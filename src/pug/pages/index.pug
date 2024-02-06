@@ -5,6 +5,23 @@ block vars
 	- array = {body_class:'', layout_mod:'', sub_keywords:'', title_inner:'Index'}
 
 block content_block
-	section.section
+	.canvas
 		#container
+
+	section.section.test
+		.section_in
+			h1 Lorem ipsum dolor sit amet.
+
+	section.section.test.js-canvas-video-trigger
+		.section_in
+			h1 Lorem ipsum dolor sit amet.
+			video.video_block.js-canvas-video(src="/src/images/test_video.mp4" muted playsinline autoplay loop)
+
+	section.section.test
+		.section_in
+			h1 Lorem ipsum dolor sit amet.
+
+	section.section.test
+		.section_in
+			h1 Lorem ipsum dolor sit amet.
 			//- canvas will be render here

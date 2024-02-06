@@ -20,7 +20,7 @@
 		"lint": "npx lint-staged --quiet"
 	},
 	"dependencies": {
-		"gsap": "^3.10.4",
+		"gsap": "^3.12.5",
 		"ismobilejs": "^1.1.1",
 		"three": "^0.160.0"
 	},

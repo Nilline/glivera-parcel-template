@@ -14,6 +14,15 @@
 
 // Put in base.scss
 
+.canvas {
+	position: fixed;
+	left: 0;
+	top: 0;
+
+	width: 100%;
+	height: 100%;
+}
+
 canvas {
 	display: block;
 }
@@ -21,6 +30,13 @@ canvas {
 #container {
 	width: 100vw;
 	height: 100vh;
+}
+
+.video_block {
+	width: 100%;
+	aspect-ratio: 16 / 9;
+	background-color: red;
+	opacity: 0;
 }
 
 html {

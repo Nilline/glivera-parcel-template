@@ -1,4 +1,4 @@
-import SampleCanvas from './components/sample-canvas';
+import SampleCanvas from './components/Canvas';
 import layout from './layout/layout';
 import { indexPage } from './pages';
 import { articlePage } from './pages/article';
@@ -15,7 +15,6 @@ const app = () => {
 
 		/** SampleCanvas contructor initialization */
 
-		console.log('123'); //!
 		const sketch = new SampleCanvas({
 			dom: document.querySelector('#container'),
 		});
