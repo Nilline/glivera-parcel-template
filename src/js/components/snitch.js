@@ -46529,3 +46529,68 @@ window.addEventListener('wheel', (a) => a.preventDefault(), {
 document.addEventListener('gesturestart', (a) => preventZoom(a));
 document.addEventListener('gesturechange', (a) => preventZoom(a));
 document.addEventListener('gestureend', (a) => preventZoom(a));
+
+
+
+
+
+
+				// uniform float uProgress;
+				// uniform float uAnimDist;
+				// uniform float uGlobalScrollPos;
+			  // uniform vec2 uSize;
+				// varying vec2 vUv;
+				// uniform float time;
+				// varying vec4 vPosition;
+				// float PI = 3.141592653589793238;
+
+
+
+
+
+					// vUv = uv;
+
+
+					// // global position
+					// vPosition = modelViewMatrix * vec4( position, 1.0 );
+
+					// vPosition.y += uGlobalScrollPos;
+
+					// vPosition.y -= uAnimDist * uProgress;
+
+
+					// // start anim position
+					// vec4 animStartPos = vPosition;
+
+					// vec2 vScale = vec2(0.5, 0.5);
+
+					// animStartPos.y -= uSize.y * 0.5 * vUv.y - uSize.y / 2.;
+
+					// animStartPos.x -= uSize.x * 0.5 * vUv.x;
+
+					// // animation
+
+					// animStartPos.x *= sin(vUv.y  * uProgress);
+					// animStartPos.y *= sin(vUv.x * uProgress);
+
+
+					// gl_Position = projectionMatrix * mix(animStartPos, vPosition, uProgress);
+
+
+
+
+// uniform sampler2D uTexture;
+// uniform float uBorderRadius;
+// uniform vec2 uSize;
+// varying vec2 vUv;
+// uniform float uProgress;
+
+
+				void main()	{
+					// vec2 newUV = vUv;
+					// vec4 textureColor = texture2D(uTexture, newUV);
+
+					// if (borderRadiusDist(newUV, uBorderRadius, uSize.y / uSize.x + 1.) > uBorderRadius) {
+					// 	discard;
+					// }
+					// gl_FragColor = textureColor;

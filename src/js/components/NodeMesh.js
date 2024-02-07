@@ -13,6 +13,11 @@ export class NodeMesh {
 
 		this.pinStart = 0;
 		this.pinEnd = 0;
+		this.position = new T.Vector2();
+		this.size = {
+			xScale: 1,
+			yScale: 1,
+		};
 	}
 
 	getScale(val) {
@@ -28,9 +33,10 @@ export class NodeMesh {
 
 	getPosition() {
 		const { x, y } = this.props.relativeNode.getBoundingClientRect();
+		console.log(this.props.relativeNode.getBoundingClientRect()); //!
 
 		this.position = {
-			x: this.getScale(x) - this.size.xScale / 2,
+			x: -0.5 + this.getScale(x) + this.size.xScale / 2,
 			y:
 				this.getScale(this.props.scene.env.height / 2 - y) -
 				this.size.yScale / 2 -

@@ -44,6 +44,7 @@ export default class SampleCanvas {
 			time: 0,
 			scrollTop: 0,
 			initialScrollTop: document.documentElement.scrollTop / this.container.offsetWidth,
+			size: { x: this.container.offsetHeight / this.container.offsetWidth, y: 1 },
 		};
 	}
 
@@ -65,15 +66,20 @@ export default class SampleCanvas {
 		/** User View: */
 		const { atan, tan } = Math;
 
-		const perspective = window.innerWidth; // start with perspective
-		const fovDeg = () => (180 * (2 * atan(window.innerHeight / 2 / perspective))) / Math.PI;
+		const perspective = this.container.offsetWidth; // start with perspective
+		const fovDeg = () => (180 * (2 * atan(this.container.offsetHeight / 2 / perspective))) / Math.PI;
 
 		// const V_FOV_RAD = () => Math.PI * (fovDeg() / 180);
 		// const TAN_HALF_V_FOV = () => tan(V_FOV_RAD() / 2);
 
-		// const getDistanceFromCamera = (fitment = 'contain') => window.innerHeight / (2 * TAN_HALF_V_FOV());
+		// const getDistanceFromCamera = (fitment = 'contain') => this.container.offsetHeight / (2 * TAN_HALF_V_FOV());
 
-		this.camera = new T.PerspectiveCamera(fovDeg(), window.innerWidth / window.innerHeight, 0.001, 1000);
+		this.camera = new T.PerspectiveCamera(
+			fovDeg(),
+			this.container.offsetWidth / this.container.offsetHeight,
+			0.001,
+			1000,
+		);
 		this.camera.position.set(0, 0, 1);
 	}
 
@@ -89,6 +95,7 @@ export default class SampleCanvas {
 	resize() {
 		this.scene.env.width = this.container.offsetWidth;
 		this.scene.env.height = this.container.offsetHeight;
+		this.scene.env.size = { x: this.container.offsetHeight / this.container.offsetWidth, y: 1 };
 		this.renderer.setSize(this.scene.env.width, this.scene.env.height);
 		this.camera.aspect = this.scene.env.width / this.scene.env.height;
 		this.camera.updateProjectionMatrix();
