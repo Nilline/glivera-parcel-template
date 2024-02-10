@@ -1,4 +1,4 @@
-import SampleCanvas from './components/Canvas';
+import AnimCanvas from './components/AnimCanvas';
 import layout from './layout/layout';
 import { indexPage } from './pages';
 import { articlePage } from './pages/article';
@@ -15,8 +15,8 @@ const app = () => {
 
 		/** SampleCanvas contructor initialization */
 
-		const sketch = new SampleCanvas({
-			dom: document.querySelector('#container'),
+		const sketch = new AnimCanvas({
+			dom: document.querySelector('#canvas_container'),
 		});
 	});
 };

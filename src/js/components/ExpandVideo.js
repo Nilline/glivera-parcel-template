@@ -13,11 +13,14 @@ export class ExpandVideo extends NodeMesh {
 		this.props = {
 			relativeNode: null,
 			injectTarget: null,
-			triggerTarget: null,
+			posHelperNode: null,
+			pinTriggerNode: null,
+			videoPlayTriggerNode: null,
 			...props,
 		};
 
 		this.handleAnimationTick = this.handleAnimationTick.bind(this);
+		this.updatePosMatrix = this.updatePosMatrix.bind(this);
 
 		this.animationPinDist = this.props.scene.env.height;
 	}
@@ -39,6 +42,7 @@ export class ExpandVideo extends NodeMesh {
 			transparent: true,
 			uniforms: {
 				time: { type: 'f', value: 0 },
+				uPageOffsetY: { type: 'f', value: this.position.y },
 				uGlobalScrollPos: { type: 'f', value: 0 },
 				uAnimDist: { type: 'f', value: this.getScale(this.animationPinDist) },
 				uProgress: { type: 'f', value: 0 },
@@ -81,10 +85,12 @@ export class ExpandVideo extends NodeMesh {
 				uniform float uProgress;
 				uniform float uAnimDist;
 				uniform float uGlobalScrollPos;
-				varying vec2 v_uv;
+				varying vec2 vUv;
 				varying vec2 v_domWH;
 				varying float v_showRatio;
 				uniform float uBorderRadius;
+				uniform float uPageOffsetY;
+				uniform float time;
 
 				vec3 qrotate(vec4 q,vec3 v){
 					return v+2.*cross(q.xyz,cross(q.xyz,v)+q.w*v);
@@ -123,10 +129,11 @@ export class ExpandVideo extends NodeMesh {
 					vec4 pos1 = modelViewMatrix*vec4(screenPos,1.0);
 					pos1.y += uGlobalScrollPos;
 					pos1.y -= uAnimDist * uProgress;
+					pos1.y -= uPageOffsetY;
 					vec4 pos = projectionMatrix * pos1;
 
 					gl_Position = pos;
-					v_uv=vec2(uv.x,1.-uv.y);
+					vUv=vec2(uv.x,1.-uv.y);
 					v_domWH=domWH;
 				}
 			`,
@@ -138,7 +145,8 @@ export class ExpandVideo extends NodeMesh {
 				uniform float uProgress;
 				uniform float uBorderRadius;
 				uniform float uEndAnimAspectScale;
-				varying vec2 v_uv;
+				uniform float time;
+				varying vec2 vUv;
 				varying vec2 v_domWH;
 				varying float v_showRatio;
 
@@ -162,29 +170,79 @@ export class ExpandVideo extends NodeMesh {
 					return smoothstep(0.,0.-fwidth(d),d);
 				}
 
-
-				void main()	{
-					float imageAlpha=getRoundedCornerMask(v_uv,v_domWH,uBorderRadius,1.0);
-					vec2 baseUv=v_uv;
+				vec3 getMap (vec2 uv) {
+					vec2 baseUv = uv;
 					float toRadialCenterDist=length((baseUv-u_radialCenter)*vec2(v_domWH.x/v_domWH.y,1.));
 					baseUv.y=(baseUv.y-.5)*mix(1.,uEndAnimAspectScale,v_showRatio)+0.5;
 					vec3 color=texture2D(uTexture,baseUv).rgb;
-					vec3 tintedColor=max(uStartColor,vec3(dot(color,vec3(0.299,0.587,0.114))));
-					gl_FragColor=vec4(mix(tintedColor,color,v_showRatio),imageAlpha);
+					return color;
+				}
 
-					// gl_FragColor = vec4(0.,0.,0.,1.);
+
+				vec3 rgb2hsv (vec3 c) {
+					vec4 K = vec4(0.0, -1.0 / 3.0, 2.0 / 3.0, -1.0);
+					vec4 p = mix(vec4(c.bg, K.wz), vec4(c.gb, K.xy), step(c.b, c.g));
+					vec4 q = mix(vec4(p.xyw, c.r), vec4(c.r, p.yzx), step(p.x, c.r));
+					float d = q.x - min(q.w, q.y);
+					float e = 1.0e-10;
+					return vec3(abs(q.z + (q.w - q.y) / (6.0 * d + e)), d / (q.x + e), q.x);
+				}
+
+				vec3 hsv2rgb(vec3 c) {
+					vec4 K = vec4(1.0, 2.0/3.0, 1.0 / 3.0, 3.0);
+					vec3 p = abs(fract (c.xxx + K.xyz) * 6.0 - K.www);
+					return c.z * mix(K.xxx, clamp(p -	K.xxx, 0.0, 1.0), c.y);
+				}
+
+				void main()	{
+					float imageAlpha = getRoundedCornerMask(vUv,v_domWH,uBorderRadius,1.0);
+
+					float progress = 0.5;
+
+					float pixeletedStrength = 140.;
+					vec2 pixelatedUV = floor(vUv * pixeletedStrength + 1.) / pixeletedStrength;
+					vec4 clearColor = vec4(getMap(vUv), imageAlpha);
+
+					vec2 position = vUv;
+					// float trans = smoothstep(0., 1., position.y + (1. - 2. * progress) + sin(position.x * 4. + progress * 69. + time) * mix(0.3,.1,abs(0.5 - position.x)) * 0.5 * smoothstep(0., 0.2, progress));
+					float trans = vUv.x;
+
+					// float mixForUV = (1. - trans) * 50. * progress;
+					float dist = distance(vec2(0.5), vUv) * 2.;
+					float mixForUV = abs(sin(time)) * dist * uProgress * uProgress;
+
+					vec3 rainbow = vec3(1., .15, .15);
+					vec3 hsv = rgb2hsv(rainbow);
+					hsv.x += 0.1 * (vUv.y + trans - progress);
+					rainbow = hsv2rgb(hsv);
+
+
+					// vec3 pxColorV3 = mix(getMap(pixelatedUV), vec3(0.,1.,0.5), 0.5 * smoothstep(0.5, 0., abs(0.5 - clearColor.g)));
+					// vec4 pixelatedColor = vec4(pxColorV3, imageAlpha);
+					vec4 pixelatedColor = vec4(0.,1.,0.5, imageAlpha);
+
+					vec4 mixedColor = mix(clearColor, pixelatedColor, mixForUV);
+
+					gl_FragColor = mixedColor;
 				}
 			`,
 		});
 	}
 
+	// pixelatedColor.a = min(trans * clearColor.b, imageAlpha);
+
+	// gl_FragColor=vec4(tintedColor,imageAlpha);
+
+	// vec3 tintedEffect=max(uStartColor,vec3(dot(clearColor,vec3(0.299,0.587,0.114))));
+	// vec3 tintedColor=mix(tintedColor,clearColor,v_showRatio);
+	// gl_FragColor=vec4(tintedColor,imageAlpha);
+
 	updateUniforms() {
-		// this.mesh.material.uniforms.uSize.value = new T.Vector2(this.size.xScale, this.size.yScale);
-		// this.mesh.material.uniforms.uPosition.value.x = -this.mesh.material.uniforms.uStartVideoSize.value.x / 2;
-		// this.mesh.material.uniforms.uPosition.value.y = -this.mesh.material.uniforms.uStartVideoSize.value.y / 2;
-		// this.mesh.material.uniforms.uPosition.value.y = 0;
 		this.mesh.material.uniforms.uStartVideoSize.value = new T.Vector2(0.5, 0.5);
 		this.mesh.material.uniforms.uEndVideoSize.value = new T.Vector2(1, 1);
+		this.mesh.material.uniforms.uAnimDist.value = this.getScale(this.animationPinDist);
+		this.mesh.material.uniforms.uPageOffsetY.value = -this.position.y;
+		this.mesh.material.uniforms.uProgress.value = this.timeline?.scrollTrigger.progress || 0;
 	}
 
 	setVideo(videoTexture) {}
@@ -209,18 +267,38 @@ export class ExpandVideo extends NodeMesh {
 		this.timeline = gsap
 			.timeline({
 				paused: true,
-				ease: 'sine.inOut',
-				onUpdate: (t) => {
+				duration: 1,
+				onUpdate: () => {
 					this.handleAnimationTick(this.timeline.scrollTrigger);
 				},
 			})
-			.to({}, {});
+			.addLabel('start')
+			.to(
+				{},
+				{
+					ease: 'sine.inOut',
+					duration: 1,
+				},
+				'start',
+			)
+			.fromTo(
+				this.props.videoPlayTriggerNode,
+				{
+					opacity: 0,
+				},
+				{
+					opacity: 1,
+					duration: 0.3,
+					pointerEvents: 'initial',
+					ease: 'sine.inOut',
+				},
+				'start+=0.7',
+			);
 		this.scrollTrigger = ScrollTrigger.create({
-			trigger: this.props.relativeNode,
+			trigger: this.props.posHelperNode,
+			pin: this.props.pinTriggerNode,
 			start: 'center center',
 			end: `center+=${this.animationPinDist} center`,
-			markers: true,
-			pin: true,
 			pinType: 'fixed',
 			animation: this.timeline,
 			scrub: true,
@@ -232,8 +310,21 @@ export class ExpandVideo extends NodeMesh {
 		if (this.mesh?.material) this.mesh.material.uniforms.uProgress.value = progress;
 	}
 
+	handleResize() {
+		this.updatePosMatrix();
+		this.updateUniforms();
+
+		ScrollTrigger.refresh();
+	}
+
 	createMesh() {
-		if (!this.props.relativeNode || !this.props.injectTarget) return;
+		if (
+			!this.props.relativeNode ||
+			!this.props.injectTarget ||
+			!this.props.posHelperNode ||
+			!this.props.pinTriggerNode
+		)
+			return;
 
 		this.setGeometry();
 		this.setMaterial();
@@ -243,6 +334,7 @@ export class ExpandVideo extends NodeMesh {
 		this.props.injectTarget?.add(this.mesh);
 
 		this.setAnimation();
+		this.mesh.resizeCallback = this.handleResize.bind(this);
 	}
 
 	destroy() {

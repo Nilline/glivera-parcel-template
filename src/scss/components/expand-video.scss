@@ -1,0 +1,67 @@
+.expand_video__container,
+.expand_video {
+	width: 100%;
+	height: 100%;
+	display: block;
+}
+
+.expand_video__container {
+	position: relative;
+}
+
+.expand_video__media {
+	position: relative;
+	z-index: 1;
+	width: 100%;
+	aspect-ratio: 16 / 9;
+	opacity: 0;
+}
+
+.expand_video__content {
+	@include flex_block(row, wrap, center, center, center);
+
+	z-index: 2;
+	position: absolute;
+	left: 0;
+	top: 0;
+
+	width: 100%;
+	height: 100%;
+	gap: 2rem;
+	cursor: pointer;
+	opacity: 0;
+	pointer-events: none;
+}
+
+.expand_video__title {
+	font-size: 10rem;
+	color: $white;
+}
+
+.expand_video__play_btn {
+	width: 15rem;
+	height: 10rem;
+	color: $white;
+	background-color: blue;
+	border-radius: 10rem;
+	padding: 2.4rem;
+	cursor: pointer;
+	transition: background-color 0.2s ease-in-out;
+
+	&:hover,
+	&:focus {
+		text-decoration: none;
+	}
+	@media (hover: hover) {
+		&:hover {
+			background-color: darken(blue, 10%);
+		}
+	}
+
+	svg {
+		display: block;
+		width: 100%;
+		height: 100%;
+		fill: currentColor;
+	}
+}

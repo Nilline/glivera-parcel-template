@@ -8,6 +8,7 @@ export class NodeMesh {
 	constructor(props) {
 		this.props = {
 			relativeNode: null,
+			posHelperNode: null,
 			...props,
 		};
 
@@ -32,13 +33,14 @@ export class NodeMesh {
 	}
 
 	getPosition() {
-		const { x, y } = this.props.relativeNode.getBoundingClientRect();
-		console.log(this.props.relativeNode.getBoundingClientRect()); //!
+		const { x, y } = this.props.posHelperNode.getBoundingClientRect();
+
+		const pageYPosition = y;
 
 		this.position = {
 			x: -0.5 + this.getScale(x) + this.size.xScale / 2,
 			y:
-				this.getScale(this.props.scene.env.height / 2 - y) -
+				this.getScale(this.props.scene.env.height / 2 - pageYPosition) -
 				this.size.yScale / 2 -
 				this.props.scene.env.initialScrollTop,
 			z: 0,
@@ -50,7 +52,8 @@ export class NodeMesh {
 		this.getPosition();
 
 		const { x, y, z } = this.position;
-		this.mesh?.position.set(x, y, z);
+		this.mesh?.position.set(x, 0, z);
+		console.log(y.toFixed(3)); //!
 
 		const { xScale, yScale } = this.size;
 		this.mesh?.scale.set(xScale, yScale, 1);

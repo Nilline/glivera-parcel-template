@@ -14,31 +14,6 @@
 
 // Put in base.scss
 
-.canvas {
-	position: fixed;
-	left: 0;
-	top: 0;
-
-	width: 100%;
-	height: 100%;
-}
-
-canvas {
-	display: block;
-}
-
-#container {
-	width: 100vw;
-	height: 100vh;
-}
-
-.video_block {
-	width: 100%;
-	aspect-ratio: 16 / 9;
-	background-color: red;
-	opacity: 0;
-}
-
 html {
 	height: 100%;
 	font: 400 calc(100vw / 1920 * 10) / 1.33 $font_1;
