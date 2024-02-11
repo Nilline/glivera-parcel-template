@@ -1,4 +1,5 @@
 import * as T from 'three';
+import dat from 'dat.gui';
 
 import gsap from 'gsap';
 
@@ -149,6 +150,7 @@ export class ExpandVideo extends NodeMesh {
 				varying vec2 vUv;
 				varying vec2 v_domWH;
 				varying float v_showRatio;
+				float PI = 3.141592653589793238;
 
 				// #include <getBlueNoise>
 				float linearStep(float edge0,float edge1,float x){
@@ -199,7 +201,7 @@ export class ExpandVideo extends NodeMesh {
 
 					float progress = 0.5;
 
-					float pixeletedStrength = 140.;
+					float pixeletedStrength = 70.;
 					vec2 pixelatedUV = floor(vUv * pixeletedStrength + 1.) / pixeletedStrength;
 					vec4 clearColor = vec4(getMap(vUv), imageAlpha);
 
@@ -208,8 +210,8 @@ export class ExpandVideo extends NodeMesh {
 					float trans = vUv.x;
 
 					// float mixForUV = (1. - trans) * 50. * progress;
-					float dist = distance(vec2(0.5), vUv) * 2.;
-					float mixForUV = abs(sin(time)) * dist * uProgress * uProgress;
+					float dist = 2. - distance(vec2(0.5), vUv) * 2.;
+					float mixForUV = abs(sin(time)) * dist * uProgress;
 
 					vec3 rainbow = vec3(1., .15, .15);
 					vec3 hsv = rgb2hsv(rainbow);
@@ -217,11 +219,41 @@ export class ExpandVideo extends NodeMesh {
 					rainbow = hsv2rgb(hsv);
 
 
-					// vec3 pxColorV3 = mix(getMap(pixelatedUV), vec3(0.,1.,0.5), 0.5 * smoothstep(0.5, 0., abs(0.5 - clearColor.g)));
-					// vec4 pixelatedColor = vec4(pxColorV3, imageAlpha);
-					vec4 pixelatedColor = vec4(0.,1.,0.5, imageAlpha);
+					// vec3 pxColorV3 = mix(getMap(pixelatedUV), vec3(1., 1., 1.), 0.5 * smoothstep(0.3, 0., abs(0.05 - clearColor.r)));
+					vec3 pxColorV3 = getMap(pixelatedUV);
+					vec4 pixelatedColor = vec4(pxColorV3, imageAlpha);
+					// vec4 pixelatedColor = clearColor;
+					// vec4 pixelatedColor = vec4(0., 1., .5, imageAlpha);
 
-					vec4 mixedColor = mix(clearColor, pixelatedColor, mixForUV);
+					vec4 mixedColor = mix(clearColor, clearColor, mixForUV);
+
+
+					float xCenter = 1. - abs(vUv.x - 0.5) * 2. + 0.3;
+					float a = vUv.x;
+					float count = 20.;
+					float dist2 = distance(0.5, vUv.x) * 2.;
+					float height = 200. ;
+					float heightMod = height - 50. * (1. - dist2);
+					float center = 0.5;
+					float centerOffset = 0.1;
+
+					float s1 = sin(a * count + time * 2.) * xCenter ;
+					float s2 = sin(a * count + time * 2. + PI) * xCenter ;
+					float test = mix(s1, s2, sin(time / 2.) * 2.);
+					float wave1 = test / heightMod + center;
+					float wave2 = test / heightMod + center ;
+
+					// mixedColor.a = smoothstep(wave1, wave2, vUv.y);
+
+					if (vUv.y < wave1 + centerOffset && vUv.y > wave2 - centerOffset) {
+						mixedColor = pixelatedColor;
+						mixedColor.a = smoothstep(0.1,1., pixelatedUV.y);
+						mixedColor.a *= smoothstep(0.,.2, pixelatedUV.x);
+						mixedColor.a *= 1. - smoothstep(0.8, 1., pixelatedUV.x);
+					}
+					// if (vUv.y < wave1 + centerOffset && vUv.y > wave2 - centerOffset) {
+					// 	mixedColor = vec4(vec3(0.), 1.);
+					// }
 
 					gl_FragColor = mixedColor;
 				}
@@ -243,6 +275,19 @@ export class ExpandVideo extends NodeMesh {
 		this.mesh.material.uniforms.uAnimDist.value = this.getScale(this.animationPinDist);
 		this.mesh.material.uniforms.uPageOffsetY.value = -this.position.y;
 		this.mesh.material.uniforms.uProgress.value = this.timeline?.scrollTrigger.progress || 0;
+	}
+
+	addGui() {
+		let that = this;
+		this.guiSettings = {
+			xRotation: 0,
+		};
+
+		this.gui = new dat.GUI();
+		// const controller = this.gui.add(this.settings, 'xRotation', -1, 1, 0.01);
+		// controller.onChange((val) => {
+		// 	console.log(val);
+		// });
 	}
 
 	setVideo(videoTexture) {}
@@ -335,6 +380,7 @@ export class ExpandVideo extends NodeMesh {
 
 		this.setAnimation();
 		this.mesh.resizeCallback = this.handleResize.bind(this);
+		this.addGui();
 	}
 
 	destroy() {
