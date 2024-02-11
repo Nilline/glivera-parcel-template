@@ -148,6 +148,7 @@ export default class AnimCanvas {
 				posHelperNode: $videoPosHelper,
 				pinTriggerNode: $videoPinTrigger,
 				videoPlayTriggerNode: $videoPlayTrigger,
+				textTextureUrl: $video.dataset.textTx,
 			});
 			this.videosInstances[index].createMesh();
 			// this.videosInstances[index].loadVideo($video.dataset.src, () => {

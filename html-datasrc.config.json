@@ -1,4 +1,6 @@
 {
 	"img": ["data-src", "your-custom-data-attribute"],
-	"div": ["your-custom-data-attribute"]
+	"div": ["your-custom-data-attribute"],
+	"*": ["data-text-tx"],
+	"video": ["data-text-tx"]
 }

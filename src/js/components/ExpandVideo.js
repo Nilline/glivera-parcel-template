@@ -17,7 +17,12 @@ export class ExpandVideo extends NodeMesh {
 			posHelperNode: null,
 			pinTriggerNode: null,
 			videoPlayTriggerNode: null,
+			textTextureUrl: null,
 			...props,
+		};
+
+		this.guiSettings = {
+			uWave: 0,
 		};
 
 		this.handleAnimationTick = this.handleAnimationTick.bind(this);
@@ -47,6 +52,8 @@ export class ExpandVideo extends NodeMesh {
 				uGlobalScrollPos: { type: 'f', value: 0 },
 				uAnimDist: { type: 'f', value: this.getScale(this.animationPinDist) },
 				uProgress: { type: 'f', value: 0 },
+				uWave: { type: 'f', value: 0.065 },
+				uTextTexture: { value: new T.Texture() },
 
 				uStartVideoPosition: { type: 'v2', value: new T.Vector2(0, 0) },
 				uEndVideoPosition: { type: 'v2', value: new T.Vector2(0, 0) },
@@ -142,8 +149,10 @@ export class ExpandVideo extends NodeMesh {
 
 				uniform vec3 uStartColor;
 				uniform sampler2D uTexture;
+				uniform sampler2D uTextTexture;
 				uniform vec2 u_radialCenter;
 				uniform float uProgress;
+				uniform float uWave;
 				uniform float uBorderRadius;
 				uniform float uEndAnimAspectScale;
 				uniform float time;
@@ -235,22 +244,50 @@ export class ExpandVideo extends NodeMesh {
 					float height = 200. ;
 					float heightMod = height - 50. * (1. - dist2);
 					float center = 0.5;
-					float centerOffset = 0.1;
+					float centerOffset = (0.1 + 1.) * uWave ;
 
 					float s1 = sin(a * count + time * 2.) * xCenter ;
 					float s2 = sin(a * count + time * 2. + PI) * xCenter ;
 					float test = mix(s1, s2, sin(time / 2.) * 2.);
-					float wave1 = test / heightMod + center;
-					float wave2 = test / heightMod + center ;
+					float wave1 = test / heightMod + center  + centerOffset;
+					float wave2 = test / heightMod + center  - centerOffset;
 
-					// mixedColor.a = smoothstep(wave1, wave2, vUv.y);
 
-					if (vUv.y < wave1 + centerOffset && vUv.y > wave2 - centerOffset) {
+					if (vUv.y < wave1 && vUv.y > wave2) {
+						pixelatedColor.a = smoothstep(0.1,1., pixelatedUV.y);
+						float xGradientStart = smoothstep(0.,.2, pixelatedUV.x);
+						float xGradientEnd = 1. - smoothstep(0.8, 1., pixelatedUV.x);
+
+
+						vec2 textUV = vUv;
+						float textOffsetY = 0.04;
+						float textGap = 0.1;
+						float textHeight = wave1 - wave2;
+						float textCopyCount = 6.;
+						float textWidth = 1. - textGap;
+						float textMarqueOffset = time / 15.;
+
+						textUV.y = (vUv.y - wave2 - textOffsetY) / (textHeight - textOffsetY * 2.);
+						textUV.x = (fract((textUV.x + textMarqueOffset) * textCopyCount) - textGap) / textWidth;
+
+						vec4 textColor = pixelatedColor;
 						mixedColor = pixelatedColor;
-						mixedColor.a = smoothstep(0.1,1., pixelatedUV.y);
-						mixedColor.a *= smoothstep(0.,.2, pixelatedUV.x);
-						mixedColor.a *= 1. - smoothstep(0.8, 1., pixelatedUV.x);
+
+						if (textUV.y > 0. && textUV.y < 1. && textUV.x > 0. && textUV.x < 1.) {
+							textColor = texture2D(uTextTexture, textUV);
+						}
+
+
+						if (textColor.a > 0.5) {
+							mixedColor = textColor;
+							// mixedColor.a *= xGradientStart;
+							// mixedColor.a *= xGradientEnd;
+						}
+							mixedColor.a *= xGradientStart;
+							mixedColor.a *= xGradientEnd;
 					}
+
+					// vec4 textTx = ;
 					// if (vUv.y < wave1 + centerOffset && vUv.y > wave2 - centerOffset) {
 					// 	mixedColor = vec4(vec3(0.), 1.);
 					// }
@@ -279,27 +316,28 @@ export class ExpandVideo extends NodeMesh {
 
 	addGui() {
 		let that = this;
-		this.guiSettings = {
-			xRotation: 0,
-		};
 
 		this.gui = new dat.GUI();
-		// const controller = this.gui.add(this.settings, 'xRotation', -1, 1, 0.01);
-		// controller.onChange((val) => {
-		// 	console.log(val);
-		// });
+		const controller = this.gui.add(this.guiSettings, 'uWave', 0.1, 1, 0.01);
+		const controller2 = this.gui.add(this.guiSettings, 'uWave', 0, 1, 0.01);
+		controller.onChange((val) => {
+			console.log(val);
+			this.mesh.material.uniforms.uWave.value = this.guiSettings.uWave || 0;
+		});
+		controller2.onChange((val) => {
+			console.log(val);
+			this.mesh.material.uniforms.uFullScreebScale.value = this.guiSettings.uFullScreebScale || 0;
+		});
 	}
 
-	setVideo(videoTexture) {}
-
-	async loadVideo({ src, onComplete }) {
+	async loadResources() {
+		if (!this.props.textTextureUrl) return;
 		const loader = new T.TextureLoader();
 
 		loader.load(
-			src,
-			(videoTexture) => {
-				this.setVideo(videoTexture);
-				onComplete();
+			this.props.textTextureUrl,
+			(tx) => {
+				this.mesh.material.uniforms.uTextTexture.value = tx;
 			},
 			() => {},
 			(err) => {
@@ -381,6 +419,7 @@ export class ExpandVideo extends NodeMesh {
 		this.setAnimation();
 		this.mesh.resizeCallback = this.handleResize.bind(this);
 		this.addGui();
+		this.loadResources();
 	}
 
 	destroy() {
