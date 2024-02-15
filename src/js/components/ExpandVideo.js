@@ -1,5 +1,5 @@
 import * as T from 'three';
-import dat from 'dat.gui';
+// import dat from 'dat.gui';
 
 import gsap from 'gsap';
 
@@ -216,7 +216,7 @@ export class ExpandVideo extends NodeMesh {
 
 					float progress = 0.5;
 
-					float pixeletedStrength = 100.;
+					float pixeletedStrength = 140.;
 					vec2 pixelatedUV = floor(vUv * pixeletedStrength + 1.) / pixeletedStrength;
 					vec4 clearColor = vec4(getMap(vUv), imageAlpha);
 
@@ -311,7 +311,7 @@ export class ExpandVideo extends NodeMesh {
 	addGui() {
 		let that = this;
 
-		this.gui = new dat.GUI();
+		// this.gui = new dat.GUI();
 		// const controller = this.gui.add(this.guiSettings, 'uWave', 0.1, 1, 0.01);
 		// const controller2 = this.gui.add(this.guiSettings, 'uWave', 0, 1, 0.01);
 		// controller.onChange((val) => {
@@ -396,10 +396,7 @@ export class ExpandVideo extends NodeMesh {
 	}
 
 	handleResize() {
-		this.updatePosMatrix();
-		this.updateUniforms();
-
-		ScrollTrigger.refresh();
+		this.update();
 	}
 
 	createMesh() {
@@ -420,8 +417,14 @@ export class ExpandVideo extends NodeMesh {
 
 		this.setAnimation();
 		this.mesh.resizeCallback = this.handleResize.bind(this);
-		this.addGui();
+		// this.addGui();
 		this.loadResources();
+	}
+
+	update() {
+		ScrollTrigger.refresh();
+		this.updatePosMatrix();
+		this.updateUniforms();
 	}
 
 	destroy() {

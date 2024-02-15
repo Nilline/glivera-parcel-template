@@ -17,7 +17,7 @@
 // Put in base.scss
 
 .video_modal {
-	z-index: 100;
+	z-index: 200;
 	position: fixed;
 	left: 0;
 	top: 0;
@@ -26,29 +26,29 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	background-color: $black;
+	background-color: black;
 	pointer-events: none;
 	opacity: 0;
 	transition: opacity 0.3s ease-in-out;
-
-	.body--video_modal_active & {
-		opacity: 1;
-		pointer-events: initial;
-	}
-
-	& > .plyr {
-		max-height: 100vh;
-		max-height: 100dvh;
-	}
 }
 
-.plyr__control--overlaid {
+.body--video_modal_active .video_modal {
+	opacity: 1;
+	pointer-events: initial;
+}
+
+.video_modal > .plyr {
+	max-height: 100vh;
+	max-height: 100dvh;
+}
+
+.video_modal .plyr__control--overlaid {
 	display: none !important;
 	// background-color: blue;
 }
 
 .cursor {
-	z-index: 101;
+	z-index: 201;
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -70,19 +70,26 @@
 		height: 100%;
 
 		border-radius: 50%;
-		background-color: blue;
+		background-color: #12162d;
+		border: 0.3rem solid $white;
 		content: '';
-		transition: transform 0.2s ease-in-out;
-	}
-
-	.body--custom_cursor_option_state & {
-		&::after {
-			transform: scale(0.5);
-		}
+		transition: transform 0.2s ease-in-out, border-color 0.2s ease-in-out;
 	}
 
 	@media not (hover: hover) {
 		display: none !important;
+	}
+}
+
+.body--custom_cursor_option_state .cursor {
+	&::after {
+		transform: scale(0.3);
+	}
+}
+
+body:active:not(.body--custom_cursor_option_state) .cursor {
+	&::after {
+		transform: scale(0.8);
 	}
 }
 
@@ -94,21 +101,21 @@
 	height: 100%;
 	display: none;
 	transition: transform 0.2s ease-in-out;
+}
 
-	.body--custom_cursor_option_state & {
-		transform: scale(0);
-	}
+body:active:not(.body--custom_cursor_option_state) .cursor_icon {
+	transform: scale(0.8);
+}
 
-	.body--custom_cursor_play_state & {
-		&.cursor_icon--play_mod {
-			display: block;
-		}
-	}
-	.body--custom_cursor_close_state & {
-		&.cursor_icon--close_mod {
-			display: block;
-		}
-	}
+.body--custom_cursor_option_state .cursor_icon {
+	transform: scale(0);
+}
+
+.body--custom_cursor_play_state .cursor_icon.cursor_icon--play_mod {
+	display: block;
+}
+.body--custom_cursor_close_state .cursor_icon.cursor_icon--close_mod {
+	display: block;
 }
 
 html {
@@ -131,18 +138,20 @@ body {
 	-moz-osx-font-smoothing: grayscale;
 
 	background: $body_bg;
-	background-color: rgb(0, 0, 205);
+	background-color: #12162d;
 
 	@supports (display: grid) {
 		display: block;
 	}
 
-	@media (hover: hover) {
-		&.body--custom_cursor_close_state,
-		&.body--custom_cursor_play_state {
-			cursor: none;
-		}
-	}
+}
+
+
+@media (hover: hover) {
+  body.body--custom_cursor_close_state:not(.body--video_modal_fullscreen_active),
+  body.body--custom_cursor_play_state:not(.body--video_modal_fullscreen_active) {
+    cursor: none;
+  }
 }
 
 .preloader {

@@ -2,10 +2,9 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import * as T from 'three';
 
-gsap.registerPlugin(ScrollTrigger);
-
 export class NodeMesh {
 	constructor(props) {
+		gsap.registerPlugin(ScrollTrigger);
 		this.props = {
 			relativeNode: null,
 			posHelperNode: null,
@@ -53,7 +52,6 @@ export class NodeMesh {
 
 		const { x, y, z } = this.position;
 		this.mesh?.position.set(x, 0, z);
-		console.log(y.toFixed(3)); //!
 
 		const { xScale, yScale } = this.size;
 		this.mesh?.scale.set(xScale, yScale, 1);
