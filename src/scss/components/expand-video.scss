@@ -15,6 +15,11 @@
 	width: 100%;
 	aspect-ratio: 16 / 9;
 	opacity: 0;
+	pointer-events: none;
+
+	&[data-play-trigger] {
+		pointer-events: initial;
+	}
 }
 
 .expand_video__content {

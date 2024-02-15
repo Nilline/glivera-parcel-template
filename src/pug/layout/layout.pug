@@ -12,6 +12,17 @@ html(lang="en")
 		+head(array)
 	body(class= array.body_class)
 		.preloader
+
+		.cursor.js-cursor
+			svg.cursor_icon.cursor_icon--play_mod(xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 36 36")
+				path(fill="currentColor" d="M7 7.29c0-1.5 1.59-2.466 2.92-1.776l20.656 10.71c1.439.747 1.439 2.805 0 3.552L9.92 30.486C8.589 31.176 7 30.21 7 28.71V7.29Z")
+			svg.cursor_icon.cursor_icon--close_mod(width="51" height="50" viewBox="0 0 51 50" fill="none" xmlns="http://www.w3.org/2000/svg")
+				rect(x="2" y="5.95685" width="7.01" height="62" rx="3.505" transform="rotate(-45 2 5.95685)" fill="#fff")
+				rect(x="44.6292" y="0.94696" width="7.00684" height="62" rx="3.50342" transform="rotate(45 44.6292 0.94696)" fill="#fff")
+
+		.video_modal.js-video-modal
+
+
 		.wrapper(class= array.layout_mod)
 			.base(class= array.layout_mod)
 				block content_block

@@ -14,3 +14,8 @@ export const BREAKPOINTS = {
 	mediaPoint3: 480,
 	mediaPoint4: 320,
 };
+
+export const CURSOR_TRIGGER_ATTR = {
+	play: 'data-play-trigger',
+	close: 'data-close-trigger',
+};

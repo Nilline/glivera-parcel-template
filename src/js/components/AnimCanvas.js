@@ -1,8 +1,18 @@
 /* eslint-disable no-unreachable */
 import gsap from 'gsap';
 import * as T from 'three';
+
+import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer';
+import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass';
+import { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass';
+
+import { RGBShiftShader } from 'three/examples/jsm/shaders/RGBShiftShader';
+import { ACESFilmicToneMappingShader } from 'three/examples/jsm/shaders/ACESFilmicToneMappingShader';
+import { OutputPass } from 'three/examples/jsm/postprocessing/OutputPass';
 import { ExpandVideo } from './ExpandVideo';
 /**
+ *
+ *
  * Template for creation a canvas with three.js
  * Describes the structure and sequence of functions for rendering
  * Contains useful developments often found in projects
@@ -11,6 +21,7 @@ import { ExpandVideo } from './ExpandVideo';
 export default class AnimCanvas {
 	constructor(options) {
 		this.container = options.dom;
+		this.onVideoClick = options.onVideoClick;
 		this.init();
 	}
 
@@ -93,6 +104,20 @@ export default class AnimCanvas {
 			1000,
 		);
 		this.camera.position.set(0, 0, 1);
+
+		this.composer = new EffectComposer(this.renderer);
+		this.composer.addPass(new RenderPass(this.scene, this.camera));
+
+		const effect1 = new ShaderPass(ACESFilmicToneMappingShader);
+		// effect1.uniforms['scale'].value = 4;
+		this.composer.addPass(effect1);
+
+		const effect2 = new ShaderPass(RGBShiftShader);
+		effect2.uniforms['amount'].value = 0.0015;
+		this.composer.addPass(effect2);
+
+		const effect3 = new OutputPass();
+		this.composer.addPass(effect3);
 	}
 
 	// loadObjects() {}
@@ -151,6 +176,9 @@ export default class AnimCanvas {
 				textTextureUrl: $video.dataset.textTx,
 			});
 			this.videosInstances[index].createMesh();
+			$video.addEventListener('click', () => {
+				if (this.onVideoClick) this.onVideoClick($video.src);
+			});
 			// this.videosInstances[index].loadVideo($video.dataset.src, () => {
 			// 	console.log('loaded!'); //!
 			// });
@@ -169,6 +197,7 @@ export default class AnimCanvas {
 
 		window.requestAnimationFrame(this.render.bind(this));
 		this.renderer.render(this.scene, this.camera);
+		this.composer.render();
 
 		// this.scene.children.forEach((mesh) => {
 		// 	if (mesh.material.uniforms.time)

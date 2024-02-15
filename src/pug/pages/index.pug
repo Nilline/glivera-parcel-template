@@ -8,15 +8,13 @@ block content_block
 	.anim_canvas
 		#canvas_container
 
-
-
 	section.section.test.js-canvas-video-section
 		.section_in
 			h1 Lorem ipsum dolor sit amet.
 			.expand_video.js-canvas-video-position-helper
 				.expand_video__container.js-canvas-video-pin
-					video.expand_video__media.js-canvas-video(src="/src/images/test_video.mp4" data-text-tx='/src/images/tx.svg' muted playsinline autoplay loop)
-					.expand_video__content.js-canvas-video-play-trigger
+					video.expand_video__media.js-canvas-video.js-play-cursor-trigger(src="/src/images/test_video.mp4" data-text-tx='/src/images/tx.svg' muted playsinline autoplay loop)
+					//- .expand_video__content.js-canvas-video-play-trigger
 						//- .expand_video__title PLAY
 						//- button.expand_video__play_btn(type="button" aria-label="play")
 						//- 	svg(xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 36 36")

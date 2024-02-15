@@ -23,6 +23,7 @@
 		"dat.gui": "^0.7.9",
 		"gsap": "^3.12.5",
 		"ismobilejs": "^1.1.1",
+		"plyr": "^3.7.8",
 		"three": "^0.160.0"
 	},
 	"devDependencies": {

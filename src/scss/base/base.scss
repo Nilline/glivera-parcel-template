@@ -3,6 +3,8 @@
 @import 'fonts';
 @import 'print';
 
+@import './plyr.scss';
+
 //------------------------------------------------------------base styles
 :root {
 	--full-screen: calc(var(--vh, 1vh) * 100);
@@ -13,6 +15,101 @@
 }
 
 // Put in base.scss
+
+.video_modal {
+	z-index: 100;
+	position: fixed;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: $black;
+	pointer-events: none;
+	opacity: 0;
+	transition: opacity 0.3s ease-in-out;
+
+	.body--video_modal_active & {
+		opacity: 1;
+		pointer-events: initial;
+	}
+
+	& > .plyr {
+		max-height: 100vh;
+		max-height: 100dvh;
+	}
+}
+
+.plyr__control--overlaid {
+	display: none !important;
+	// background-color: blue;
+}
+
+.cursor {
+	z-index: 101;
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 6rem;
+	width: 6rem;
+	margin: -3rem 0 0 -3rem;
+	color: $white;
+
+	padding: 1.5rem;
+	pointer-events: none;
+	opacity: 0;
+
+	&::after {
+		z-index: 1;
+		position: absolute;
+		left: 0;
+		top: 0;
+		width: 100%;
+		height: 100%;
+
+		border-radius: 50%;
+		background-color: blue;
+		content: '';
+		transition: transform 0.2s ease-in-out;
+	}
+
+	.body--custom_cursor_option_state & {
+		&::after {
+			transform: scale(0.5);
+		}
+	}
+
+	@media not (hover: hover) {
+		display: none !important;
+	}
+}
+
+.cursor_icon {
+	position: relative;
+	z-index: 2;
+	display: block;
+	width: 100%;
+	height: 100%;
+	display: none;
+	transition: transform 0.2s ease-in-out;
+
+	.body--custom_cursor_option_state & {
+		transform: scale(0);
+	}
+
+	.body--custom_cursor_play_state & {
+		&.cursor_icon--play_mod {
+			display: block;
+		}
+	}
+	.body--custom_cursor_close_state & {
+		&.cursor_icon--close_mod {
+			display: block;
+		}
+	}
+}
 
 html {
 	height: 100%;
@@ -38,6 +135,13 @@ body {
 
 	@supports (display: grid) {
 		display: block;
+	}
+
+	@media (hover: hover) {
+		&.body--custom_cursor_close_state,
+		&.body--custom_cursor_play_state {
+			cursor: none;
+		}
 	}
 }
 

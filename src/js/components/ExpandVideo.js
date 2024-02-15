@@ -6,6 +6,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 
 import { NodeMesh } from './NodeMesh';
+import { CURSOR_TRIGGER_ATTR } from '../utils/constants';
 
 export class ExpandVideo extends NodeMesh {
 	constructor(props) {
@@ -31,6 +32,12 @@ export class ExpandVideo extends NodeMesh {
 		this.animationPinDist = this.props.scene.env.height;
 	}
 
+	get STATES() {
+		return {
+			relativeNodeEnterState: CURSOR_TRIGGER_ATTR.play,
+		};
+	}
+
 	setGeometry() {
 		this.getSize();
 
@@ -52,7 +59,7 @@ export class ExpandVideo extends NodeMesh {
 				uGlobalScrollPos: { type: 'f', value: 0 },
 				uAnimDist: { type: 'f', value: this.getScale(this.animationPinDist) },
 				uProgress: { type: 'f', value: 0 },
-				uWave: { type: 'f', value: 0.065 },
+				uWave: { type: 'f', value: 0 },
 				uTextTexture: { value: new T.Texture() },
 
 				uStartVideoPosition: { type: 'v2', value: new T.Vector2(0, 0) },
@@ -125,7 +132,6 @@ export class ExpandVideo extends NodeMesh {
 					vec2 startPos = uStartVideoPosition;
 					startPos -= uStartVideoSize / 2.;
 
-
 					vec2 domXY=mix(startPos,uEndVideoPosition,v_showRatio);
 					vec2 domWH=mix(uStartVideoSize,uEndVideoSize,v_showRatio);
 					domXY.x+=mix(domWH.x,0.,cos(v_showRatio*3.1415926*2.)*0.5+0.5)*0.1;
@@ -190,68 +196,61 @@ export class ExpandVideo extends NodeMesh {
 				}
 
 
-				vec3 rgb2hsv (vec3 c) {
-					vec4 K = vec4(0.0, -1.0 / 3.0, 2.0 / 3.0, -1.0);
-					vec4 p = mix(vec4(c.bg, K.wz), vec4(c.gb, K.xy), step(c.b, c.g));
-					vec4 q = mix(vec4(p.xyw, c.r), vec4(c.r, p.yzx), step(p.x, c.r));
-					float d = q.x - min(q.w, q.y);
-					float e = 1.0e-10;
-					return vec3(abs(q.z + (q.w - q.y) / (6.0 * d + e)), d / (q.x + e), q.x);
-				}
+				// vec3 rgb2hsv (vec3 c) {
+				// 	vec4 K = vec4(0.0, -1.0 / 3.0, 2.0 / 3.0, -1.0);
+				// 	vec4 p = mix(vec4(c.bg, K.wz), vec4(c.gb, K.xy), step(c.b, c.g));
+				// 	vec4 q = mix(vec4(p.xyw, c.r), vec4(c.r, p.yzx), step(p.x, c.r));
+				// 	float d = q.x - min(q.w, q.y);
+				// 	float e = 1.0e-10;
+				// 	return vec3(abs(q.z + (q.w - q.y) / (6.0 * d + e)), d / (q.x + e), q.x);
+				// }
 
-				vec3 hsv2rgb(vec3 c) {
-					vec4 K = vec4(1.0, 2.0/3.0, 1.0 / 3.0, 3.0);
-					vec3 p = abs(fract (c.xxx + K.xyz) * 6.0 - K.www);
-					return c.z * mix(K.xxx, clamp(p -	K.xxx, 0.0, 1.0), c.y);
-				}
+				// vec3 hsv2rgb(vec3 c) {
+				// 	vec4 K = vec4(1.0, 2.0/3.0, 1.0 / 3.0, 3.0);
+				// 	vec3 p = abs(fract (c.xxx + K.xyz) * 6.0 - K.www);
+				// 	return c.z * mix(K.xxx, clamp(p -	K.xxx, 0.0, 1.0), c.y);
+				// }
 
 				void main()	{
 					float imageAlpha = getRoundedCornerMask(vUv,v_domWH,uBorderRadius,1.0);
 
 					float progress = 0.5;
 
-					float pixeletedStrength = 70.;
+					float pixeletedStrength = 100.;
 					vec2 pixelatedUV = floor(vUv * pixeletedStrength + 1.) / pixeletedStrength;
 					vec4 clearColor = vec4(getMap(vUv), imageAlpha);
 
-					vec2 position = vUv;
-					// float trans = smoothstep(0., 1., position.y + (1. - 2. * progress) + sin(position.x * 4. + progress * 69. + time) * mix(0.3,.1,abs(0.5 - position.x)) * 0.5 * smoothstep(0., 0.2, progress));
-					float trans = vUv.x;
-
-					// float mixForUV = (1. - trans) * 50. * progress;
 					float dist = 2. - distance(vec2(0.5), vUv) * 2.;
 					float mixForUV = abs(sin(time)) * dist * uProgress;
 
-					vec3 rainbow = vec3(1., .15, .15);
-					vec3 hsv = rgb2hsv(rainbow);
-					hsv.x += 0.1 * (vUv.y + trans - progress);
-					rainbow = hsv2rgb(hsv);
+					// vec3 rainbow = vec3(1., .15, .15);
+					// vec3 hsv = rgb2hsv(rainbow);
+					// hsv.x += 0.1 * (vUv.y + vUv.x - progress);
+					// rainbow = hsv2rgb(hsv);
 
-
-					// vec3 pxColorV3 = mix(getMap(pixelatedUV), vec3(1., 1., 1.), 0.5 * smoothstep(0.3, 0., abs(0.05 - clearColor.r)));
 					vec3 pxColorV3 = getMap(pixelatedUV);
 					vec4 pixelatedColor = vec4(pxColorV3, imageAlpha);
-					// vec4 pixelatedColor = clearColor;
-					// vec4 pixelatedColor = vec4(0., 1., .5, imageAlpha);
 
-					vec4 mixedColor = mix(clearColor, clearColor, mixForUV);
+					vec4 color = clearColor;
 
-
-					float xCenter = 1. - abs(vUv.x - 0.5) * 2. + 0.3;
-					float a = vUv.x;
 					float count = 20.;
-					float dist2 = distance(0.5, vUv.x) * 2.;
-					float height = 200. ;
-					float heightMod = height - 50. * (1. - dist2);
+					float distFromCenterX = 1. - abs(vUv.x - 0.5) * 2.;
+
+					float height = 250. - 100. * (1. - uWave);
+					float heightMod = height - 50. * distFromCenterX;
+
 					float center = 0.5;
-					float centerOffset = (0.1 + 1.) * uWave ;
+					float centerOffset = 0.065 * uWave ;
 
-					float s1 = sin(a * count + time * 2.) * xCenter ;
-					float s2 = sin(a * count + time * 2. + PI) * xCenter ;
-					float test = mix(s1, s2, sin(time / 2.) * 2.);
-					float wave1 = test / heightMod + center  + centerOffset;
-					float wave2 = test / heightMod + center  - centerOffset;
+					float waveOffset = vUv.x * count + time * 2.;
 
+					float waveOffset1 = sin(waveOffset) * distFromCenterX ;
+					float waveOffset2 = sin(waveOffset + PI) * distFromCenterX;
+
+					float wave = mix(waveOffset1, waveOffset2, sin(time / 2.) * 4.) / heightMod + center;
+
+					float wave1 = wave + centerOffset;
+					float wave2 = wave - centerOffset;
 
 					if (vUv.y < wave1 && vUv.y > wave2) {
 						pixelatedColor.a = smoothstep(0.1,1., pixelatedUV.y);
@@ -261,17 +260,18 @@ export class ExpandVideo extends NodeMesh {
 
 						vec2 textUV = vUv;
 						float textOffsetY = 0.04;
-						float textGap = 0.1;
-						float textHeight = wave1 - wave2;
+						float textGap = 0.;
+						float ribbonHeight = wave1 - wave2;
+						float textHeight = 0.15;
 						float textCopyCount = 6.;
 						float textWidth = 1. - textGap;
-						float textMarqueOffset = time / 15.;
+						float textMarqueOffset = -time / 15.;
 
-						textUV.y = (vUv.y - wave2 - textOffsetY) / (textHeight - textOffsetY * 2.);
+						textUV.y = (vUv.y - wave2 - textOffsetY - ribbonHeight / 2. + textHeight / 2.) / (textHeight - textOffsetY * 2.) ;
 						textUV.x = (fract((textUV.x + textMarqueOffset) * textCopyCount) - textGap) / textWidth;
 
 						vec4 textColor = pixelatedColor;
-						mixedColor = pixelatedColor;
+						color = pixelatedColor;
 
 						if (textUV.y > 0. && textUV.y < 1. && textUV.x > 0. && textUV.x < 1.) {
 							textColor = texture2D(uTextTexture, textUV);
@@ -279,20 +279,14 @@ export class ExpandVideo extends NodeMesh {
 
 
 						if (textColor.a > 0.5) {
-							mixedColor = textColor;
-							// mixedColor.a *= xGradientStart;
-							// mixedColor.a *= xGradientEnd;
+							color = textColor;
 						}
-							mixedColor.a *= xGradientStart;
-							mixedColor.a *= xGradientEnd;
+
+							color.a *= xGradientStart;
+							color.a *= xGradientEnd;
 					}
 
-					// vec4 textTx = ;
-					// if (vUv.y < wave1 + centerOffset && vUv.y > wave2 - centerOffset) {
-					// 	mixedColor = vec4(vec3(0.), 1.);
-					// }
-
-					gl_FragColor = mixedColor;
+					gl_FragColor = color;
 				}
 			`,
 		});
@@ -318,16 +312,16 @@ export class ExpandVideo extends NodeMesh {
 		let that = this;
 
 		this.gui = new dat.GUI();
-		const controller = this.gui.add(this.guiSettings, 'uWave', 0.1, 1, 0.01);
-		const controller2 = this.gui.add(this.guiSettings, 'uWave', 0, 1, 0.01);
-		controller.onChange((val) => {
-			console.log(val);
-			this.mesh.material.uniforms.uWave.value = this.guiSettings.uWave || 0;
-		});
-		controller2.onChange((val) => {
-			console.log(val);
-			this.mesh.material.uniforms.uFullScreebScale.value = this.guiSettings.uFullScreebScale || 0;
-		});
+		// const controller = this.gui.add(this.guiSettings, 'uWave', 0.1, 1, 0.01);
+		// const controller2 = this.gui.add(this.guiSettings, 'uWave', 0, 1, 0.01);
+		// controller.onChange((val) => {
+		// 	console.log(val);
+		// 	this.mesh.material.uniforms.uWave.value = this.guiSettings.uWave || 0;
+		// });
+		// controller2.onChange((val) => {
+		// 	console.log(val);
+		// 	this.mesh.material.uniforms.uFullScreebScale.value = this.guiSettings.uFullScreebScale || 0;
+		// });
 	}
 
 	async loadResources() {
@@ -364,16 +358,24 @@ export class ExpandVideo extends NodeMesh {
 				},
 				'start',
 			)
-			.fromTo(
-				this.props.videoPlayTriggerNode,
+			.to(
+				{},
 				{
-					opacity: 0,
-				},
-				{
-					opacity: 1,
-					duration: 0.3,
-					pointerEvents: 'initial',
-					ease: 'sine.inOut',
+					duration: 0.1,
+					onStart: () => {
+						this.props.relativeNode.setAttribute(this.STATES.relativeNodeEnterState, 'true');
+						gsap.to(this.mesh.material.uniforms.uWave, {
+							value: 1,
+							ease: 'sine.inOut',
+						});
+					},
+					onReverseComplete: () => {
+						this.props.relativeNode.removeAttribute(this.STATES.relativeNodeEnterState);
+						gsap.to(this.mesh.material.uniforms.uWave, {
+							value: 0,
+							ease: 'sine.inOut',
+						});
+					},
 				},
 				'start+=0.7',
 			);
