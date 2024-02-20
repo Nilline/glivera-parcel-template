@@ -29,7 +29,7 @@ export class ExpandVideo extends NodeMesh {
 		this.handleAnimationTick = this.handleAnimationTick.bind(this);
 		this.updatePosMatrix = this.updatePosMatrix.bind(this);
 
-		this.animationPinDist = this.props.scene.env.height;
+		this.animationPinDist = 0;
 	}
 
 	get STATES() {
@@ -381,12 +381,12 @@ export class ExpandVideo extends NodeMesh {
 			);
 		this.scrollTrigger = ScrollTrigger.create({
 			trigger: this.props.posHelperNode,
-			pin: this.props.pinTriggerNode,
-			start: 'center center',
-			end: `center+=${this.animationPinDist} center`,
-			pinType: 'fixed',
+			// pin: this.props.pinTriggerNode,
+			start: 'top center',
+			end: 'center center',
+			// pinType: 'fixed',
 			animation: this.timeline,
-			scrub: true,
+			scrub: 1,
 			snap: true,
 		});
 	}

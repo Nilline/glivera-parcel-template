@@ -6,8 +6,8 @@ export function cursorAnimations() {
 	let isCustomCursor = false;
 
 	const pointer = {
-		x: 0,
-		y: 0,
+		x: window.innerWidth / 2,
+		y: window.innerHeight / 2,
 		lastEvent: null,
 	};
 
@@ -20,6 +20,8 @@ export function cursorAnimations() {
 	gsap.set($cursor, {
 		opacity: 0,
 		scale: 0,
+		x: pointer.x,
+		y: pointer.y,
 	});
 
 	const handlePointerMove = (e) => {
@@ -119,7 +121,6 @@ export function cursorAnimations() {
 	};
 
 	window.addEventListener('pointerover', handlePointerOver);
-	// window.addEventListener('scroll', handlePointerOver);
 	window.updateCursor = handlePointerOver;
 }
 
