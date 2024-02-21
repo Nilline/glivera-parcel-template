@@ -105,7 +105,7 @@ export default class AnimCanvas {
 			0.001,
 			1000,
 		);
-		this.camera.position.set(0, 0, 1);
+		this.camera.position.set(0, 0, 100);
 
 		// this.composer = new EffectComposer(this.renderer);
 		// this.composer.addPass(new RenderPass(this.scene, this.camera));
@@ -157,7 +157,7 @@ export default class AnimCanvas {
 	scroll() {
 		this.scene.env.scrollTop = document.documentElement.scrollTop / this.scene.env.width;
 		this.scene.children.forEach((mesh) => {
-			if (mesh.material.uniforms.uGlobalScrollPos)
+			if (mesh.material?.uniforms?.uGlobalScrollPos)
 				// eslint-disable-next-line no-param-reassign
 				mesh.material.uniforms.uGlobalScrollPos.value = this.scene.env.scrollTop;
 		});
@@ -165,32 +165,46 @@ export default class AnimCanvas {
 
 	/** Create and add meshes to the scene */
 	addObjects() {
-		const $sections = document.querySelectorAll(this.SELECTORS.videoSection);
-		this.videosInstances = [];
+		this.position = new T.Vector3();
+		this.direction = new T.Vector3();
+		this.binormal = new T.Vector3();
+		this.normal = new T.Vector3();
+		this.position = new T.Vector3();
+		this.lookAt = new T.Vector3();
 
-		$sections.forEach(($section, index) => {
-			const $video = $section.querySelector(this.SELECTORS.video);
-			const $videoPosHelper = $section.querySelector(this.SELECTORS.videoPositionHelper);
-			const $videoPinTrigger = $section.querySelector(this.SELECTORS.videoPinTrigger);
-			const $videoPlayTrigger = $section.querySelector(this.SELECTORS.videoPlayTrigger);
+		const path = new T.CatmullRomCurve3([
+			new T.Vector3(40 / 4, -40 / 4, 0),
+			new T.Vector3(40 / 4, 40 / 4, -50),
+			new T.Vector3(-20 / 4, 40 / 4, 0),
+		]);
 
-			this.videosInstances[index] = new ExpandVideo({
-				relativeNode: $video,
-				injectTarget: this.scene,
-				scene: this.scene,
-				posHelperNode: $videoPosHelper,
-				pinTriggerNode: $videoPinTrigger,
-				videoPlayTriggerNode: $videoPlayTrigger,
-				textTextureUrl: $video.dataset.textTx,
-			});
-			this.videosInstances[index].createMesh();
-			$video.addEventListener('click', () => {
-				if (this.onVideoClick) this.onVideoClick($video.src);
-			});
-			// this.videosInstances[index].loadVideo($video.dataset.src, () => {
-			// 	console.log('loaded!'); //!
-			// });
-		});
+		this.tubeGeometry = new T.TubeGeometry(path, 100, 0.1, 100, true);
+		this.splineMesh = new T.Mesh(
+			this.tubeGeometry,
+			new T.MeshStandardMaterial({ color: new T.Color(0x00ff00) }),
+		);
+
+		this.ballMesh = new T.Mesh(
+			new T.SphereGeometry(1),
+			new T.MeshStandardMaterial({ color: new T.Color(0x0000ff) }),
+		);
+		this.ballMesh.position.set(40 / 4, -40 / 4, 0);
+		this.position.copy(this.ballMesh.position);
+
+		const light = new T.AmbientLight(0xffffff, 10);
+		this.scene.add(light);
+
+		// direction vector for movement
+
+		// splineCamera.matrix.lookAt(splineCamera.position, lookAt, normal);
+		// splineCamera.quaternion.setFromRotationMatrix(splineCamera.matrix);
+		// renderer.render(scene, params.animationView === true ? splineCamera : camera);
+		// this.splineMesh.rotation.y += 0.3;
+
+		this.group = new T.Group();
+		this.group.add(this.ballMesh);
+		this.group.add(this.splineMesh);
+		this.scene.add(this.group);
 	}
 
 	/** Сanvas drawing */
@@ -198,19 +212,65 @@ export default class AnimCanvas {
 		this.scene.env.time += 0.01;
 
 		this.scene.children.forEach((mesh) => {
-			if (mesh.material.uniforms.time)
+			if (mesh.material?.uniforms?.time)
 				// eslint-disable-next-line no-param-reassign
 				mesh.material.uniforms.time.value = this.scene.env.time;
 		});
 
 		window.requestAnimationFrame(this.render.bind(this));
 		this.renderer.render(this.scene, this.camera);
-		// this.composer.render();
 
-		// this.scene.children.forEach((mesh) => {
-		// 	if (mesh.material.uniforms.time)
-		// 		// eslint-disable-next-line no-param-reassign
-		// 		mesh.material.uniforms.time.value = this.scene.env.time;
-		// });
+		const time = Date.now();
+		const speed = 10;
+		const looptime = speed * 1000;
+		const t = (time % looptime) / looptime;
+		const scale = 1;
+
+		this.tubeGeometry.parameters.path.getPointAt(t, this.position);
+		this.position.multiplyScalar(scale);
+
+		// interpolation
+
+		const segments = this.tubeGeometry.tangents.length;
+		const pickt = t * segments;
+		const pick = Math.floor(pickt);
+		const pickNext = (pick + 1) % segments;
+
+		this.binormal.subVectors(this.tubeGeometry.binormals[pickNext], this.tubeGeometry.binormals[pick]);
+		this.binormal.multiplyScalar(pickt - pick).add(this.tubeGeometry.binormals[pick]);
+
+		this.tubeGeometry.parameters.path.getTangentAt(t, this.direction);
+		const offset = 0;
+
+		this.normal.copy(this.binormal).cross(this.direction);
+		this.position.add(this.normal.clone().multiplyScalar(offset));
+
+		this.ballMesh.position.copy(this.position);
+
+		this.tubeGeometry.parameters.path.getPointAt(
+			(t + 30 / this.tubeGeometry.parameters.path.getLength()) % 1,
+			this.lookAt,
+		);
+		this.lookAt.multiplyScalar(scale);
+
+		this.ballMesh.matrix.lookAt(this.ballMesh.position, this.lookAt, this.normal);
+		this.ballMesh.quaternion.setFromRotationMatrix(this.ballMesh.matrix);
+
+		this.group.rotation.y += 0.005;
 	}
 }
+
+gsap.to('#some_element', {
+	motionPath: {
+		path: [{ x: 0, y: 0 }, { x: 20, y: 0 }, { x: 30, y: 50 }, { x: 50, y: 50 }],
+		path: "M9,100c0,0,18-41,49-65",
+		path: '#pathID',
+
+		align: '#pathID',
+		alignOrigin: [0.5, 0.5],
+		autoRotate: true,
+
+		start: 0.25,
+		end: 0.75,
+	},
+});
