@@ -20,6 +20,7 @@
 		"lint": "npx lint-staged --quiet"
 	},
 	"dependencies": {
+		"@parcel/bundler-default": "^2.11.0",
 		"gsap": "^3.10.4",
 		"ismobilejs": "^1.1.1"
 	},
@@ -43,6 +44,7 @@
 		"lint-staged": "^13.1.0",
 		"parcel": "^2.9.3",
 		"parcel-bundler": "^1.12.5",
+		"parcel-bundler-runtime-controller": "file:./parcel-bundler-runtime-controller/",
 		"parcel-namer-sorter": "^0.1.3",
 		"parcel-plugin-ignore-assets": "^1.0.0",
 		"parcel-resolver-exclude-assets": "^2.0.1",

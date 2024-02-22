@@ -1,0 +1,16 @@
+{
+	"description": "Parcel-plugin for sort files in build/dist. Remove hashes from filenames.",
+	"author": "jsqrt",
+	"license": "MIT",
+	"name": "parcel-bundler-runtime-controller",
+	"version": "0.1.9",
+	"main": "index.js",
+	"devDependencies": {},
+	"dependencies": {
+		"@parcel/plugin": "^2.0.1",
+		"@parcel/bundler-default": "^2.11.0"
+	},
+	"engines": {
+		"parcel": "^2.0.1"
+	}
+}
