@@ -314,6 +314,7 @@ mixin pagination(config)
 					a.pagination__link(href='#')
 
 //- picture
+
 mixin picture(data)
 	- imagesArray = data.img_mob ? [data.img, data.img_mob] : [data.img];
 	- dedicatedPaths = imagesArray.map((path) => path.split('.')); // array contains [path, type]

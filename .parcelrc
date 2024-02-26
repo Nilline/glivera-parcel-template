@@ -17,5 +17,8 @@
 		"parcel-resolver-exclude-assets",
 		"@parcel/resolver-default"
 	],
-	"bundler": "parcel-bundler-runtime-controller"
+	"reporters": [
+		"parcel-reporter-event-handler",
+		"..."
+	]
 }

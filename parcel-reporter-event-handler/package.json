@@ -2,7 +2,7 @@
 	"description": "Parcel-plugin for sort files in build/dist. Remove hashes from filenames.",
 	"author": "jsqrt",
 	"license": "MIT",
-	"name": "parcel-bundler-runtime-controller",
+	"name": "parcel-reporter-event-handler",
 	"version": "0.1.9",
 	"main": "index.js",
 	"devDependencies": {},
