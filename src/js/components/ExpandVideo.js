@@ -389,6 +389,19 @@ export class ExpandVideo extends NodeMesh {
 			scrub: 1,
 			snap: true,
 		});
+		this.
+
+
+		this.= ScrollTrigger.create({
+			trigger: this.props.posHelperNode,
+			// pin: this.props.pinTriggerNode,
+			start: 'top center',
+			end: 'center center',
+			// pinType: 'fixed',
+			animation: this.timeline,
+			scrub: 1,
+			snap: true,
+		});
 	}
 
 	handleAnimationTick({ progress }) {
