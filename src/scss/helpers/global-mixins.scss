@@ -239,3 +239,8 @@
 		background: $color;
 	}
 }
+
+@function percent($px, $from: 1200) {
+	$result: math($px, $from) * 100%;
+	@return math(round($result * 100), 100);
+}
